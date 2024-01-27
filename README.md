@@ -16,6 +16,7 @@ Added
 - Flow zone texture fix (fibzy)
 - Movement fixes  (by bigdogmatt - justa | Niflheimrx | fibzy)
 - Get Gravity fixes (justa | fibzy)
+- Custom Rabbit Model (fibzy)
 - Check Crouch fix (george ri)
 - Set No Jump fix (george ri)
 - WR Replay Names Outside of server (justa | Niflheimrx)
