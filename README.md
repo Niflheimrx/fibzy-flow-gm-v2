@@ -22,7 +22,7 @@ Added
 - Improved stepsize hulls (fibzy)
 - Jhud updates based off justa's (justa - fibzy)
 - Center Spawn with save last eye angles (fibzy)
-- Telefix updates (fibzy)
+- Telefix fully works - updates (fibzy)
 - Improved Movement Angle bases off justa's with clacview (justa - fibzy)
 - Improved Segment  (justa - fibzy)
 - Added green showtriggers (justa - fibzy)
