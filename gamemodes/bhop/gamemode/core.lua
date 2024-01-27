@@ -37,7 +37,7 @@ local TIME_TO_DUCK   = 0.4
 local EYE_CLEARANCE = 12
 
 _C["Player"] = {
-	DefaultModel = "models/player/group01/male_01.mdl",
+	DefaultModel = "models/player/overgrowth/rabbit_playermodel.mdl",
 	DefaultWeapon = "weapon_glock",
 	JumpPower = 290,
 	ScrollPower = 268.4,
