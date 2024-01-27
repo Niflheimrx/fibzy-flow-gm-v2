@@ -2,6 +2,7 @@
 
 -- Fonts
 surface.CreateFont("hud.title", {font = "coolvetica", size = 20, weight = 100, antialias = true})
+surface.CreateFont("hud.titlebig", {font = "coolvetica", size = 25, weight = 100, antialias = true})
 surface.CreateFont("hud.credits", {font = "Tahoma", size = 12, weight = 100, antialias = true})
 surface.CreateFont("hud.infotext", {font = "Tahoma", size = 13, weight = 800, antialias = true})
 surface.CreateFont("hud.subinfo", {font = "Tahoma", size = 12, weight = 300, antialias = true})
@@ -26,7 +27,7 @@ local SCORE_HEIGHT = ScrH() - 118
 local SCORE_WIDTH = (ScrW() / 2) + 150
 
 -- Text
-local SCORE_TITLE = "kawaiiclan bunnyhop"
+local SCORE_TITLE = "Kawaiiclan Bunny Hop"
 local SCORE_PLAYERS = "Players: %s/%s"
 local SCORE_CREDITS = ""
 
@@ -70,13 +71,13 @@ local function CreateScoreboard()
 		-- Paint
 		scoreboard.Paint = function(self, width, height)
 			-- updates
-			SCORE_ONE = Color( 42, 42, 42 )
-			SCORE_TWO = Color( 42, 42, 42 )
-			SCORE_THREE = Color( 42, 42, 42 )
-			SCORE_ACCENT = Color( 0, 100, 255 )
+			SCORE_ONE = Color( 32, 32, 32 )
+			SCORE_TWO = Color( 32, 32, 32 )
+			SCORE_THREE = Color( 32, 32, 32 )
+			SCORE_ACCENT = Color( 28, 152, 198 )
 
 			-- Outlines?
-			outlines = Color( 45, 45, 45 )
+			outlines = Color( 25, 25, 25 )
 
 			-- Text
 			text_colour = Settings:GetValue("TextCol")
@@ -85,17 +86,17 @@ local function CreateScoreboard()
 			-- Main
 			surface.SetDrawColor(SCORE_ONE)
 			surface.DrawRect(0, 0, width, height)
-			surface.SetDrawColor(Color( 35, 35, 35 ))
+			surface.SetDrawColor(Color( 25, 25, 25 ))
 
 			if outlines then
 				surface.DrawOutlinedRect(0, 0, width, height, 10)
 			end
 
-			surface.SetDrawColor(Color( 35, 35, 35 ))
+			surface.SetDrawColor(Color( 25, 25, 25 ))
 			surface.DrawRect(0, 0, width, 35)
 
 			-- Title
-			draw.SimpleText(SCORE_TITLE, "hud.title", width / 2, 12, text_colour, TEXT_ALIGN_CENTER, TEXT_ALIGN_TOP)
+			draw.SimpleText(SCORE_TITLE, "hud.titlebig", width / 2, 7, text_colour, TEXT_ALIGN_CENTER, TEXT_ALIGN_TOP)
 
 			-- Map
 			draw.SimpleText(game.GetMap(), "hud.title", 14, 12, text_colour, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
@@ -156,7 +157,7 @@ local function CreateScoreboard()
 				return
 			end
 
-			surface.SetDrawColor(isBot and SCORE_ACCENT or Color( 35, 35, 35 ))
+			surface.SetDrawColor(isBot and SCORE_ACCENT or Color( 0, 0, 0, 0 ))
 			surface.DrawRect(0, 0, width, height)
 			surface.SetDrawColor(color_black)
 
