@@ -1,10 +1,10 @@
-"justa's cool gamemode" v1.4.3
+Kawaiiclan "justa's cool server" gamemode v1.4.3
 
-Released by - (https://steamcommunity.com/id/fibzysending/)
+Released by fibzy (https://steamcommunity.com/id/fibzysending/)
 
-This gamemode was edited and heavy modified from kawaiiclan gamemode
+This gamemode was edited and heavy modified from kawaiiclan gamemode.
 
-includes almost all of justas code and fixes
+Includes almost all of justa's code and fixes.
 
 Added
 - Momentum mod hud (by justa)
