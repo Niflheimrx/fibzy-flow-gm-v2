@@ -19,6 +19,16 @@ include( "modules/cl_strafe.lua" )
 
 include( "userinterface/cl_scoreboard.lua" )
 
+-- Destroy resource hogs
+function GM:UpdateAnimation() end
+function GM:GrabEarAnimation() end
+function GM:MouthMoveAnimation() end
+function GM:DoAnimationEvent() end
+function GM:AdjustMouseSensitivity() end
+function GM:CalcViewModelView() end
+function GM:PreDrawViewModel() end
+function GM:PostDrawViewModel() end
+
 function GM:Think() return true end
 function GM:Tick() return true end
 function GM:PlayerTick() return true end

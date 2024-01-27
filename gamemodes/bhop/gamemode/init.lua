@@ -23,6 +23,15 @@ include( "modules/sv_segment.lua" )
 gameevent.Listen( "player_connect" )
 Core:AddResources()
 
+-- Hogs
+function GM:CanPlayerSuicide() return false end
+function GM:PlayerShouldTakeDamage() return false end
+function GM:GetFallDamage() return false end
+function GM:PlayerCanHearPlayersVoice() return true end
+function GM:IsSpawnpointSuitable() return true end
+function GM:PlayerDeathThink() end
+function GM:PlayerSetModel() end
+
 function GM:Think() return true end
 function GM:Tick() return true end
 function GM:PlayerTick() return true end
