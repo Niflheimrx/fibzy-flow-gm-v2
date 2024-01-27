@@ -63,4 +63,4 @@ TO DO:
     
 fastdl | https://main.fastdl.me/
 
-Injoy!
+Enjoy!
