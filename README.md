@@ -54,5 +54,7 @@ TO DO:
   - sv.db
   - Lua bin files
   - Custom server.cfg
+  
+fastdl | https://main.fastdl.me/
 
 Injoy!
