@@ -12,6 +12,7 @@ Added
 - Crouch Boost fixes / CB Stop Time fix [This is broken on pG Gamemode] (by fibzy)
 - RNGFix - Downhill (Now has no prediction errors) (by claz | Niflheimrx)
 - Rawinput2 - (fibzy)
+- Custom Chat Box (fibzy)
 - Flow zone texture fix (fibzy)
 - Movement fixes  (by bigdogmatt - justa | Niflheimrx | fibzy)
 - WR Replay Names Outside of server (justa | Niflheimrx)
