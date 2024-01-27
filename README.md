@@ -58,7 +58,8 @@ TO DO:
   - sv.db
   - Lua bin files
   - Custom server.cfg
-  
+  - 2 Fpsfixs
+    
 fastdl | https://main.fastdl.me/
 
 Injoy!
