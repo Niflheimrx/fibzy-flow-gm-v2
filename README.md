@@ -19,6 +19,7 @@ Added
 - Check Crouch fix (george ri)
 - Set No Jump fix (george ri)
 - WR Replay Names Outside of server (justa | Niflheimrx)
+- WR Replay Crouch Bug fix (justa | fibzy)
 - Improved zone detection (justa | fibzy)
 - SurfFix detection (Niflheimrx)
 - Round Error Fixes (Niflheimrx)
