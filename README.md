@@ -33,14 +33,15 @@ Added
 
 TO DO:
 
-Add !setspawn to gamemode
-
+- Add !setspawn to gamemode
+- Make the Momentum Hud 1440p version for 1080p resolution
+  
   Comes with:
 
-  Custom workshop fixes
-  Database
-  sv.db
-  Lua bin files
-  Custom server.cfg
+  - Custom workshop fixes
+  - Database
+  - sv.db
+  - Lua bin files
+  - Custom server.cfg
 
   Injoy!
