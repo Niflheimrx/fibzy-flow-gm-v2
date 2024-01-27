@@ -39,7 +39,9 @@ TO DO:
 - Finsih new progress replay code
 - Add FJT and Pre-Speed to Jhud
 - Finish Simple Huds Jhud
-    
+- Finish Main options Hud
+
+      
   Comes with:
 
   - Custom workshop fixes
