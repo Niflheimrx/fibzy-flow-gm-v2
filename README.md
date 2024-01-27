@@ -1,4 +1,4 @@
-"justa's cool gamemode" v 1.4.3
+"justa's cool gamemode" v1.4.3
 
 Released by - (https://steamcommunity.com/id/fibzysending/)
 
