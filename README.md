@@ -36,7 +36,8 @@ Added
 - Custom Map fixes (fibzy)
 - Added Zone Helper lines (justa | fibzy)
 
-![alt text](https://i.imgur.com/twoMu7S.jpeg)
+
+![20240127014848_1](https://github.com/FiBzYDev/jcs-kawaiiclan-gamemode/assets/58349075/39cff560-394a-41f3-ad83-53345794b87b)
 
   
 TO DO:
