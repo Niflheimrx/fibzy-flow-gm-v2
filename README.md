@@ -1,6 +1,6 @@
 "justa's cool gamemode" v 1.4.3
 
-Released by - https://steamcommunity.com/id/FiBzY_JCS/ 
+Released by - (https://steamcommunity.com/id/fibzysending/)
 
 This gamemode was edited and heavy modified from kawaiiclan gamemode
 
