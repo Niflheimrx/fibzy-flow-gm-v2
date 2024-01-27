@@ -36,7 +36,7 @@ Added
 - Custom Map fixes (fibzy)
 - Added Zone Helper lines (justa | fibzy)
 
-![alt text]([https://i.imgur.com/twoMu7S.jpeg)
+![alt text](https://i.imgur.com/twoMu7S.jpeg)
 
   
 TO DO:
