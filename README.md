@@ -35,7 +35,10 @@ TO DO:
 
 - Add !setspawn to gamemode
 - Make the Momentum Hud 1440p version for 1080p resolution
-  
+- Finsih new progress replay code
+- Add FJT and Pre-Speed to Jhud
+- Finish Simple Huds Jhud
+    
   Comes with:
 
   - Custom workshop fixes
