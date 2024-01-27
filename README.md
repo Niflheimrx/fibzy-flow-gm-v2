@@ -13,7 +13,7 @@ Added
 - RNGFix - Downhill now has no prediction errors (by claz - Niflheimrx)
 - rawinput2 - (fibzy)
 - Flow zone texture fix (fibzy)
-- Movement fixes / nulls  (by bigdogmatt - justa - Niflheimrx - fibzy)
+- Movement fixes  (by bigdogmatt - justa - Niflheimrx - fibzy)
 - WR Replay Names outside of server (justa - Niflheimrx - DotShark )
 - Improved zone detection (justa - fibzy)
 - SurfFix detection (Niflheimrx)
