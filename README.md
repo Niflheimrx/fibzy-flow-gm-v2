@@ -35,19 +35,12 @@ TO DO:
 
 Add !setspawn to gamemode
 
-
   Comes with:
 
-  custom workshop fixes
-  database
+  Custom workshop fixes
+  Database
   sv.db
-  lua bin files
-  custom server.cfg
+  Lua bin files
+  Custom server.cfg
 
-  Note: this was made for Linux Server ONLY*
-
-  +sv_maxspeed 80000000000000000000000000000000000000 - you can only change this value in command start
-
-My custom workshop addons here
-
-https://steamcommunity.com/id/FiBzY_Dev/myworkshopfiles/?appid=4000
+  Injoy!
