@@ -146,8 +146,10 @@ function GM:FinishMove( ply, mv, cmd ) return false end
 function GM:StartMove( ply, mv, cmd ) return true end
 function GM:EntityEmitSound() return true end
 
+-- Normal GMod AirDensity 
 physenv.SetAirDensity( 0 )
 
+-- Custom client run commands for different maps
 timer.Create( "rawinput2", 4, 1, function()
 for k,v in pairs(player.GetAll()) do
 		v:ConCommand( "m_rawinput 2" )
@@ -226,6 +228,7 @@ timer.Create( "forvehnex", 2, 1, function()
 		   end
 end)
 
+-- Custom Stepsize fixes
 if game.GetMap() == "bhop_surprise" then
 	_C.Player.StepSize = 18.00
 end
@@ -654,6 +657,7 @@ function GM:CreateTeams()
 	team.SetSpawnPoint( _C.Team.Players, { "info_player_terrorist", "info_player_counterterrorist" } )
 end
 
+-- Set MaxSpeed to the highest possabile for better movement smoothness
 hook.Add( "Move", "SetMaxSpeed", function( ply, mv, usrcmd )
 	 if not ply:IsOnGround() then 
 		 mv:SetMaxSpeed( math.huge )
@@ -662,12 +666,64 @@ hook.Add( "Move", "SetMaxSpeed", function( ply, mv, usrcmd )
 	end
 end )
 
+-- Useful metafunctions, mainly here to easily use them in movement code --
+do
+	local META = FindMetaTable "Player"
+
+	function META:FullyDucked()
+		return self:KeyDown(IN_DUCK) and self:IsFlagSet(FL_DUCKING)
+	end
+
+	function META:Ducking()
+		return self:KeyDown(IN_DUCK) and !self:IsFlagSet(FL_DUCKING)
+	end
+
+	function META:UnDucking()
+		return !self:KeyDown(IN_DUCK) and self:IsFlagSet(FL_DUCKING)
+	end
+
+	function META:NotDucked()
+		return !self:Ducking() and !self:FullyDucked() and !self:UnDucking()
+	end
+
+	function META:HoldingSpace()
+		return self:KeyDown(IN_JUMP)
+	end
+
+	-- This will prune (slow) player's movement at their current location --
+	function META:PruneMovement()
+		local vel = self:GetVelocity()
+		local dir = vel:GetNormalized()
+
+		self:SetVelocity(-vel + dir * 290)
+	end
+
+	-- This is used for some styles in order to override gravity changes --
+	function META:OverrideGravity(gravity)
+		local currentGravity = self:GetGravity()
+		if self.Freestyle then
+			self:SetGravity(0)
+		elseif (math.floor(currentGravity * 10) / 10 != gravity) then
+			if (currentGravity == 0) then
+				self:SetGravity(gravity)
+			elseif (currentGravity == 1) then
+				-- Runs on the next tick --
+				timer.Simple(0, function()
+					self:SetGravity(gravity)
+				end)
+			end
+		end
+	end
+end
+
+-- JSS Base
 local mabs, matan, mdeg, NormalizeAngle = math.abs, math.atan, math.deg, math.NormalizeAngle
 
 local function GetPerfectYaw(mv, speed)
 	return speed == 0 and 0 or mabs(mdeg(matan(mv/speed)))
 end
 
+-- You can edit the different movement speeds (not recommended)
 /*function GM:Move( ply, data )
 	if not IsValid( ply ) then return end
 	if lp and ply != lp() then return end
@@ -1405,56 +1461,6 @@ local function ProcessDuckMove(ply, data)
 	end
 end
 hook.Add("SetupMove", "sm_duckbug_fix", ProcessDuckMove)
-
--- Useful metafunctions, mainly here to easily use them in movement code --
-do
-	local META = FindMetaTable "Player"
-
-	function META:FullyDucked()
-		return self:KeyDown(IN_DUCK) and self:IsFlagSet(FL_DUCKING)
-	end
-
-	function META:Ducking()
-		return self:KeyDown(IN_DUCK) and !self:IsFlagSet(FL_DUCKING)
-	end
-
-	function META:UnDucking()
-		return !self:KeyDown(IN_DUCK) and self:IsFlagSet(FL_DUCKING)
-	end
-
-	function META:NotDucked()
-		return !self:Ducking() and !self:FullyDucked() and !self:UnDucking()
-	end
-
-	function META:HoldingSpace()
-		return self:KeyDown(IN_JUMP)
-	end
-
-	-- This will prune (slow) player's movement at their current location --
-	function META:PruneMovement()
-		local vel = self:GetVelocity()
-		local dir = vel:GetNormalized()
-
-		self:SetVelocity(-vel + dir * Mod.ZoneCap)
-	end
-
-	-- This is used for some styles in order to override gravity changes --
-	function META:OverrideGravity(gravity)
-		local currentGravity = self:GetGravity()
-		if self.Freestyle then
-			self:SetGravity(0)
-		elseif (math.floor(currentGravity * 10) / 10 != gravity) then
-			if (currentGravity == 0) then
-				self:SetGravity(gravity)
-			elseif (currentGravity == 1) then
-				-- Runs on the next tick --
-				timer.Simple(0, function()
-					self:SetGravity(gravity)
-				end)
-			end
-		end
-	end
-end
 
 -- These constants are defined from Valve's SDK 2013 --
 local VEC_HULL_MIN = Vector(-16, -16, 0)
