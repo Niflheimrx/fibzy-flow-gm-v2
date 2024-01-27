@@ -38,6 +38,7 @@ Added
 
 
 ![20240127014848_1](https://github.com/FiBzYDev/jcs-kawaiiclan-gamemode/assets/58349075/39cff560-394a-41f3-ad83-53345794b87b)
+![20240127015354_1](https://github.com/FiBzYDev/jcs-kawaiiclan-gamemode/assets/58349075/0eb67f28-c9ac-421b-b345-f96b056f12d9)
 
   
 TO DO:
