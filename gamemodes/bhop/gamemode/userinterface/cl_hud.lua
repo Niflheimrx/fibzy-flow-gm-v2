@@ -1277,7 +1277,7 @@ HUD.Themes = {
 			draw.SimpleText(velocity .. " u/s", "HUDTimer2", ScrW() / 2, yPos - 390, tc, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 		else
 			draw.SimpleText(szStyle, "HUDTimer2", ScrW() / 2, yPos + 92, tc, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-			draw.SimpleText(velocity, "HUDTimer2", ScrW() / 2, yPos + 123, tc, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+			--draw.SimpleText(velocity, "HUDTimer2", ScrW() / 2, yPos + 123, tc, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 			draw.SimpleText(velocity .. " u/s", "HUDTimer2", ScrW() / 2, yPos - 390, tc, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 
 			draw.SimpleText("Sync: " .. sync .. "%", "HUDTimer2", 1755, 1000, tc)
@@ -1757,6 +1757,7 @@ local function SSJ_HUD()
 	local color = Color(235, 49, 46, 255)
 	local color35 = Color(255, 255, 255)
 	local color355 = Color(255, 255, 255)
+	local color77 = Color(255, 255, 255)
 
      if (speed > 0) then
 	   if (speed >= 277) then
@@ -1784,6 +1785,14 @@ local function SSJ_HUD()
         fade = fade + 0.5
         color355.a = math.Clamp(color355.a - fade, 0, 255)
         color355.a = color355.a
+     else
+        fade = 0
+     end
+
+	 if (JHudAnnounced + 2) < CurTime() then 
+        fade = fade + 2
+        color77.a = math.Clamp(color77.a - fade, 0, 255)
+        color77.a = color77.a
      else
         fade = 0
      end
@@ -1824,6 +1833,22 @@ local function SSJ_HUD()
 	else 
 		draw.SimpleText(gain, "JHUDMainBIG2", ScrW() / 2, (ScrH() / 2) - 60, color355, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	end
+
+	local width = 200
+	local height = 100
+
+	local xPos = (ScrW() / 2) - (width / 2)
+	local yPos = ScrH() - 90 - height
+	local tc = color_white
+
+	kawaiihud = GetConVarNumber("kawaii_hud")
+
+	if kawaiihud == 2 and jump <= 0 then 
+		draw.SimpleText("", "HUDTimer2", ScrW() / 2, yPos + 123, color77, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+	else
+		draw.SimpleText(speed .. " (+" .. speed - 56 .. ")", "HUDTimer2", ScrW() / 2, yPos + 123, color77, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+	end
+
 end
 
 
