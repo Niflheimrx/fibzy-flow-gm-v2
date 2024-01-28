@@ -51,7 +51,7 @@ Thanks to all the creators who contributed to this code.
 ![download](https://github.com/FiBzYDev/jcs-kawaiiclan-gamemode/assets/58349075/e150a6c6-6f89-4a96-b910-4d0cfd9221db)
 
 How the movment should work and look
-https://github.com/FiBzYDev/jcs-kawaiiclan-gamemode/assets/58349075/b7ec4040-05d7-4f7d-b457-32f98f651c5c
+[https://github.com/FiBzYDev/jcs-kawaiiclan-gamemode/assets/58349075/b7ec4040-05d7-4f7d-b457-32f98f651c5c](https://youtu.be/sM5J31xdd80)
 
 
 
