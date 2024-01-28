@@ -6,7 +6,7 @@ Released by fibzy (https://steamcommunity.com/id/fibzysending/)
 
 This gamemode was edited and heavy modified from kawaiiclan gamemode.
 
-Contans code from 2014 all the way up to 2024
+Contains code from 2014 all the way up to 2024
 
 Includes almost all of justa's code and fixes.
 
