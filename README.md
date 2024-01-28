@@ -128,4 +128,6 @@ I started playing gmod bhop in 2014 on a server called pG.
 ![285100932-6603e73f-dcaf-4925-92fe-28f5ecdd990f](https://github.com/FiBzYDev/jcs-kawaiiclan-gamemode/assets/58349075/621b07af-89dc-40ec-ba09-3fb4245ff9c9)
 picture taken on my server in 2016 with friends
 
+I played with Matt7220, Cat, Garry's Bhop, Henwi, Sad rainbow, lolu, rhythm and a few others. Everyone was nice and enjoyed playing on my servers in 2014 through 2017. We used to make jokes, make eachother laugh while playing. I brought a gamemode from George Ri for about 65 USD it was the best gamemode at its time.
+
 
