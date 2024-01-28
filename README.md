@@ -59,7 +59,8 @@ TO DO:
 - Add FJT and Pre-Speed to Jhud
 - Finish Simple Huds Jhud
 - Finish Main Menu Hud [kawaii_mainmenu]
-
+- Add my version of CS:S Hud?
+  
 Private Commands:
 
 - kawaii_hud 1 | CS:S Hud by justa
