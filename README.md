@@ -27,6 +27,7 @@ Added
 - WR Replay Crouch Bug fix (justa | fibzy)
 - Improved zone detection (justa | fibzy)
 - SurfFix detection (Niflheimrx)
+- Base gamemode edits (fibzy)
 - Round Error Fixes (Niflheimrx)
 - Improved Score Board based off justa's (fibzy)
 - Improved Stepsize hulls (fibzy)
