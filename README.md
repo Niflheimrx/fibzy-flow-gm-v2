@@ -41,6 +41,7 @@ Added
 - Added green showtriggers (justa - fibzy)
 - Custom FoV Changer [kawaii_fov] (fibzy)
 - Disabled lua funcstion hogs (Gravious)
+- Add scout (fibzy)
 - Added Soild AC for slipery floors (fibzy)
 - Custom Map fixes (fibzy)
 - Added Zone Helper lines (justa | fibzy)
