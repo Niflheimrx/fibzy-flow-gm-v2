@@ -121,3 +121,11 @@ Drag the bhop folder to garrysmod/gamemodes,
 
 
 Enjoy!
+
+# Backstory writing....
+
+I started playing gmod bhop in 2014 on a server called pG.
+![285100932-6603e73f-dcaf-4925-92fe-28f5ecdd990f](https://github.com/FiBzYDev/jcs-kawaiiclan-gamemode/assets/58349075/621b07af-89dc-40ec-ba09-3fb4245ff9c9)
+picture taken on my server in 2016 with friends
+
+
