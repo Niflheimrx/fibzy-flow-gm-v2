@@ -1,5 +1,3 @@
--- "addons\\rngfix\\lua\\rngfix\\cl_debug.lua"
--- Retrieved by https://github.com/lewisclark/glua-steal
 local RNGFix = _G.RNGFix
 local print, net, string, pcall = print, net, string, pcall
 local Debug = {}

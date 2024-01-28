@@ -1,17 +1,3 @@
-local function PrintRainbowText( frequency, str )
-	local text = {}
-	local len = #text
-
-	for i = 1, #str do
-		text[len + 1] = HSVToColor( i * frequency % 360, 1, 1 )
-		text[len + 2] = string.sub( str, i, i )
-		len = len + 2
-	end
-
-	MsgC( unpack( text ) )
-end
-
-PrintRainbowText(10, "RNGFix: Server-Sided Loaded")
 
 -- Engine constants, NOT settings (do not change)
 local LAND_HEIGHT = 2.0          -- Maximum height above ground at which you can "land"
