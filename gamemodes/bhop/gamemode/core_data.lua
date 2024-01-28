@@ -54,7 +54,6 @@ function Core:AwaitLoad( bRetry )
 	if not bRetry then
 		Zones:SetupMap()
 		Bot:Setup()
-		Radio:Setup()
 		Core:Optimize()
 		
 		if SQL.Use then
@@ -214,8 +213,6 @@ local function CoreHandle( ply, szAction, varArgs )
 		Player:SendTopList( ply, varArgs[ 1 ], varArgs[ 2 ] )
 	elseif szAction == "Checkpoints" then
 		Timer:CPHandleCallback( ply, varArgs[ 1 ], varArgs[ 2 ], varArgs[ 3 ] )
-	elseif szAction == "Radio" then
-		Radio:HandleClient( ply, varArgs )
 	elseif szAction == 'abc' then 
 		JAC:RegisterDetection(ply, 'no_startcommand')
 	end
