@@ -72,7 +72,7 @@ Private Commands:
 - kawaii_fov | FoV Changer
 - !strafetrainer | Strafe Trainer Display
 
-Follow rawinput2.txt https://github.com/Haze1337/RawInput2/releases
+Follow rawinput2.txt in other https://github.com/Haze1337/RawInput2/releases
 
 Comes with:
 
