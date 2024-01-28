@@ -14,7 +14,6 @@ include( "cl_receive.lua" )
 include( "cl_gui.lua" )
 
 include( "modules/cl_admin.lua" )
-include( "modules/cl_radio.lua" )
 include( "modules/cl_strafe.lua" )
 
 include( "userinterface/cl_scoreboard.lua" )
@@ -437,8 +436,6 @@ function myChat.closeChatbox()
 	hook.Run( "ChatTextChanged", "" )
 end
 end)
-
---timer.Simple(2, function() chat.AddText(Color(255,255,255,255), "Welcome to " .. GetHostName() .. "!" ) end)
 
 local PANEL = {}
 
@@ -1393,11 +1390,6 @@ end
 cvars.AddChangeCallback( "sl_showothers", VisibilityCallback )
 
 local function PlayerVisiblityCheck( ply )
-	--if CPlayers:GetBool() then
-	--	ply:SetRenderMode(RENDERMODE_NONE)
-	--else
-	--	ply:SetRenderMode(RENDERMODE_TRANSALPHA)
-	--end
 	ply:SetNoDraw(not CPlayers:GetBool())
 	if not CPlayers:GetBool() then return true end
 end
@@ -1406,7 +1398,7 @@ hook.Add( "PrePlayerDraw", "PlayerVisiblityCheck", PlayerVisiblityCheck )
 local function Initialize()
 	timer.Simple( 5, ClientTick )
 	timer.Simple( 5, function() Core:Optimize() end )
-	timer.Simple( 1, function() Radio:Resume() end )
+
 
 	for _,str in pairs( HUDItems ) do
 		HUDItems[ str ] = true
