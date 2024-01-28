@@ -68,8 +68,9 @@ Private Commands:
 - kawaii_mainmenu | Main Client Settings Menu (Unfinished)
 - kawaii_fov | FoV Changer
 - !strafetrainer | Strafe Trainer Display
-ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ
-  Comes with:
+
+
+Comes with:
 
   - Custom workshop fixes
   - Database
@@ -78,6 +79,6 @@ Private Commands:
   - Custom server.cfg
   - 2 Fps fixs
     
-fastdl | https://main.fastdl.me/
+FastDL Link | https://main.fastdl.me/
 
 Enjoy!
