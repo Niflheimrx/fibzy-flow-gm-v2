@@ -55,12 +55,12 @@ TO DO:
 
 Private Commands:
 
-kawaii_hud 1 | CS:S Hud by justa
-kawaii_hud 2 | Simple Hud by justa
-kawaii_hud 3 | Momentum Hud by justa
-kawaii_hud 4 | Flow Hud edited by justa
+- kawaii_hud 1 | CS:S Hud by justa
+- kawaii_hud 2 | Simple Hud by justa
+- kawaii_hud 3 | Momentum Hud by justa
+- kawaii_hud 4 | Flow Hud edited by justa
 
-kawaii_sercet 1 | Jhud
+- kawaii_sercet 1 | Jhud
 
   Comes with:
 
