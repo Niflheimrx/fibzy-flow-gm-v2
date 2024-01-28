@@ -61,6 +61,12 @@ bhop_alt_univaje demo
 
 https://github.com/FiBzYDev/jcs-kawaiiclan-gamemode/assets/58349075/aa0d01ac-ac85-4105-93b5-019906e0250e
 
+bhop_bhop demo
+
+
+https://github.com/FiBzYDev/jcs-kawaiiclan-gamemode/assets/58349075/2e6df12c-d803-4aaa-b466-0ece25815165
+
+
 
 
 
