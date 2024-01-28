@@ -1,5 +1,4 @@
-![icon24](https://github.com/FiBzYDev/jcs-kawaiiclan-gamemode/assets/58349075/9adb96b4-0485-408e-b52e-8ec65a2391ac)
-# Kawaiiclan "justa's cool server" gamemode v1.4.3
+![icon24](https://github.com/FiBzYDev/jcs-kawaiiclan-gamemode/assets/58349075/9adb96b4-0485-408e-b52e-8ec65a2391ac) # Kawaiiclan "justa's cool server" gamemode v1.4.3
 
 Released by fibzy (https://steamcommunity.com/id/fibzysending/)
 
