@@ -53,10 +53,9 @@ Thanks to all the creators who contributed to this code.
 How the movment should work and look
 
 bhop_overline demo
-[https://github.com/FiBzYDev/jcs-kawaiiclan-gamemode/assets/58349075/b7ec4040-05d7-4f7d-b457-32f98f651c5c](https://youtu.be/sM5J31xdd80)
 
+https://github.com/FiBzYDev/jcs-kawaiiclan-gamemode/assets/58349075/3c12f2a3-a0ae-4ad4-9d64-b567e92b2d6d
 
-https://github.com/FiBzYDev/jcs-kawaiiclan-gamemode/assets/58349075/6f65a068-8a21-4ef3-8784-300840e00a19
 
 
 bhop_alt_univaje demo
