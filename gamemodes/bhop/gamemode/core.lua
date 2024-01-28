@@ -741,12 +741,12 @@ do
 		if ply:OnGround() then return end
 
 		-- Default CSS Bunny Hop Settings --
-		local aa, mv = 500, 32.8
+		local aa, mv = 100000, 32.8
 		local aim = data:GetMoveAngles()
 		local forward, right = aim:Forward(), aim:Right()
 		local fmove, smove = data:GetForwardSpeed(), data:GetSideSpeed()
 
-		local sideadd, foreadd = 500, 500
+		local sideadd, foreadd = 100000, 100000
 		local styleAirAccelerate, styleGain, styleGravity, styleSide, styleFore = ply.Style
 		if styleSide or styleFore then
 			sideadd = styleSide or sideadd
@@ -786,11 +786,12 @@ do
 			wishspeed = data:GetMaxSpeed()
 		end
 
+		local vel = data:GetVelocity()
 		local wishspd = wishspeed
-		wishspd = mc(wishspd, 0, mv)
+
+		wishspd = mc( wishspd, 0, 32.8 + (mc( vel:Length2D() - 500, 0, 500 ) / 1000) * 1.4 )
 
 		local wishdir = wishvel:GetNormal()
-		local vel = data:GetVelocity()
 		local current = vel:Dot(wishdir)
 
 		-- Gain Stats
