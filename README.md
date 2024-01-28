@@ -36,7 +36,7 @@ Added
 - Jhud updates based off justa's (justa | fibzy)
 - Center Spawn with save last eye angles (fibzy)
 - Telefix fully works - updates (fibzy)
-- Improved Movement Angle bases off justa's with ClacView ("Movement now feels more like roblox")
+- Improved Movement Angle bases off justa's with ClacView | Movement now feels more like roblox
 - Improved Segment  (justa | fibzy)
 - Added green showtriggers (justa - fibzy)
 - Custom FoV Changer [kawaii_fov] (fibzy)
@@ -51,7 +51,7 @@ Thanks to all the creators who contributed to this code.
 ![download](https://github.com/FiBzYDev/jcs-kawaiiclan-gamemode/assets/58349075/e150a6c6-6f89-4a96-b910-4d0cfd9221db)
 
 How the movment should work and look
-[<img src="https://i.ytimg.com/vi/Hc79sDi3f0U/maxresdefault.jpg" width="50%">](https://www.youtube.com/watch?v=Hc79sDi3f0U "Now in Android: 55")
+https://github.com/FiBzYDev/jcs-kawaiiclan-gamemode/assets/58349075/b7ec4040-05d7-4f7d-b457-32f98f651c5c
 
 
 
