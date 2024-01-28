@@ -40,7 +40,6 @@ gamemodes\bhop\entities\entities\ent_smokegrenade\shared.lua
 gamemodes\bhop\entities\entities\BoosterZone.lua
 gamemodes\bhop\entities\entities\TeleporterEnt.lua
 gamemodes\bhop\entities\entities\HullSizeZone.lua
-gamemodes\bhop\gamemode\modules\cl_radio.lua
 gamemodes\bhop\gamemode\modules\cl_admin.lua
 gamemodes\bhop\gamemode\modules\cl_strafe.lua
 gamemodes\bhop\gamemode\cl_gui.lua
