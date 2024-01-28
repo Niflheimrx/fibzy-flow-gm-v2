@@ -74,6 +74,7 @@ TO DO:
 - Finish Simple Huds Jhud
 - Finish Main Menu Hud [kawaii_mainmenu]
 - Add my version of CS:S Hud?
+- Add justas old version of Momentum Hud Jhud?
   
 Private Commands:
 
