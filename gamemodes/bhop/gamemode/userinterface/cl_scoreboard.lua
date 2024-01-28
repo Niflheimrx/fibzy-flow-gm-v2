@@ -287,10 +287,6 @@ local function CreateScoreboard()
 						surface.DrawRect(0, 0, width, height)
 						surface.SetDrawColor(color_black)
 
-						//if outlines then
-							//surface.DrawOutlinedRect(0, 0, width, height)
-						//end
-
 						surface.SetFont("hud.title")
 
 						-- Player name
