@@ -100,7 +100,8 @@ Private Commands:
 
 Follow rawinput2.txt in other https://github.com/Haze1337/RawInput2/releases
 - I use + 0.031250 (Pos rounded) added to my sensitivity so if you use 1.3 it will then be sensitivity 1.33125
-
+- Run GMod in 86x bit mode
+  
 Comes with:
 
   - A fully custom bhop gamemode
