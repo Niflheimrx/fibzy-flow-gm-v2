@@ -11,14 +11,14 @@ Contains code from 2014 all the way up to 2024
 Includes almost all of justa's code and fixes.
 
 Added
-- Momentum Mod Hud (by justa)
-- Simple Hud (by justa)
-- Crouch Boost fixes / CB Stop Time fix [This is broken on pG Gamemode] (by fibzy)
-- RNGFix - Downhill (Now has no prediction errors) (by claz | Niflheimrx)
+- Momentum Mod Hud (justa)
+- Simple Hud (justa)
+- Crouch Boost fixes / CB Stop Time fix [This is broken on pG Gamemode] (fibzy)
+- RNGFix - Downhill (Now has no prediction errors) (claz | Niflheimrx)
 - Rawinput2 - (fibzy)
 - Custom Chat Box (fibzy)
 - Flow zone texture fix (fibzy)
-- Movement fixes  (by bigdogmatt - justa | Niflheimrx | fibzy)
+- Movement fixes (bigdogmatt | justa | Niflheimrx | fibzy)
 - Get Gravity fixes (justa | fibzy)
 - Custom Rabbit Model (fibzy)
 - Check Crouch fix (george ri)
@@ -33,7 +33,7 @@ Added
 - Jhud updates based off justa's (justa | fibzy)
 - Center Spawn with save last eye angles (fibzy)
 - Telefix fully works - updates (fibzy)
-- Improved Movement Angle bases off justa's with clacview (justa | fibzy)
+- Improved Movement Angle bases off justa's with ClacView ("Movement now feels more like roblox")
 - Improved Segment  (justa | fibzy)
 - Added green showtriggers (justa - fibzy)
 - Custom FoV Changer [kawaii_fov] (fibzy)
