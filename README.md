@@ -50,7 +50,9 @@ Thanks to all the creators who contributed to this code.
 ![20240127015354_1](https://github.com/FiBzYDev/jcs-kawaiiclan-gamemode/assets/58349075/0eb67f28-c9ac-421b-b345-f96b056f12d9)
 ![download](https://github.com/FiBzYDev/jcs-kawaiiclan-gamemode/assets/58349075/e150a6c6-6f89-4a96-b910-4d0cfd9221db)
 
-  
+How the movment should work and look
+https://github.com/FiBzYDev/jcs-kawaiiclan-gamemode/assets/58349075/d74822c4-823e-4c14-99a1-14aaff27ff4a
+
 TO DO:
 
 - Add !setspawn to gamemode
