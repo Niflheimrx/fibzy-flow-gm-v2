@@ -31,7 +31,7 @@ function Player:Spawn( ply )
 	else
 		ply:SetMoveType( MOVETYPE_NONE )
 		ply:SetCollisionGroup( COLLISION_GROUP_DEBRIS )
-		ply:SetFOV( 90, 0 )
+		ply:SetFOV( 100, 0 )
 		ply:SetGravity( 0 )
 		ply:StripWeapons()
 

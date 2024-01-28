@@ -870,7 +870,7 @@ local function MoveNoclip(ply, mv)
 	local multiplier = 4
 	local isSpeeding, isDucking = mv:KeyDown(IN_SPEED), mv:KeyDown(IN_DUCK)
 	if isSpeeding then
-		multiplier = 0.05
+		multiplier = 0.0001
 	elseif isDucking then
 		multiplier = 32
 	end
