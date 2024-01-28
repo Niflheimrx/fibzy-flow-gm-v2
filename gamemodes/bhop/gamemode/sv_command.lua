@@ -37,25 +37,6 @@ function GM:PlayerSay( ply, text, team )
 end
 
 function GM:FilterText( ply, text )
-	if Radio.Prepared then
-		local low = _low( text )
-		if _find( low, "jiggy", 1, true ) then
-			Core:Send( ply, "Radio", { "Single", nil, Radio.Misc.jiggy } )
-		elseif _find( low, "waitin' for a mate", 1, true ) then
-			Core:Send( ply, "Radio", { "Single", nil, Radio.Misc.mate } )
-		elseif _find( low, "i'm a rude boy", 1, true ) then
-			Core:Send( ply, "Radio", { "Single", nil, Radio.Misc.rude } )
-		elseif _find( low, "a problem", 1, true ) then
-			HelpSetter = ply:Name()
-		elseif HelpSetter and table.HasValue( Radio.Misc.target, ply:SteamID() ) then
-			Core:Broadcast( "Radio", { "Single", nil, Radio.Misc.problem, ply:Name() .. ": " .. (string.len( text ) > 8 and text or "No, " .. HelpSetter .. ", not really..." ) } )
-			HelpSetter = nil
-			return ""
-		elseif HelpSetter then
-			HelpSetter = nil
-		end
-	end
-
 	for input,output in pairs( varFilter ) do
 		text = _rep( text, input, output )
 	end
@@ -853,7 +834,6 @@ function Command:Init()
 	self:Register( "admin", Admin.CommandProcess )
 	self:Register( "vip", Admin.VIPProcess )
 	--self:Register( { "cp", "cpmenu", "cpsave", "cpload" }, Timer.CPProcess )
-	self:Register( { "radio", "groove", "gs", "yt", "song", "play" }, Radio.CommandProcess )
 
 	-- Default functions
 	self:Register( "invalid", function( ply, args )
