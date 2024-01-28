@@ -351,6 +351,7 @@ function GM:Move( ply, data )
 	
 			for i = 1, 2 do vel[i] = vel[i] + accelspeed * wishdir[i] end
 
+			-- Gravity Fix
 			if not game.GetMap() == "bhop_kasvihuone" then
 				vel.z = vel.z - (ply:GetGravity() * 800 * FrameTime() * 0.5)
 			end
@@ -363,4 +364,20 @@ function GM:Move( ply, data )
 			data:SetVelocity( vel )
 		end
 	end
+end
+
+-- Old way with ang:Forward() * 18
+local function fov(ply, ori, ang, fov, nz, fz)
+	local view = {}
+
+	local suppress_viewpunch = suppress_viewpunch.Enabled:GetBool()
+	if suppress_viewpunch then
+		ang.r = 0
+	end
+
+	view.origin = ori - ( ang:Forward() * 18 )
+	view.angles = ang
+	view.fov = newfov
+
+	return view
 end
