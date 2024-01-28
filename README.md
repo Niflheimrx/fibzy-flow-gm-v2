@@ -10,6 +10,8 @@ Contains code from 2014 all the way up to 2024
 
 Includes almost all of justa's code and fixes.
 
+Original Gamemode (https://github.com/bhopbhop/kawaiiclan-gamemode)
+
 Added
 - Momentum Mod Hud (justa)
 - Simple Hud (justa)
