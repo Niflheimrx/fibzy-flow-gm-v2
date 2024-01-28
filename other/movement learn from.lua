@@ -46,6 +46,15 @@ local function AirAccelerate( ply, data )
 end
 hook.Add("SetupMove", "AirAccelerate", AirAccelerate)
 
+-- Sets MaxSpeed to the highest value possabile with math.huge
+hook.Add( "Move", "SetMaxSpeed", function( ply, mv, usrcmd )
+	if not ply:IsOnGround() then 
+		mv:SetMaxSpeed( math.huge )
+	else
+	   mv:SetMaxSpeed( math.huge )
+   end
+end )
+
 -- Max Speed for GMod no crouch side like CS:S
 hook.Add("SetupMove","SetMaxClientSpeed", function( ply, mv )
 	
