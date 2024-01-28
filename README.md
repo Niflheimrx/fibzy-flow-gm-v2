@@ -56,7 +56,11 @@ bhop_overline demo
 https://github.com/FiBzYDev/jcs-kawaiiclan-gamemode/assets/58349075/fdeeea38-401e-4767-bd57-942744b65709
 
 bhop_alt_univaje demo
-https://github.com/FiBzYDev/jcs-kawaiiclan-gamemode/assets/58349075/f80d3ebd-02c4-4881-a3a6-440f9f2312c1
+
+
+https://github.com/FiBzYDev/jcs-kawaiiclan-gamemode/assets/58349075/aa0d01ac-ac85-4105-93b5-019906e0250e
+
+
 
 
 
