@@ -25,20 +25,15 @@ local DrawArea = {
 local DrawMaterial = Material( "sprites/jscfixtimer" )
 
 function ENT:Initialize() end
- 
-function ENT:Think()
-	local Min, Max = self:GetCollisionBounds()
-	self:SetRenderBounds( Min, Max )
-end
 
-/*function ENT:Think()
+function ENT:Think()
 	local rm, rma = self:GetCollisionBounds()
 
-	local Min = self:GetPos() + rm - Vector( -100, -100, 0 )
-	local Max = self:GetPos() + rma + Vector( -100, -100, 0 )
+	local Min = self:GetPos() + rm - Vector( -16, -16, 0 )
+	local Max = self:GetPos() + rma + Vector( -16, -16, 0 )
 
 	self:SetRenderBounds( rm, rma )
-end*/
+end
 
 -- Edited: justa
 -- Show ACs
@@ -56,9 +51,9 @@ function ENT:Draw()
 	Min = self:GetPos() + Min
 	Max = self:GetPos() + Max
 
-	--local rm, rma = self:GetCollisionBounds()
-	--local Min = self:GetPos() + rm - Vector( -100, -100, 0 )
-	--local Max = self:GetPos() + rma + Vector( -100, -100, 0 )
+	local rm, rma = self:GetCollisionBounds()
+	local Min = self:GetPos() + rm - Vector( -16, -16, 0 )
+	local Max = self:GetPos() + rma + Vector( -16, -16, 0 )
 
 	local Col, Width = DrawArea[ self:GetZoneType() ], 1
 	local B1, B2, B3, B4 = Vector(Min.x, Min.y, Min.z), Vector(Min.x, Max.y, Min.z), Vector(Max.x, Max.y, Min.z), Vector(Max.x, Min.y, Min.z)

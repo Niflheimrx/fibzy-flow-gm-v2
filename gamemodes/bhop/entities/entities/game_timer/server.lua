@@ -15,31 +15,10 @@ local Zone = {
 }
 
 function ENT:Initialize()
-	local BBOX = (self.max - self.min) / 2
-
-	self:SetSolid( SOLID_BBOX )
-	self:PhysicsInitBox( -BBOX, BBOX )
-	self:SetCollisionBoundsWS( self.min, self.max )
-
-	self:SetTrigger( true )
-	self:DrawShadow( false )
-	self:SetNotSolid( true )
-	self:SetNoDraw( false )
-
-	self.Phys = self:GetPhysicsObject()
-	if self.Phys and self.Phys:IsValid() then
-		self.Phys:Sleep()
-		self.Phys:EnableCollisions( false )
-	end
-
-	self:SetZoneType( self.zonetype )
-end
-
-/*function ENT:Initialize()
 	local mi, ma = self.min, self.max
 
-	mi = mi + Vector( -100, -100, 0 )
-	ma = ma - Vector( -100, -100, 0 )
+	mi = mi + Vector( -16, -16, 0 )
+	ma = ma - Vector( -16, -16, 0 )
 
 	local BBOX = (mi - ma) / 2
 
@@ -59,7 +38,7 @@ end
 	end
 
 	self:SetZoneType( self.zonetype )
-end*/
+end
 
 function ENT:StartTouch(ent)
 	-- See if the entity is valid, and is a player.	

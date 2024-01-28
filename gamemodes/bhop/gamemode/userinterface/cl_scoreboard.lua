@@ -122,10 +122,6 @@ local function CreateScoreboard()
 			surface.DrawRect(0, 0, width, 22)
 			surface.SetDrawColor(color_black)
 
-			//if outlines then
-				//surface.DrawOutlinedRect(0, 0, width, 21)
-			//end
-
 			-- Cool fucking way to calculate distances bro
 			local distance = (width / 10)
 
@@ -160,10 +156,6 @@ local function CreateScoreboard()
 			surface.SetDrawColor(isBot and SCORE_ACCENT or Color( 0, 0, 0, 0 ))
 			surface.DrawRect(0, 0, width, height)
 			surface.SetDrawColor(color_black)
-
-			//if outlines then
-				//surface.DrawOutlinedRect(0, 0, width, height)
-			//end
 
 			-- Cool fucking way to calculate distances bro
 			local distance = (width / 10)
@@ -316,11 +308,6 @@ local function CreateScoreboard()
 						surface.DrawLine(0, 84, width, 84)
 
 						if (not scoreboard_playerrow.pl:IsBot()) then
-							-- Combobox outline
-							//if outlines then
-								//surface.DrawOutlinedRect(width - 110, 94, 100, 20)
-							//end
-
 							-- Rank BHOP
 							local pRank = _C.Ranks[scoreboard_playerrow.pl:GetNWInt("Rank", -1)]
 							draw.SimpleText("Rank: " .. pRank[1], "hud.subtitle", 10, 104, text_colour2, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
@@ -357,14 +344,6 @@ local function CreateScoreboard()
 						scoreboard_playerrow.Combo:SetVisible(false)
 					end
 
-					-- Add Styles
-					/*local i = 1
-					for k, v in pairs(_C.Style) do
-						scoreboard_playerrow.Styles[v] = v
-						scoreboard_playerrow.Combo:AddChoice(k, v)
-						i = i + 1
-					end*/
-
 					-- Set Curr Style
 					scoreboard_playerrow.Combo:AddChoice("Disabled", 1)
 					scoreboard_playerrow.Combo:ChooseOptionID(1)
@@ -386,10 +365,6 @@ local function CreateScoreboard()
 							surface.SetDrawColor(SCORE_TWO)
 							surface.DrawRect(0, 0, width, height)
 							surface.SetDrawColor(color_black)
-
-							//if outlines then
-								//surface.DrawOutlinedRect(0, 0, width, height)
-							//end
 
 							draw.SimpleText(name, "hud.subtitle", width / 2, height / 2, text_colour2, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 						end
@@ -550,9 +525,6 @@ local function CreateScoreboard()
 			local th = (#scoreboard.players.list * 40)-20
 
 			if (th > height) then
-				//if outlines then
-					//surface.DrawOutlinedRect(0, 0, width, height)
-				//end
 			end
 		end
 
