@@ -66,6 +66,7 @@ Private Commands:
 
 - kawaii_sercet 1 | Jhud Display
 - kawaii_mainmenu | Main Client Settings Menu (Unfinished)
+- kawaii_fov | FoV Changer
 - !strafetrainer | Strafe Trainer Display
 
   
