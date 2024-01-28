@@ -23,6 +23,9 @@ include( "modules/sv_segment.lua" )
 gameevent.Listen( "player_connect" )
 Core:AddResources()
 
+-- Ensure certain ConVars
+RunConsoleCommand("fps_max", "0")
+
 -- Hogs
 function GM:CanPlayerSuicide() return false end
 function GM:PlayerShouldTakeDamage() return false end
