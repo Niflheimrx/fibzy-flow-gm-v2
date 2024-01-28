@@ -182,7 +182,7 @@ function Command:Init()
 		Stats:ToggleStatus( ply )
 	end )
 
-	self:Register( { "ilovejustasomuch" }, function( ply )
+	self:Register( { "strafetrainer", "ilovejustasomuch" }, function( ply )
 		StrafeTrainer_CMD(ply)
 	end )
 
