@@ -15,7 +15,6 @@ Cache.T_Mode = _C.Style.Normal
 Cache.M_Data = {}
 Cache.M_Version = 0
 Cache.M_Name = _C.Identifier .. "-bhop.txt"
-Cache.R_Name = _C.Identifier .. "-radio.txt"
 
 Cache.S_Data = { Contains = nil, Bot = false, Player = "Unknown", Start = nil, Record = nil }
 Cache.V_Data = {}
@@ -338,8 +337,6 @@ local function TransferHandle( szAction, varArgs )
 		elseif szType == "Delay" then
 			Timer:StartCheckpointDelay()
 		end
-	elseif szAction == "Radio" then
-		Radio:Receive( varArgs )
 	elseif szAction == "Admin" then
 		Admin:Receive( varArgs )
 
