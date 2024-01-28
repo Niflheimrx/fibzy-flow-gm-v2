@@ -8,7 +8,7 @@ This gamemode was edited and heavy modified from kawaiiclan gamemode.
 
 Contains code from 2014 all the way up to 2024
 
-Includes almost all of justa's code and fixes.
+Includes almost all of justa's code and fixes. My Backstory is at the bottom of README
 
 Original Gamemode (https://github.com/bhopbhop/kawaiiclan-gamemode)
 
