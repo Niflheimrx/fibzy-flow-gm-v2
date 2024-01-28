@@ -134,3 +134,8 @@ This is a picture of what they did to the bhop server in 2020
 
 ![download](https://github.com/FiBzYDev/jcs-kawaiiclan-gamemode/assets/58349075/f9bed91e-45ac-410d-bfef-0627dd95de8a)
 
+Note I was like only 17 at the time i was getting upset so I got my mother to talk to then to get them to stop and it only got worse.
+Watch at your own risk*
+
+https://www.youtube.com/watch?v=ztg1WnB3-RM&list=PLvsVm4rpG66NfYEBiJCCRHcVMGu83Rk0l&index=10&ab_channel=Vehnex
+
