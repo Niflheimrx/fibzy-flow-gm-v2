@@ -61,6 +61,7 @@ Private Commands:
 - kawaii_hud 4 | Flow Hud edited by justa
 
 - kawaii_sercet 1 | Jhud Display
+- kawaii_mainmenu | Main Client Settings Menu (Unfinished)
 - !strafetrainer | Strafe Trainer Display
 
   
@@ -71,7 +72,7 @@ Private Commands:
   - sv.db
   - Lua bin files
   - Custom server.cfg
-  - 2 Fpsfixs
+  - 2 Fps fixs
     
 fastdl | https://main.fastdl.me/
 
