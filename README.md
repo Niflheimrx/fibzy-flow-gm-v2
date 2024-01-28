@@ -100,6 +100,7 @@ Follow rawinput2.txt in other https://github.com/Haze1337/RawInput2/releases
 
 Comes with:
 
+  - A fully custom bhop gamemode
   - Custom workshop fixes
   - Database
   - sv.db
