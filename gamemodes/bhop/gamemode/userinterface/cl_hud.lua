@@ -94,7 +94,6 @@ hook.Add("HUDPaint", "Speedometer", function()
 			color = Color(255, 255, 255, 255)
 		end
 
-
         last = current
         draw.SimpleText(string.Split(current, ".")[1], "HUDTimerKindaUltraBig", ScrW() / 2, yPos - 110, color, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	end
@@ -239,7 +238,7 @@ HUD.Themes = {
 	
 		-- Strings
 		local style = pl:GetNWInt("Style", 1)
-		local stylename = Core:StyleName(style or 1) .. (pl:IsBot() and " Bot" or "")
+		local stylename = Core:StyleName(style or 1) .. (pl:IsBot() and " Replay" or "")
 
 		-- Personal best
 		local personal = ConvertTime(data.pb or 0)
@@ -416,7 +415,7 @@ HUD.Themes = {
 
 		-- Strings
 		local style = pl:GetNWInt("Style", 1)
-		local stylename = Core:StyleName(style or 1) .. (pl:IsBot() and " Bot" or "")
+		local stylename = Core:StyleName(style or 1) .. (pl:IsBot() and " Replay" or "")
 
 		-- Personal best
 		local personal = ConvertTime(data.pb or 0)
@@ -573,13 +572,6 @@ HUD.Themes = {
 		local TEXT = Settings:GetValue("TextCol")
 		local BAR = Settings:GetValue("AccentCol")
 		local OUTLINE = Color(0, 0, 0, 0)
-
-		--local theme = Theme:Get("hud.flow.redesign")
-		--local BASE = theme["Colours"]["Primary Colour"]
-		--local INNER = theme["Colours"]["Secondary Colour"]
-		--local BAR = theme["Colours"]["Accent Colour"]
-		--local TEXT = theme["Colours"]["Text Colour"]
-		--local OUTLINE = theme["Toggles"]["Outlines"] and color_black or Color(0, 0, 0, 0)
 
 		sync = data.sync or sync
 
