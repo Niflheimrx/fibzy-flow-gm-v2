@@ -187,6 +187,12 @@ timer.Create( "dicy", 2, 1, function()
 		   end
 end)
 
+timer.Create( "mody", 2, 1, function()
+	if game.GetMap() == "bhop_moderated" then
+		   LocalPlayer():ConCommand( "kawaii_map_brightness 1.3" )
+		   end
+end)
+
 timer.Create( "bloody", 2, 1, function()
  if game.GetMap() == "bhop_bloodflow" then
 		LocalPlayer():ConCommand( "kawaii_map_color 1.8" )
