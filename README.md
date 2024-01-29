@@ -52,6 +52,8 @@ Thanks to all the creators who contributed to this code.
 ![20240127015354_1](https://github.com/FiBzYDev/jcs-kawaiiclan-gamemode/assets/58349075/0eb67f28-c9ac-421b-b345-f96b056f12d9)
 ![download](https://github.com/FiBzYDev/jcs-kawaiiclan-gamemode/assets/58349075/e150a6c6-6f89-4a96-b910-4d0cfd9221db)
 ![20240128004208_1](https://github.com/FiBzYDev/jcs-kawaiiclan-gamemode/assets/58349075/9c3da4fe-7059-401e-b8ff-f519858bdf69)
+Paint preview:
+![20240129014556_1](https://github.com/FiBzYDev/jcs-kawaiiclan-gamemode/assets/58349075/97a6aad0-a013-44e6-affb-045cb4cdec2e)
 
 How the movment should work and look
 
