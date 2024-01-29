@@ -17,7 +17,7 @@ Added
 - Simple Hud (justa)
 - Crouch Boost fixes / CB Stop Time fix [This is broken on pG Gamemode] (fibzy)
 - RNGFix - Downhill (Now has no prediction errors) (claz | Niflheimrx)
-- Rawinput2 - (fibzy)
+- Rawinput2 not fully tested - (fibzy)
 - Custom Chat Box (fibzy)
 - Flow zone texture fix (fibzy)
 - Movement fixes (bigdogmatt | justa | Niflheimrx | fibzy)
