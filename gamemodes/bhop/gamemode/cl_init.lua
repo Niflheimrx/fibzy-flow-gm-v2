@@ -8,7 +8,7 @@ include( "userinterface/cl_themes.lua" )
 include( "userinterface/cl_ui.lua" )
 include( "userinterface/cl_hud.lua" )
 include( "userinterface/cl_menu.lua" )
-
+include( "sh_paint.lua" )
 include( "cl_timer.lua" )
 include( "cl_receive.lua" )
 include( "cl_gui.lua" )

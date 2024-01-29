@@ -3,6 +3,7 @@ include( "core_lang.lua" )
 include( "core_data.lua" )
 include( "sv_player.lua" )
 include( "sv_command.lua" )
+include( "sh_paint.lua" )
 include( "sv_timer.lua" )
 include( "sv_zones.lua" )
 include( "modules/sv_rtv.lua" )
@@ -59,67 +60,6 @@ local function LoadEntities()
 	Core:AwaitLoad()
 end
 hook.Add( "InitPostEntity", "LoadEntities", LoadEntities )
-
--- Gets base gains server sided
-/*local function AirAccelerate( ply, data )
-	if ply:IsOnGround() or not ply:Alive() then return end
-	
-	local g_cvAirAccelerate, mv = math.huge, 32.8
-
-	local aim = data:GetMoveAngles()
-	local forward, right = aim:Forward(), aim:Right()
-	local fmove = data:GetForwardSpeed()
-	local smove = data:GetSideSpeed()
-	local strafing = false
-
-	-- Server sided overlap
-	if data:KeyDown( IN_MOVERIGHT ) then
-		smove = (smove) + 10000000000000000000000000000000
-	elseif data:KeyDown( IN_MOVELEFT ) then
-		smove = (smove) - 10000000000000000000000000000000
-	end
-
-	forward.z, right.z = 0,0
-	forward:Normalize()
-	right:Normalize()
-
-	local wishvel = forward * fmove + right * smove
-
-	wishvel.z = 0
-
-	local wishspeed = wishvel:Length2D()
-	local wishdir = wishvel:GetNormalized()
-
-	if wishspeed ~= 0 then
-	local wishspd = wishspeed
-	
-	local vel = ply:GetAbsVelocity()
-	local current = vel:Dot( wishdir )
-
-	wishspd = math.Clamp( wishspd, 0, 32.8 + (math.Clamp( vel:Length2D() - 500, 0, 500 ) / 1000) * 1.4 )
-
-	local addspeed = wishspd - current
-
-	if addspeed > 0 then
-		local accelspeed = math.huge * 500 * wishspeed
-		if (accelspeed > addspeed) then accelspeed = addspeed end
-	
-			for i = 1, 2 do vel[i] = vel[i] + accelspeed * wishdir[i] end
-
-			if not game.GetMap() == "bhop_kasvihuone" then
-				vel.z = vel.z - (ply:GetGravity() * 800 * FrameTime() * 0.5)
-			end
-
-			if st == 6 then
-				if not ply.AirStam or ply.AirStam < 4 then ply.AirStam = 4 end
-				if ply.Gset then ply.Gset = nil end
-			end
-
-			data:SetVelocity( vel )
-		end
-	end
-end
-hook.Add("SetupMove", "AirAccelerate", AirAccelerate)*/
 
 function GM:PlayerSpawn( ply )
 	player_manager.SetPlayerClass( ply, "player_bhop" )
