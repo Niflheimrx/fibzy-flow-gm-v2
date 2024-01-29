@@ -1846,6 +1846,8 @@ local function SSJ_HUD()
 
 	if kawaiihud == 3 then return end
 	if kawaiihud == 4 then return end
+	if LocalPlayer():IsOnGround() then return end
+
 	if kawaiihud == 2 and jump <= 0 then 
 		draw.SimpleText("", "HUDTimer2", ScrW() / 2, yPos + 123, color77, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	else
