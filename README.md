@@ -19,6 +19,7 @@ Added
 - RNGFix - Downhill (Now has no prediction errors) (claz | Niflheimrx)
 - Rawinput2 not fully tested - (fibzy)
 - Custom Chat Box (fibzy)
+- Paint  (Niflheimrx)
 - Flow zone texture fix (fibzy)
 - Movement fixes (bigdogmatt | justa | Niflheimrx | fibzy)
 - Get Gravity fixes (justa | fibzy)
