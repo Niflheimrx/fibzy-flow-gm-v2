@@ -123,7 +123,6 @@ if CLIENT then
 			util.Decal("paint_" .. col, pos - norm, pos)
 		end
 
-		Surf:Notify( "Debug", "Paint history request received [Size: " .. size .. "]" )
 	end)
 
 	local cooldown_time = 0.05
