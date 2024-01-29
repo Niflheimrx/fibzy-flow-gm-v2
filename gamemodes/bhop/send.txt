@@ -49,6 +49,7 @@ gamemodes\bhop\gamemode\cl_timer.lua
 gamemodes\bhop\gamemode\core.lua
 gamemodes\bhop\gamemode\core_player.lua
 gamemodes\bhop\gamemode\core_view.lua
+gamemodes\bhop\gamemode\sh_paint.lua
 gamemodes\bhop\gamemode\userinterface\cl_scoreboard.lua
 gamemodes\bhop\gamemode\userinterface\cl_hud.lua
 gamemodes\bhop\gamemode\userinterface\cl_settings.lua
