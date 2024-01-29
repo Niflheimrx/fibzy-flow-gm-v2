@@ -746,7 +746,7 @@ do
 		local forward, right = aim:Forward(), aim:Right()
 		local fmove, smove = data:GetForwardSpeed(), data:GetSideSpeed()
 
-		local sideadd, foreadd = 100000, 100000
+		local sideadd, foreadd = 500, 500
 		local styleAirAccelerate, styleGain, styleGravity, styleSide, styleFore = ply.Style
 		if styleSide or styleFore then
 			sideadd = styleSide or sideadd
@@ -789,7 +789,7 @@ do
 		local vel = data:GetVelocity()
 		local wishspd = wishspeed
 
-		wishspd = mc( wishspd, 0, 32.8 + (mc( vel:Length2D() - 500, 0, 500 ) / 1000) * 1.4 )
+		wishspd = mc( wishspd, 0, mv )
 
 		local wishdir = wishvel:GetNormal()
 		local current = vel:Dot(wishdir)
@@ -803,7 +803,7 @@ do
 				gaincoeff = (wishspd - math.abs(current)) / wishspd
 				ply.rawgain = ply.rawgain + gaincoeff
 	
-				--JAC:CheckFrame(ply, gaincoeff, smove)
+				JAC:CheckFrame(ply, gaincoeff, smove)
 			end
 		end
 
