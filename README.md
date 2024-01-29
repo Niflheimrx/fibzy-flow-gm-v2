@@ -104,7 +104,8 @@ Private Commands:
 - kawaii_mainmenu | Main Client Settings Menu (Unfinished)
 - kawaii_fov | FoV Changer
 - !strafetrainer | Strafe Trainer Display
-
+- sm_paint | Painter for routes
+  
 Follow rawinput2.txt in other https://github.com/Haze1337/RawInput2/releases
 - I use + 0.031250 (Pos rounded) added to my sensitivity so if you use 1.3 it will then be sensitivity 1.33125
 - Run GMod in 86x bit mode
