@@ -1851,7 +1851,7 @@ local function SSJ_HUD()
 	if kawaiihud == 2 and jump <= 0 then 
 		draw.SimpleText("", "HUDTimer2", ScrW() / 2, yPos + 123, color77, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	else
-		draw.SimpleText(speed .. " (" .. sync .. "% +" .. speed - 56 .. ")", "HUDTimer2", ScrW() / 2, yPos + 123, color77, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+		draw.SimpleText(speed .. " (" .. sync .. "%, +" .. speed - 56 .. ")", "HUDTimer2", ScrW() / 2, yPos + 123, color77, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	end
 
 end
