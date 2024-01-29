@@ -1052,49 +1052,74 @@ HUD.Ids = {"Counter Strike: Source", "Simple", "Momentum", "Flow Network"}
 -- Themes
 local sync = "0"
 
-local last = 0
-local coll
-local lastUp = CurTime()
-
 MONHUD = {}
 MONHUD.Enabled = CreateClientConVar( "kawaii_momentum_speed_hud", "1", true, false, "Momentum speed hud display" )
 
-hook.Add("HUDPaint", "Speedometer", function() 
-		local MONHUD = MONHUD.Enabled:GetBool()
-		if !MONHUD then return end
-
-        local current = LocalPlayer():GetVelocity():Length2D()
-    	if not (LocalPlayer():Team() == TEAM_SPECTATOR) then 
-	    if (current == 0) then
-		 	   	current = 0
-	       	 else
-	    		if (current <= 33) and not LocalPlayer():IsOnGround() then
-		  	  	current = 30
-		  	  end 
-	   	 end
-
-        if last < current then
-            coll = Color(0, 160, 200)
-        end
-        if last > current then
-            coll = Color(255,0,0)
-        end
-        if last == current then
-            if CurTime() > (lastUp + 0.5) then
-                coll = Color(255, 255, 255)
-                lastUp = CurTime()
-            end
-        end
-
-		local width = 200
-		local height = 100
-		local xPos = (ScrW() / 2) - (width / 2)
-		local yPos = ScrH() - height - 60 - (LocalPlayer():Team() == TEAM_SPECTATOR and 50 or 0)
-
-        last = current
-        draw.SimpleText(string.Split(current, ".")[1], "HUDTimerKindaUltraBig", ScrW() / 2, yPos - 110, coll, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+local newSpeed, lastSpeed = 0, 0
+local ticksNoSpeed, speedOpacity = 0, 255
+local lastUpdated, lastColor = nil, color_white
+local function HUDPaintCenterSpeed()
+	local exceededMaxvel = (newSpeed > 10000)
+	if exceededMaxvel then
+		newSpeed = 0
 	end
-end)
+
+	local didGain = (newSpeed > (lastSpeed + 1))
+	local didLose = (newSpeed < (lastSpeed - 1))
+
+	local width = 200
+	local height = 100
+	local yPos = ScrH() - height - 60 - (LocalPlayer():Team() == TEAM_SPECTATOR and 50 or 0)
+	local midWidth, midHeight = ScrW() / 2, yPos - 110
+	local font = "HUDTimerKindaUltraBig"
+
+	if lastUpdated and CurTime() < (lastUpdated + 0.030) then
+		draw.SimpleText( newSpeed, font, midWidth, midHeight, lastColor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
+	return end
+
+	lastUpdated = CurTime()
+
+	local lpc = LocalPlayer()
+	local isSpec = (lpc:Team() == ts)
+	local ob = isSpec and lpc:GetObserverTarget()
+
+
+	if ob and IsValid( ob ) then
+		local nSpeed = ob:GetVelocity()
+		if MONHUD then nSpeed = nSpeed:Length2D() else nSpeed = nSpeed:Length() end
+
+		newSpeed = nSpeed
+	else
+		local nSpeed = lpc:GetVelocity()
+		if MONHUD then nSpeed = nSpeed:Length2D() else nSpeed = nSpeed:Length() end
+
+		newSpeed = nSpeed
+	end
+
+	newSpeed = math.Round( newSpeed )
+
+	didGain = (newSpeed > (lastSpeed + 1))
+	didLose = (newSpeed < (lastSpeed - 1))
+	centerColor = didGain and Color( 0, 255, 255, speedOpacity ) or didLose and Color( 255, 0, 0, speedOpacity ) or Color( 255, 255, 255, speedOpacity )
+	lastColor = centerColor
+
+	draw.SimpleText( newSpeed, font, midWidth, midHeight, centerColor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
+
+	if (newSpeed == 0) then
+		ticksNoSpeed = ticksNoSpeed - 15
+	else
+		ticksNoSpeed = 0
+	end
+
+	if ticksNoSpeed > 15 then
+		speedOpacity = speedOpacity - 15
+	else
+		speedOpacity = 255
+	end
+
+	lastSpeed = newSpeed
+end
+hook.Add( "HUDPaint", "PaintCenterSpeed", HUDPaintCenterSpeed )
 
 HUD.Themes = {
 	function(pl, data) -- CS:S
