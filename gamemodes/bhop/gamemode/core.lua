@@ -410,10 +410,10 @@ do
 		local wishvel = forward * fmove + right * smove
 		wishvel.z = 0
 
-		local wishspeed = wishvel:Length()
-		if wishspeed > data:GetMaxSpeed() then
-			wishvel = wishvel * (data:GetMaxSpeed() / wishspeed)
-			wishspeed = data:GetMaxSpeed()
+		local wishspeed = wishvel:Length(Angle(-100, -100, 0))
+		if wishspeed > data:GetMaxSpeed(Angle(-100, -100, 0)) then
+			wishvel = wishvel * (data:GetMaxSpeed(Angle(-100, -100, 0)) / wishspeed)
+			wishspeed = data:GetMaxSpeed(Angle(-100, -100, 0))
 		end
 
 		local vel = data:GetVelocity()
@@ -421,7 +421,7 @@ do
 
 		wishspd = mc( wishspd, 0, mv )
 
-		local wishdir = wishvel:GetNormal()
+		local wishdir = wishvel:GetNormal(Angle(-100, -100, 0))
 		local current = vel:Dot(wishdir)
 
 		-- Gain Stats
