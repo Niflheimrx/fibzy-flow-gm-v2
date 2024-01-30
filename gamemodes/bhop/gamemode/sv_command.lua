@@ -415,12 +415,6 @@ function Command:Init()
 	-- Edited: justa
 	-- Concommand, as if we did this serverside it would do it for everyone nifl!! <3
 
-	self:Register({"trigger", "triggers", "showtrigger", "showtriggers", "toggletriggers"}, function(pl)
-		pl:ConCommand("bhop_toggletriggers")
-
-		Core:Send(pl, "Print", {"Notification", "This command is NOT currently disabled, sorry!"})
-	end)
-
 	self:Register({"acs", "anticheats", "showanticheats", "toggleanticheats", "toggleacs"}, function(pl)
 		pl:ConCommand("_toggleanticheats")
 
