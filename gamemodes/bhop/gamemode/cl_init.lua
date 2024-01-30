@@ -100,7 +100,7 @@ steady_view.Enabled = CreateClientConVar( "kawaii_steady_view", "0", true, false
 hook.Add("CalcViewModelView", "FixPos", function(wep, vm, oldPos, oldAng, pos, ang)
 
 	if steady_view then
-		pos, ang = oldPos, oldAng + Angle( -5, -5, 0 )
+		pos, ang = oldPos, oldAng
 	end
 
 	local suppress_viewpunch_wep = suppress_viewpunch_wep.Enabled:GetBool()
@@ -120,7 +120,7 @@ local function fov(ply, ori, ang, fov, nz, fz)
 	end
 
 	view.origin = ori
-	view.angles = ply:EyeAngles() + Angle( -5, -5, 0 )
+	view.angles = ply:EyeAngles()
 	view.fov = newfov
 
 	return view
