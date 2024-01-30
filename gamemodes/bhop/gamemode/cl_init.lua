@@ -100,10 +100,10 @@ steady_view.Enabled = CreateClientConVar( "kawaii_steady_view", "0", true, false
 local amountposfix =  GetConVarNumber("jcs_movement_ang")
 
 hook.Add("CalcViewModelView", "FixPos", function(wep, vm, oldPos, oldAng, pos, ang)
-	pos = pos - ang:Forward()
+	pos = pos - ang:Forward() * 5
 
 	if steady_view then
-		pos, ang = oldPos - ang:Forward(), oldAng
+		pos, ang = oldPos - ang:Forward() * 5, oldAng
 	end
 
 	local suppress_viewpunch_wep = suppress_viewpunch_wep.Enabled:GetBool()
@@ -122,7 +122,7 @@ local function fov(ply, ori, ang, fov, nz, fz)
 		ang.r = 0
 	end
 
-	view.origin = ori - ang:Forward()
+	view.origin = ori - ang:Forward() * 5
 	view.angles = ang
 	view.fov = newfov
 
