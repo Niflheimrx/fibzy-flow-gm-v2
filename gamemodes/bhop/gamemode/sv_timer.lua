@@ -548,17 +548,6 @@ end
 
 -- Hooking
 local LeftBypass
-local function BlockLeftRight( ply, data )
-	if LeftBypass then return end
-	if data:KeyDown( IN_RIGHT ) then
-		if ply.Tn or ply.Tb then
-			if ply:StopAnyTimer() then
-				Core:Send( ply, "Print", { "Timer", Lang:Get( "StyleLeftRight" ) } )
-			end
-		end
-	end
-end
-hook.Add( "SetupMove", "BlockLeft", BlockLeftRight )
 
 function Timer:SetLeftBypass( bValue )
 	LeftBypass = bValue
