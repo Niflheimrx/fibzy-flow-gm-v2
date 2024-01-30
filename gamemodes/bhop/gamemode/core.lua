@@ -376,6 +376,7 @@ do
 		local forward, right = aim:Forward(), aim:Right()
 		local fmove, smove = data:GetForwardSpeed(), data:GetSideSpeed()
 
+		local st = ply.Style
 		local sideadd, foreadd = 500, 500
 		local styleAirAccelerate, styleGain, styleGravity, styleSide, styleFore = ply.Style
 		if styleSide or styleFore then
@@ -388,6 +389,30 @@ do
 
 			if styleGravity then
 				ply:OverrideGravity(styleGravity)
+			end
+		end
+
+		if st == 1 then
+			if data:KeyDown( IN_MOVERIGHT ) then
+				smove = (smove* 10) + 100000
+			elseif data:KeyDown( IN_MOVELEFT ) then
+				smove = (smove* 10) - 100000
+			end
+		end
+
+		if st == 8 then
+			if data:KeyDown( IN_MOVERIGHT ) then
+				smove = (smove* 10) + 100000
+			elseif data:KeyDown( IN_MOVELEFT ) then
+				smove = (smove* 10) - 100000
+			end
+		end
+
+		if st == 9 then
+			if data:KeyDown( IN_MOVERIGHT ) then
+				smove = (smove* 10) + 100000
+			elseif data:KeyDown( IN_MOVELEFT ) then
+				smove = (smove* 10) - 100000
 			end
 		end
 
