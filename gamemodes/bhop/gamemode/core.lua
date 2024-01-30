@@ -289,15 +289,6 @@ function GM:CreateTeams()
 	team.SetSpawnPoint( _C.Team.Players, { "info_player_terrorist", "info_player_counterterrorist" } )
 end
 
--- Set MaxSpeed to the highest possabile for better movement smoothness
-hook.Add( "Move", "SetMaxSpeed", function( ply, mv, usrcmd )
-	 if not ply:IsOnGround() then 
-		 mv:SetMaxSpeed( math.huge )
-	 else
-		mv:SetMaxSpeed( math.huge )
-	end
-end )
-
 -- Useful metafunctions, mainly here to easily use them in movement code --
 do
 	local META = FindMetaTable "Player"
@@ -347,6 +338,13 @@ do
 		end
 	end
 end
+
+-- Set MaxSpeed to the highest possabile for better movement smoothness
+hook.Add( "Move", "SetMaxSpeed", function( ply, mv, usrcmd )
+	if not ply:Crouching() then 
+	   mv:SetMaxSpeed( math.huge )
+   end
+end )
 
 -- JSS Base
 local mabs, matan, mdeg, NormalizeAngle = math.abs, math.atan, math.deg, math.NormalizeAngle
