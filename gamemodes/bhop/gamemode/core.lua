@@ -377,7 +377,7 @@ do
 		local fmove, smove = data:GetForwardSpeed(), data:GetSideSpeed()
 
 		local st = ply.Style
-		local sideadd, foreadd = 500, 500
+		local sideadd, foreadd = 100000, 100000
 		local styleAirAccelerate, styleGain, styleGravity, styleSide, styleFore = ply.Style
 		if styleSide or styleFore then
 			sideadd = styleSide or sideadd
