@@ -18,6 +18,7 @@ include("modules/sv_boosterfix.lua")
 
 -- Checkpoints
 include( "modules/sv_checkpoint.lua" )
+include( "modules/sv_setspawn.lua" )
 include( "modules/sv_segment.lua" )
 
 gameevent.Listen( "player_connect" )

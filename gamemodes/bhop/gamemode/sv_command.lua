@@ -88,6 +88,7 @@ function Command:Init()
 
 		Command:RemoveLimit( ply )
 		Command.Restart( ply )
+		SetSpawn:Teleport( ply )
 	end )
 
 	self:Register( { "spectate", "spec", "watch", "view" }, function( ply, args )
@@ -161,6 +162,10 @@ function Command:Init()
 
 	self:Register( { "lj", "ljstats", "wj", "longjump", "stats" }, function( ply )
 		Stats:ToggleStatus( ply )
+	end )
+
+	self:Register( { "setspawn", "ss", "setstart"} , function( ply )
+		SetSpawn:Save( ply )
 	end )
 
 	self:Register( { "strafetrainer", "ilovejustasomuch" }, function( ply )
