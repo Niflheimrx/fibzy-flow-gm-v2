@@ -116,7 +116,7 @@ HUD.Themes = {
 		local time = "Time: "
 		local pb = "PB: "
 		local style = pl:GetNWInt("Style", 1)
-		local stylename = Core:StyleName(style or 1) .. (pl:IsBot() and " Bot" or "")
+		local stylename = Core:StyleName(style or 1) .. (pl:IsBot() and " Replay" or "")
 
 		-- Personal best
 		local personal = ConvertTime(data.pb or 0)
@@ -268,7 +268,7 @@ HUD.Themes = {
 			status = ConvertTime(current)
 
 			if pl.TnF or pl.TbF then 
-				draw.SimpleText("Map Completed", "HUDTimer2", ScrW() / 2, yPos - 40, tc, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+				draw.SimpleText("Map Completed", "HUDTimer2", ScrW() / 2, yPos + 24, tc, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 			end 
 		end
 
@@ -287,7 +287,7 @@ HUD.Themes = {
 		end
 
 		if not pl:IsBot() and pl:GetNWInt("inPractice", true) then 
-			draw.SimpleText("Practicing", "HUDTimer2", ScrW() / 2, yPos - 40, tc, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+			draw.SimpleText("Practicing", "HUDTimer2", ScrW() / 2, yPos + 24, tc, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 		end
 
 		local wr, wrn
