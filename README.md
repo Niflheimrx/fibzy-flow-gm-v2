@@ -25,6 +25,7 @@ Added
 - Get Gravity fixes (justa | fibzy)
 - Fullbright (Niflheimrx)
 - Custom Rabbit Model (fibzy)
+- Set Spawn (justa | fibzy)
 - Check Crouch fix (george ri)
 - Set No Jump fix (george ri)
 - WR Replay Names Outside of server (justa | Niflheimrx)
@@ -83,7 +84,6 @@ https://github.com/FiBzYDev/jcs-kawaiiclan-gamemode/assets/58349075/2e6df12c-d80
 
 TO DO:
 
-- Add !setspawn to gamemode
 - Make the Momentum Hud 1440p version for 1080p resolution
 - Finsih new progress replay code
 - Add FJT and Pre-Speed to Jhud
