@@ -176,9 +176,9 @@ local function DispatchChatWR(um)
 end
 usermessage.Hook("DispatchChatWR", DispatchChatWR)
 
-if SERVER then AddCSLuaFile() end
-surface.CreateFont( "FancyChatBox", {font = "ChatFont", extended = false,size = 22,weight = 600,shadow = false} )
-surface.CreateFont( "FancyChatBox12", {font = "ChatFont", extended = false,size = 22,weight = 500,shadow = false} )
+surface.CreateFont( "FancyChatBox", {font = "ChatFont", extended = false,size = 22,weight = 600,shadow = true} )
+surface.CreateFont( "FancyChatBox12", {font = "ChatFont", extended = false,size = 22,weight = 500,shadow = true} )
+
 timer.Simple(0, function()
 local myChat = {}
 local size1, size2 = ScrW() / 2.8, ScrH() / 4
@@ -201,6 +201,7 @@ myChat.dTextEntry:SetPos(0,size2 - size2 / 10)
 myChat.dTextEntry:SetSize(size1, ScrH() / 50)
 myChat.dTextEntry:SetPaintBackgroundEnabled( true )
 myChat.dTextEntry:SetAlpha(0)
+
 myChat.dTextEntry.OnKeyCodeTyped = function( self, code )
 	if code == KEY_ESCAPE then
 		myChat.closeChatbox()
@@ -212,139 +213,7 @@ myChat.dTextEntry.OnKeyCodeTyped = function( self, code )
 end
 
 myChat.dRichText = vgui.Create("RichText", myChat.dFrame)
-myChat.dRichText:SetPos(0,0)
-myChat.dRichText:SetSize(size1, size2 - size2 / 10)
-myChat.dRichText:SetVerticalScrollbarEnabled( false )
-myChat.dRichText.Paint = function(self, w, h) draw.RoundedBox(0, 0, 0, w, h, Color(20,20,20,0)) end
-myChat.dRichText:Show()
-myChat.dRichText.PerformLayout = function (self)
-self:SetFontInternal("FancyChatBox12")
-self:SetFGColor( Color(42,42,42,255) )
-end
-
-hook.Add( "PlayerBindPress", "overrideChatbind", function( ply, bind, pressed )
-    local bTeam = false
-	chatbox_isteam = false
-    if bind == "messagemode" then
-    elseif bind == "messagemode2" then
-        bTeam = true
-		chatbox_isteam = true
-	elseif bind == "cancelselect" then 
-		myChat.closeChatbox()
-    else
-        return
-    end
-
-    myChat.openChatbox( bTeam )
-
-    return true 
-end )
-
-hook.Add( "ChatText", "serverNotifications", function( index, name, text, type )
-    if type == "joinleave" or type == "none" then
-        myChat.dRichText:AppendText( text .. "\n" )
-    end
-end )
-
-hook.Add( "HUDShouldDraw", "noMoreDefault", function( name )
-	if name == "CHudChat" then
-		return false
-	end
-end )
-
-local oldAddText = chat.AddText
-function chat.AddText( ... )
-	local args = {...}
-	for _, obj in ipairs( args ) do
-		if type( obj ) == "table" then
-			myChat.dRichText:InsertColorChange( 0, 0, 0, 255 )
-		elseif type( obj ) == "string"  then 
-			myChat.dRichText:AppendText( obj )
-			myChat.dRichText:InsertFade(8, 2)
-		elseif obj:IsPlayer() then
-			local col = GAMEMODE:GetTeamColor( obj ) 
-			myChat.dRichText:InsertColorChange( col.r, col.g, col.b, 255 )
-			myChat.dRichText:AppendText( obj:Nick() )
-			myChat.dRichText:InsertFade(8, 2)
-		end
-	end
-	myChat.dRichText:AppendText( "\n" )
-	myChat.dRichText:InsertFade(8, 2)
-	oldAddText( ... )
-end
-
-
-
-function myChat.openChatbox(bTeam)
-	myChat.dFrame:MakePopup()
-	myChat.dFrame:SetMouseInputEnabled( true )
-
-	myChat.dRichText:SetBGColor(42, 42, 42, 255)
-	myChat.dRichText:ResetAllFades(true, false, 100000)
-	myChat.dRichText:SetVerticalScrollbarEnabled( true)
-
-	if bTeam then myChat.dTextEntry:SetBGColor(Color(34,34,34,255)); else myChat.dTextEntry:SetBGColor(Color(34,34,34,255));end
-	myChat.dTextEntry:AlphaTo( 255, 0.25, 0)
-	myChat.dTextEntry:RequestFocus()
-
-	hook.Run( "StartChat" )
-end
-
-function myChat.closeChatbox()
-	myChat.dFrame:SetMouseInputEnabled( false )
-	myChat.dFrame:SetKeyboardInputEnabled( false )
-
-	myChat.dTextEntry:SetText( "" )
-	myChat.dTextEntry:AlphaTo(0, 0.25, 0)
-
-	myChat.dRichText:ResetAllFades(false, false, 2)
-	myChat.dRichText:SetBGColor(20, 20, 20, 0)
-	myChat.dRichText:SetVerticalScrollbarEnabled( false )
-
-	gui.EnableScreenClicker( false )
-
-	hook.Run( "FinishChat" )
-	hook.Run( "ChatTextChanged", "" )
-end
-end)
-
-if SERVER then AddCSLuaFile() end
-surface.CreateFont( "FancyChatBox", {font = "ChatFont", extended = false,size = 22,weight = 600,shadow = false} )
-surface.CreateFont( "FancyChatBox12", {font = "ChatFont", extended = false,size = 22,weight = 500,shadow = false} )
-timer.Simple(0, function()
-local myChat = {}
-local size1, size2 = ScrW() / 2.8, ScrH() / 4
-local pos1, pos2 = 19, ScrH() / 1.65
-local chatbox_isteam = false
-
-myChat.dFrame = vgui.Create("DFrame")
-myChat.dFrame:SetPos(pos1, pos2)
-myChat.dFrame:SetTitle("")
-myChat.dFrame:ShowCloseButton(false)
-myChat.dFrame:SetAlpha(255)
-myChat.dFrame:SetSize(size1, size2)
-myChat.dFrame:SetDraggable( false )
-myChat.dFrame.Paint = function ()  end
-myChat.dFrame:Show()
-
-myChat.dTextEntry = vgui.Create("DTextEntry", myChat.dFrame)
-myChat.dTextEntry:SetFont("FancyChatBox")
-myChat.dTextEntry:SetPos(0,size2 - size2 / 10)
-myChat.dTextEntry:SetSize(size1, ScrH() / 50)
-myChat.dTextEntry:SetPaintBackgroundEnabled( true )
-myChat.dTextEntry:SetAlpha(0)
-myChat.dTextEntry.OnKeyCodeTyped = function( self, code )
-	if code == KEY_ESCAPE then
-		myChat.closeChatbox()
-		gui.HideGameUI()
-	elseif code == KEY_ENTER then
-		if string.Trim( self:GetText() ) != "" then if !chatbox_isteam then LocalPlayer():ConCommand( "say " .. self:GetText() ) ; else LocalPlayer():ConCommand( "say_team " .. self:GetText() ); end end
-		myChat.closeChatbox()
-	end
-end
-
-myChat.dRichText = vgui.Create("RichText", myChat.dFrame)
-myChat.dRichText:SetPos(0,-2)
+myChat.dRichText:SetPos(0,2)
 myChat.dRichText:SetSize(size1, size2 - size2 / 10)
 myChat.dRichText:SetVerticalScrollbarEnabled( false )
 myChat.dRichText.Paint = function(self, w, h) draw.RoundedBox(0, 0, 0, w, h, Color(20,20,20,0)) end
@@ -405,8 +274,6 @@ function chat.AddText( ... )
 	oldAddText( ... )
 end
 
-
-
 function myChat.openChatbox(bTeam)
 	myChat.dFrame:MakePopup()
 	myChat.dFrame:SetMouseInputEnabled( true )
@@ -439,122 +306,6 @@ function myChat.closeChatbox()
 	hook.Run( "ChatTextChanged", "" )
 end
 end)
-
-local PANEL = {}
-
-local PlayerVoicePanels = {}
-
-function PANEL:Init()
-	self.LabelName = vgui.Create( "DLabel", self )
-
-	self.LabelName:SetFont( "HUDTimerKindaUltraBig" )
-	self.LabelName:Dock( FILL )
-	self.LabelName:DockMargin( 8, 0, 0, 0 )
-	self.LabelName:SetTextColor( Color( 255, 255, 255 ) )
-
-	self.Avatar = vgui.Create( "AvatarImage", self )
-	self.Avatar:Dock( LEFT )
-	self.Avatar:SetSize( 32, 32 )
-
-	self.Color = color_transparent
-
-	self:SetSize( 250, 32 + 8 )
-	self:DockPadding( 4, 4, 4, 4 )
-	self:DockMargin( 2, 2, 2, 2 )
-
-	self:Dock( BOTTOM )
-end
-
-function PANEL:Setup( ply )
-	self.ply = ply
-	self.LabelName:SetText( ply:Nick() )
-	self.Avatar:SetPlayer( ply )
-	self.Color = team.GetColor( ply:Team() )
-
-	self:InvalidateLayout()
-end
-
-function PANEL:Paint( w, h )
-	if ( !IsValid( self.ply ) ) then return end
-
-	draw.RoundedBox( 2, 0, 0, w, h, self.Color )
-	draw.RoundedBox( 2, 1, 1, w-2, h-2, Color( 0, 0, 0, 30 ) )
-end
-
-function PANEL:Think()
-	if ( IsValid( self.ply ) ) then
-		self.LabelName:SetText( self.ply:Nick() )
-	end
-
-	if ( self.fadeAnim ) then
-		self.fadeAnim:Run()
-	end
-end
-
-function PANEL:FadeOut( anim, delta, data )
-	if ( anim.Finished ) then
-		if ( IsValid( PlayerVoicePanels[ self.ply ] ) ) then
-			PlayerVoicePanels[ self.ply ]:Remove()
-			PlayerVoicePanels[ self.ply ] = nil
-			return
-		end
-
-	return end
-
-	self:SetAlpha( 200 - ( 230 * delta ) )
-end
-derma.DefineControl( "VoiceNotify", "", PANEL, "DPanel" )
-
-function GM:PlayerStartVoice( ply )
-	if ( !IsValid( g_VoicePanelList ) ) then return end
-
-	GAMEMODE:PlayerEndVoice( ply )
-
-	if ( IsValid( PlayerVoicePanels[ ply ] ) ) then
-		if ( PlayerVoicePanels[ ply ].fadeAnim ) then
-			PlayerVoicePanels[ ply ].fadeAnim:Stop()
-			PlayerVoicePanels[ ply ].fadeAnim = nil
-		end
-		PlayerVoicePanels[ ply ]:SetAlpha( 255 )
-		return
-	end
-
-	if ( !IsValid( ply ) ) then return end
-
-	local pnl = g_VoicePanelList:Add( "VoiceNotify" )
-
-	pnl:Setup( ply )
-	PlayerVoicePanels[ ply ] = pnl
-end
-
-local function VoiceClean()
-	for k, v in pairs( PlayerVoicePanels ) do
-		if ( !IsValid( k ) ) then
-			GAMEMODE:PlayerEndVoice( k )
-		end
-	end
-end
-timer.Create( "VoiceClean", 0.02, 0, VoiceClean )
-
-function GM:PlayerEndVoice( ply )
-	if ( IsValid( PlayerVoicePanels[ ply ] ) ) then
-		if ( PlayerVoicePanels[ ply ].fadeAnim ) then return end
-
-		PlayerVoicePanels[ ply ].fadeAnim = Derma_Anim( "FadeOut", PlayerVoicePanels[ ply ], PlayerVoicePanels[ ply ].FadeOut )
-		PlayerVoicePanels[ ply ].fadeAnim:Start( 1 )
-	end
-end
-
-local function CreateVoiceVGUI()
-	g_VoicePanelList = vgui.Create( "DPanel" )
-	g_VoicePanelList:ParentToHUD()
-
-	g_VoicePanelList:SetPos( ScrW() - 460, 150 )
-	g_VoicePanelList:SetSize( 450, ScrH() - 325 )
-
-	g_VoicePanelList:SetPaintBackground( false )
-end
-hook.Add( "InitPostEntity", "CreateVoiceVGUI", CreateVoiceVGUI )
 
 -- Edited: justa
 -- convars
