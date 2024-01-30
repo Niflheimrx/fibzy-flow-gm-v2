@@ -41,7 +41,7 @@ _C["Player"] = {
 	DefaultWeapon = "weapon_glock",
 	JumpPower = 290,
 	ScrollPower = 268.4,
-	StepSize = 6,
+	StepSize = 18,
 	HullMin = VEC_HULL_MIN,
 	HullDuck = VEC_DUCK_HULL_MAX,
 	HullStand = VEC_HULL_MAX,
@@ -175,6 +175,12 @@ for k,v in pairs(player.GetAll()) do
 		end
 end)
 
+timer.Create( "painter", 2, 1, function()
+	for k,v in pairs(player.GetAll()) do
+			v:ConCommand( "r_decals 100" )
+			end
+	end)
+
 timer.Create( "nervy", 2, 1, function()
  if game.GetMap() == "bhop_nervosity2" then
 		LocalPlayer():ConCommand( "kawaii_map_brightness .8" )
@@ -234,387 +240,6 @@ timer.Create( "forvehnex", 2, 1, function()
 		   LocalPlayer():ConCommand( "mat_bloomscale 1" )
 		   end
 end)
-
--- Custom Stepsize fixes
-if game.GetMap() == "bhop_surprise" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_volcanobhop" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_nebula" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "surf_claz_rngfix_test" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_arcane_v2" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_arcane2_a06" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_monster_jam_v1" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_sdc01" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_monster_jam_fixd" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_spyro" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "kz_bhop_yonkoma" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_something" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_adarkplace" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_alvo" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_strafe_syn_yk" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_is_kewl" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_blue_shade_fix2" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_supertastic" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_surhids" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_lego_v1" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_lego2" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_voyage" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_orionsbelt" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_arcticbhop_final" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_funny_bunny" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_octagon" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_whenstoned4v1" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_wildcard" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "gm_construct" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_slime_foranime" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_eladio_fix" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_neon_v2" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_mirrorsedge_chpt1" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_veritas" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_hexag0n_cool" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_fishey_v3" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_austere" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_xof" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_skyscrapers_fix" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_giga_citadel_v2" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_wob_yk" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_stony" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_alone" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_probeginners" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_thsisinotwhate" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_fur" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_aux_a9" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_lament2" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_aux_mini" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_mcginis_fix" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_owk" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_montana_fix" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_firetemple" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_eazython" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_r7_gold" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_monument_valley" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_dan_kwc" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_dan" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_sonder" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_monument_valley_2" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_mustapaska" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_strafe_fix" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_choice" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_cks_dev3" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_plainhop_css" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_forgotten_tomb" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_suitsuke" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_suitsuke_night" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_fuckjusta" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_strafe_for_retards" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_kasvihuone" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_kasvihuone_jcs" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_contained" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_lost_world" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_mist_2" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_mist_3" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_mist_4" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_shrubhop" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_poon_mitt" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_kasvihuone" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_pinky" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_alt_univaje" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_impulse" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_zeel_recapture" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_0" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_underground_tunnels" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_asko" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_sandtrap" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_sandtrap2" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_sandtrap3" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_lostchristmas_v2" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_horseshit_6" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_believe" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_dust_v2" then
-	_C.Player.StepSize = 18.00
-end
-
-if game.GetMap() == "bhop_advi_new" then
-	_C.Player.StepSize = 18.00
-end
 
 if game.GetMap() == "bhop_aux_a9" then
 	_C.Player.JumpPower = math.sqrt( 2 * 800 * 57.0 )
@@ -748,7 +373,7 @@ do
 
 		-- Default CSS Bunny Hop Settings --
 		local aa, mv = 500, 32.8
-		local aim = data:GetMoveAngles()
+		local aim = data:GetMoveAngles(Angle(-100, -100, 0))
 		local forward, right = aim:Forward(), aim:Right()
 		local fmove, smove = data:GetForwardSpeed(), data:GetSideSpeed()
 
@@ -780,8 +405,8 @@ do
 		end
 
 		forward.z, right.z = 0,0
-		forward:Normalize()
-		right:Normalize()
+		forward:Normalize(Angle(-100, -100, 0))
+		right:Normalize(Angle(-100, -100, 0))
 
 		local wishvel = forward * fmove + right * smove
 		wishvel.z = 0
@@ -1297,7 +922,7 @@ LAND_HEIGHT = 2.0
 NON_JUMP_VELOCITY = 140.0
 MIN_STANDABLE_ZNRM = 0.7
 DEFAULT_JUMP_IMPULSE = 301.99337741
-SERVER_GRAVITY = 800
+SERVER_GRAVITY = 50
 
 TRIGGER_PUSH = 1
 TRIGGER_BASEVEL = 2
