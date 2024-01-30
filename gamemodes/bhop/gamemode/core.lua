@@ -1,6 +1,6 @@
 GM.Name = "Bunny Hop"
 GM.DisplayName = "Bunny Hop"
-GM.Author = "justa"
+GM.Author = "fibzy, Niflheimrx, justa, claz, George, and Gravoius"
 GM.Email = "hello@fastdl.me"
 GM.Website = "https://fastdl.me/"
 GM.TeamBased = true
@@ -9,7 +9,7 @@ DeriveGamemode( "base" )
 DEFINE_BASECLASS( "gamemode_base" )
 
 _C = _C or {}
-_C["Version"] = 1.43
+_C["Version"] = 1.44
 _C["PageSize" ] = 7
 _C["GameType"] = "bhop"
 _C["ServerName"] = "kawaiiclan"
