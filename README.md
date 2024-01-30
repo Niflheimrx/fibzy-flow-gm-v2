@@ -21,7 +21,7 @@ Added
 - Custom Chat Box (fibzy)
 - Paint (Niflheimrx)
 - Flow zone texture fix (fibzy)
-- Movement fixes (bigdogmatt | justa | Niflheimrx | fibzy)
+- Movement Code (bigdogmatt | justa | Niflheimrx)
 - Get Gravity fixes (justa | fibzy)
 - Fullbright (Niflheimrx)
 - Custom Rabbit Model (fibzy)
