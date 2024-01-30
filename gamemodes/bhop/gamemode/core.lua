@@ -341,9 +341,10 @@ end
 
 -- Set MaxSpeed to the highest possabile for better movement smoothness
 hook.Add( "Move", "SetMaxSpeed", function( ply, mv, usrcmd )
-	if not ply:Crouching() then 
-	   mv:SetMaxSpeed( math.huge )
-   end
+	if ply:IsOnGround() and ply:Crouching() then 
+	else
+		mv:SetMaxSpeed( math.huge )
+	end
 end )
 
 -- JSS Base
