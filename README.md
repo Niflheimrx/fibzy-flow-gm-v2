@@ -19,10 +19,11 @@ Added
 - RNGFix - Downhill (Now has no prediction errors) (claz | Niflheimrx)
 - Rawinput2 not fully tested - (fibzy)
 - Custom Chat Box (fibzy)
-- Paint  (Niflheimrx)
+- Paint (Niflheimrx)
 - Flow zone texture fix (fibzy)
 - Movement fixes (bigdogmatt | justa | Niflheimrx | fibzy)
 - Get Gravity fixes (justa | fibzy)
+- Fullbright (Niflheimrx)
 - Custom Rabbit Model (fibzy)
 - Check Crouch fix (george ri)
 - Set No Jump fix (george ri)
@@ -47,7 +48,7 @@ Added
 - Custom Map fixes (fibzy)
 - Added Zone Helper lines (justa | fibzy)
 
-Thanks to all the creators who contributed to this code.
+Thanks to Niflheimrx and all the creators who contributed to this code.
 ![20240127014848_1](https://github.com/FiBzYDev/jcs-kawaiiclan-gamemode/assets/58349075/39cff560-394a-41f3-ad83-53345794b87b)
 ![20240127015354_1](https://github.com/FiBzYDev/jcs-kawaiiclan-gamemode/assets/58349075/0eb67f28-c9ac-421b-b345-f96b056f12d9)
 ![download](https://github.com/FiBzYDev/jcs-kawaiiclan-gamemode/assets/58349075/e150a6c6-6f89-4a96-b910-4d0cfd9221db)
