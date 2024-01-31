@@ -48,7 +48,7 @@ end
 
 -- Create Scoreboard
 local function CreateScoreboard()
-	-- The scoreboard is already open you nigger
+	-- The scoreboard is already
 	if (scoreboard) then
 		if (scoreboard_playerrow) then
 			scoreboard_playerrow:Remove()
