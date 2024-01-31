@@ -27,6 +27,7 @@ Added
 - Fullbright (Niflheimrx)
 - Show Keys (Niflheimrx)
 - Custom Rabbit Model (fibzy)
+- Map Lag fixes (fibzy)
 - Set Spawn (justa | fibzy)
 - Check Crouch fix (george ri)
 - Set No Jump fix (george ri)
