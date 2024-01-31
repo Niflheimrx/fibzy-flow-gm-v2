@@ -158,7 +158,7 @@ function SSJ:Display(pl)
     end
 
 	-- Build string table
-	local dStr = {"Jumps: ", _C["Prefixes"].Timer, tostring(#pl.SSJ["Jumps"]), color_white, " | ", "Speed: ", _C["Prefixes"].Timer, tostring(math.Round(currentVel)), color_white}
+	local dStr = {"Jumps: ", _C["Prefixes"].Timer, tostring(#pl.SSJ["Jumps"]), color_white, " | ", "Speed: ", _C["Prefixes"].Timer, tostring(math.Round(currentVel - 0.5)), color_white}
 
 	-- Values
 	local difference, height
