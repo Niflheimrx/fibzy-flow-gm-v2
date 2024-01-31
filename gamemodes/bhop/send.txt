@@ -42,6 +42,11 @@ gamemodes\bhop\entities\entities\TeleporterEnt.lua
 gamemodes\bhop\entities\entities\HullSizeZone.lua
 gamemodes\bhop\gamemode\modules\cl_admin.lua
 gamemodes\bhop\gamemode\modules\cl_strafe.lua
+gamemodes\bhop\gamemode\userinterface\cl_interface.lua
+gamemodes\bhop\gamemode\userinterface\cl_bhoptimer.lua
+gamemodes\bhop\gamemode\userinterface\cl_interface.lua
+gamemodes\bhop\gamemode\userinterface\cl_extensions.lua
+gamemodes\bhop\gamemode\userinterface\sh_init.lua
 gamemodes\bhop\gamemode\cl_gui.lua
 gamemodes\bhop\gamemode\cl_init.lua
 gamemodes\bhop\gamemode\cl_receive.lua
@@ -55,4 +60,3 @@ gamemodes\bhop\gamemode\userinterface\cl_hud.lua
 gamemodes\bhop\gamemode\userinterface\cl_settings.lua
 gamemodes\bhop\gamemode\userinterface\cl_themes.lua
 gamemodes\bhop\gamemode\userinterface\cl_ui.lua
-gamemodes\bhop\gamemode\userinterface\cl_menu.lua

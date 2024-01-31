@@ -214,6 +214,14 @@ local function TransferHandle( szAction, varArgs )
 		Window:Update( tostring( varArgs[ 1 ] ), varArgs[ 2 ] )
 	elseif szAction == "Print" then
 		Link:Print( tostring( varArgs[ 1 ] ), varArgs[ 2 ])
+	elseif szAction == "MainMenu" then
+		local isLegacy = varArgs[1]
+		if isLegacy then
+			SurfTimerLegacy()
+			SurfTimer:Open()
+		else
+			SurfTimer:Open()
+		end
 	elseif szAction == "Timer" then
 		local szType = tostring( varArgs[ 1 ] )
 		

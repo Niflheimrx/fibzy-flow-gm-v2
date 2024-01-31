@@ -48,6 +48,9 @@ function GM:ShowTeam( ply )
 	Core:Send( ply, "GUI_Open", { "Spectate" } )
 end
 
+function GM:ShowHelp( ply )
+	Core:Send( ply, "MainMenu" )
+end
 
 Command = {}
 Command.Functions = {}
@@ -58,12 +61,16 @@ local HelpData, HelpLength
 
 
 function Command:Init()
+	self:Register( { "menu", "mainmenu", "settings" }, function( ply, args )
+		Core:Send( ply, "MainMenu" )
+	end )
+
 	self:Register({"theme", "themeeditor", "themes"}, function(pl)
 		pl:ConCommand("kawaii_thememanager")
 	end)
 
-	self:Register({"menu", "mainmneu", "options"}, function(pl)
-		pl:ConCommand("kawaii_mainmenu")
+	self:Register({"theme", "themeeditor", "themes"}, function(pl)
+		pl:ConCommand("kawaii_thememanager")
 	end)
 
 	-- General timer commands
