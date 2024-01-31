@@ -180,13 +180,8 @@ local function CheckpointOpen(pl, args)
 	if (pl.SetSpawn) then 
 		UI:SendToClient(pl, "SetSpawn", true, SetSpawn:GetCurrent(pl), #pl.SetSpawn)
 	end
-
-	-- Warning
-	if (pl.Tn) or (pl.Tb) or (not pl:GetNWInt("inPractice", false)) then 
-		Core:Send(pl, "Print", {"Timer", "Warning: The use of SetSpawn will disable your timer."})
-	end
 end
-Command:Register({"cp", "SetSpawn", "cps"}, CheckpointOpen)
+Command:Register({"SetSpawn"}, CheckpointOpen)
 
 UI:AddListener("SetSpawn", function(client, data)
 	local id = data[1]

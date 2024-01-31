@@ -17,7 +17,6 @@ function Checkpoints:SetUp(pl)
 
 	if (not practice) then 
 		Core:Send(pl, "Print", {"Timer", "Your timer has been stopped due to the use of checkpoints."})
-		Core:Send(pl, "Print", {"Server", "Feel free to use this for setspawn."})
 	end
 
 	-- Timer?
