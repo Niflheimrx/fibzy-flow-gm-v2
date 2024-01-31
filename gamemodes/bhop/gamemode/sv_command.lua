@@ -699,7 +699,7 @@ function Command:Init()
 	end )
 
 	-- Easy access commands
-	self:Register( { "normal", "default", "standard", "n" }, function( ply )
+	self:Register( { "normal", "default", "standard", "n", "main" }, function( ply )
 		Command:RemoveLimit( ply )
 		Command.Style( ply, nil, { _C.Style.Normal } )
 	end )
@@ -737,6 +737,11 @@ function Command:Init()
 	self:Register( { "bonus", "extra", "b" }, function( ply )
 		Command:RemoveLimit( ply )
 		Command.Style( ply, nil, { _C.Style.Bonus } )
+	end )
+
+	self:Register( { "as", "autostrafe" }, function( ply )
+		Command:RemoveLimit( ply )
+		Command.Style( ply, nil, { _C.Style.AutoStrafe } )
 	end )
 
 	self:Register( { "practice", "try", "free", "p" }, function( ply )

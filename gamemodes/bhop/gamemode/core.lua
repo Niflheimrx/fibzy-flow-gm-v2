@@ -18,7 +18,7 @@ _C["SteamGroup"] = ""
 _C["MaterialID"] = "flow"
 
 _C["Team"] = { Players = 1, Spectator = TEAM_SPECTATOR }
-_C["Style"] = { Normal = 1, SW = 2, HSW = 3, ["W-Only"] = 4, ["A-Only"] = 5, Legit = 6, ["Easy Scroll"] = 7, Bonus = 8, Segment = 9 }
+_C["Style"] = { Normal = 1, SW = 2, HSW = 3, ["W-Only"] = 4, ["A-Only"] = 5, Legit = 6, ["Easy Scroll"] = 7, Bonus = 8, Segment = 9, AutoStrafe = 10 }
 
 -- These constants are defined from Valve's SDK 2013 --
 local VEC_HULL_MIN = Vector(-16, -16, 0)
@@ -558,6 +558,24 @@ local function AutoHop( ply, data )
 	end
 end
 hook.Add( "SetupMove", "AutoHop", AutoHop )
+
+function GM:CreateMove( cmd ) 
+	if LocalPlayer().Style == _C.Style.AutoStrafe then
+		if cmd:KeyDown( IN_JUMP ) then
+			if cmd:GetMouseX() < 0 then
+				cmd:SetSideMove(-10000)
+			elseif cmd:GetMouseX() > 0 then
+				cmd:SetSideMove(10000)
+			end
+		end
+	end
+	if CLIENT and (bit.band(cmd:GetButtons(), IN_ATTACK) > 0) and LocalPlayer():Team() != _C.Team.Spectator and NoAmmoConVar and NoAmmoConVar:GetInt() == 1 then 
+		cmd:SetButtons( cmd:GetButtons() - IN_ATTACK )
+	end
+end
+
+function GM:SetupMove() end
+function GM:FinishMove() end
 
 PlayerJumps = {}
 local P1, P2 = _C.Player.ScrollPower, _C.Player.JumpPower
