@@ -526,10 +526,10 @@ hook.Add("Think", "Changelog", function()
 
 		if (not lastchange) or (tonumber(lastchange) != 100) then
 			UI:NumberedUIPanel("Change Log",
-				{["name"] = "[+] Added !revote command as requested."},
-				{["name"] = "[+] Confirmation is now needed when resetting waypoints."},
-				{["name"] = "[*] Reset confirmation will now ask again if you haven't used reset in a while."},
-				{["name"] = "[*] Segmented style will now reset normally as long as no waypoints are set."}
+				{["name"] = "[+] Added Set Spawn command as requested."},
+				{["name"] = "[+] Added sm_paint."},
+				{["name"] = "[+] Auto Strafe has been added."},
+				{["name"] = "[+] Showtriggers is enabled."}
 			)
 
 			LocalPlayer():SetPData("changelog", 100)
