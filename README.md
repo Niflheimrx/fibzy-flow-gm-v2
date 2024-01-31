@@ -35,7 +35,7 @@ Added
 - Improved zone detection (justa | fibzy)
 - SurfFix detection (Niflheimrx)
 - Base gamemode edits (fibzy)
-- Round Error Fixes (Niflheimrx)
+- Round Error Fixes (Niflheimrx | fibzy)
 - Improved Score Board based off justa's (fibzy)
 - Improved Stepsize hulls (fibzy)
 - Auto Strafe Style (fibzy)
