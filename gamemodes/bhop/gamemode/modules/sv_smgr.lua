@@ -254,8 +254,6 @@ local function MonitorInputSync( ply, data )
 		local difference = norm( ang - MonitorAngle[ ply ] )
 		
 		if difference > 0 then
-			if LastUpdate + 0.02 > CurTime() then return end 
-			LastUpdate = CurTime() + 0.02
 			SyncTotal[ ply ] = SyncTotal[ ply ] + 1
 				
 			if (fb( buttons, IN_MOVELEFT ) > 0) and not (fb( buttons, IN_MOVERIGHT ) > 0) then
