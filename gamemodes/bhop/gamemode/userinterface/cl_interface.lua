@@ -41,7 +41,7 @@ Interface.BigBezel = { [0] = 23, [1] = 30 }
 
 Interface.BackgroundColor = Color( 20, 20, 20 )
 Interface.ForegroundColor = Color( 40, 40, 40 )
-Interface.HighlightColor = Color( 255, 0, 0 )
+Interface.HighlightColor = Color( 28, 152, 198 )
 
 Interface.Wide = 0
 
