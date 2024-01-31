@@ -456,9 +456,9 @@ local function CheckJumpButton(ply, velocity)
     return FinishGravity(ply, velocity)
 end
 
+--[[ George's fix
 local lastground = {}
-
---[[hook.Add("Move","DumbGMOD",function(ply, data)
+hook.Add("Move","DumbGMOD",function(ply, data)
 	if LocalPlayer and ply != LocalPlayer() then return end
 	
 	if(ply:IsFlagSet(FL_ONGROUND) && !data:KeyDown(IN_JUMP)) then
@@ -493,49 +493,6 @@ local function CheckCrouch( ply,data )
 	end
 end
 hook.Add("SetupMove","CheckCrouch",CheckCrouch)
-
---[[hook.Add( "Move", "SetMaxSpeed", function( ply, mv, usrcmd )
-	 if not ply:IsOnGround() then 
-		 mv:SetMaxSpeed( 0 )
-	 else
-		mv:SetMaxSpeed( 250 )
-	end
-
-	--print(ply:GetMaxSpeed())
-end )
-
-hook.Add("SetupMove","SetMaxClientSpeed", function( ply, mv )
-	
-	 if not ply:KeyDown(IN_DUCK) then 
-		 mv:SetMaxClientSpeed( 0 )
-	 end
-	
-	 if ply:KeyDown(IN_WALK) then 
-		 mv:SetMaxClientSpeed( 150 )
-	 end
-
-	 if not ply:IsOnGround() then 
-		 mv:SetMaxClientSpeed( 0 )
-	 end
-
-	 if ply:KeyDown(IN_JUMP) then 
-		 mv:SetMaxClientSpeed( 0 )
-	 end
-
-	 if ply:KeyDown(IN_DUCK) and !ply:IsFlagSet(FL_DUCKING) then 
-		 mv:SetMaxClientSpeed( 88.4 )
-	 end
-
-	 --if not ply:IsOnGround() then 
-    	--ply:ConCommand("cl_sidespeed 400") --ply:ConCommand("cl_sidespeed 0")
-	 --end
-
-	 --if ply:IsOnGround() then 
-    	--ply:ConCommand("cl_sidespeed 500")
-	 --end
-
-	--print(mv:GetMaxClientSpeed())
-end )--]]
 
 local function AirAccelerate(ply, velocity, mv)
 	-- This also includes the initial parts of AirMove()
@@ -1365,7 +1322,6 @@ TeleFix = {
 	end,
 
 }
-
 TeleFix:Initialize()
 
 -- PostThink works a little better than a ProcessMovement post hook because we need to wait for ProcessImpacts (trigger activation)
