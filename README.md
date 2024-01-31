@@ -92,15 +92,14 @@ https://github.com/FiBzYDev/jcs-kawaiiclan-gamemode/assets/58349075/2e6df12c-d80
 
 TO DO:
 
-- Make the Momentum Hud 1440p version for 1080p resolution
+- Make the Momentum Hud 1440p version for 1080p Resolution
 - Finsih new progress replay code
 - Add FJT and Pre-Speed to Jhud
-- Finish Simple Huds Jhud
-- Finish Main Menu Hud [kawaii_mainmenu]
+- Finish Main Menu Hud
 - Add my version of CS:S Hud?
-- Add justas old version of Momentum Hud Jhud?
+- Add justa's old version of Momentum Hud Jhud?
 - Add Roblox Hud
-- Add george's gamemode Hud
+- Add george's Gamemode Hud
   
 Private Commands:
 
