@@ -13,6 +13,7 @@ include( "modules/sv_spectator.lua" )
 include( "modules/sv_smgr.lua" )
 include( "modules/sv_stats.lua" )
 include("modules/sv_ssj.lua")
+include("modules/sv_trailing.lua")
 include("modules/sv_jac.lua")
 include("modules/sv_boosterfix.lua")
 
