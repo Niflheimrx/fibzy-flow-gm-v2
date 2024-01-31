@@ -685,6 +685,9 @@ function Core:Optimize()
 	hook.Remove( "PreDrawHalos", "PropertiesHover" )
 end
 
+local MainStand, IdleActivity, round = ACT_MP_STAND_IDLE, ACT_HL2MP_IDLE, math.Round
+function GM:CalcMainActivity() return MainStand, -1 end
+function GM:TranslateActivity() return IdleActivity end
 
 Core.Util = {}
 function Core.Util:GetPlayerJumps( ply )
