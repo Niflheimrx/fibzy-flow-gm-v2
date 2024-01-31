@@ -815,13 +815,13 @@ local function SSJ_HUD()
 
 	if jump <= 1 then 
 	else 
-		draw.SimpleText(math.Round(speed + 0.5) - jump + 3, "JHUDMainBIG2", ScrW() / 2, (ScrH() / 2) - 140, color355, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+		draw.SimpleText(math.Round(speed, 0) - jump + 3, "JHUDMainBIG2", ScrW() / 2, (ScrH() / 2) - 140, color355, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	end
 
 	if jump <= 1 then 
-		draw.SimpleText(math.Round(speed + 0.5), "JHUDMainBIG", ScrW() / 2, (ScrH() / 2) - 100, color355, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+		draw.SimpleText(math.Round(speed, 0), "JHUDMainBIG", ScrW() / 2, (ScrH() / 2) - 100, color355, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	else
-		draw.SimpleText(math.Round(speed + 0.5), "JHUDMainBIG", ScrW() / 2, (ScrH() / 2) - 100, color, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+		draw.SimpleText(math.Round(speed, 0), "JHUDMainBIG", ScrW() / 2, (ScrH() / 2) - 100, color, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	end
 
 	if jump <= 1 then 
