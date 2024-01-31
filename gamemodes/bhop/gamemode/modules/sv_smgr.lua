@@ -20,8 +20,8 @@ local SyncAlignB = {}
 
 local StateArchive = {}
 
-local S1, S2, S3, S4, S5, S6 = _C.Style.Normal, _C.Style.Legit, _C.Style["Easy Scroll"], _C.Style.Bonus, _C.Style.Practice, _C.Style.Segment
-local function IsValidStyle( SX ) if SX == S1 or SX == S2 or SX == S3 or SX == S4 or SX == S5 or SX == S6 then return true else return false end end
+local S1, S2, S3, S4, S5, S6, S7 = _C.Style.Normal, _C.Style.Legit, _C.Style["Easy Scroll"], _C.Style.Bonus, _C.Style.Practice, _C.Style.Segment, _C.Style.AutoStrafe
+local function IsValidStyle( SX ) if SX == S1 or SX == S2 or SX == S3 or SX == S4 or SX == S5 or SX == S6 or SX == S7 then return true else return false end end
 
 function SMgrAPI:Monitor( ply, bTarget )
 	Monitored[ ply ] = bTarget or not Monitored[ ply ]
