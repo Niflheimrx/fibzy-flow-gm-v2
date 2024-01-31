@@ -260,7 +260,7 @@ function SurfTimer.Open()
 			local showKeysValue = showKeysOptions[int]
 			if !showKeysValue then return end
 
-			RunConsoleCommand( "sl_showkeys_pos", tostring(int - 1) )
+			RunConsoleCommand( "kawaii_showkeys_pos", tostring(int - 1) )
 
 			Link:Print( "Surf Timer", "Your ShowKeys Position has been moved towards the " .. showKeysValue )
 		end
