@@ -38,8 +38,8 @@ local UPHILL_DEFAULT = 0  -- Do nothing (retain RNG)
 local UPHILL_NEUTRAL = 1  -- Force a jump (respecting NON_JUMP_VELOCITY) (fix RNG in player's favor)
 
 -- Plugin settings
-local g_cvDownhill = CreateConVar("rngfix_downhill", "0", FCVAR_NOTIFY, "Enable downhill incline fix.", 0.0, 1.0)
-local g_cvUphill = CreateConVar("rngfix_uphill", "0", FCVAR_NOTIFY, "Enable uphill incline fix. Set to -1 to normalize effects not in the player's favor (not recommended).", -1.0, 1.0)
+local g_cvDownhill = CreateConVar("rngfix_downhill", "1", FCVAR_NOTIFY, "Enable downhill incline fix.", 0.0, 1.0)
+local g_cvUphill = CreateConVar("rngfix_uphill", "1", FCVAR_NOTIFY, "Enable uphill incline fix. Set to -1 to normalize effects not in the player's favor (not recommended).", -1.0, 1.0)
 local g_cvEdge = CreateConVar("rngfix_edge", "1", FCVAR_NOTIFY, "Enable edgebug fix.", 0.0, 1.0)
 local g_cvDebug = CreateConVar("rngfix_debug", "0", FCVAR_NONE, "1 = Enable debug messages. 2 = Enable debug messages and lasers.", 0.0, 2.0)
 local g_cvUseOldSlopefixLogic = CreateConVar("rngfix_useoldslopefixlogic", "0", FCVAR_NOTIFY, "Old Slopefix had some logic errors that could cause double boosts. Enable this on a per-map basis to retain old behavior. (NOT RECOMMENDED)", 0.0, 1.0)

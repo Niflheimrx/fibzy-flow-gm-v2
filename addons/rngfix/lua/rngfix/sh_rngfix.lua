@@ -41,8 +41,8 @@ local g_iLastMapTeleportTick = {}
 -- RNGFix ConVars
 local CV_FLAGS = FCVAR_NOTIFY + FCVAR_REPLICATED
 local g_cvEdge = CreateConVar("rngfix_edge", "1", CV_FLAGS, "Enable edgebug fix.", 0.0, 1.0)
-local g_cvDownhill = CreateConVar("rngfix_downhill", "0", CV_FLAGS, "Enable downhill incline fix.", 0.0, 1.0)
-local g_cvUphill = CreateConVar("rngfix_uphill", "0", CV_FLAGS,
+local g_cvDownhill = CreateConVar("rngfix_downhill", "1", CV_FLAGS, "Enable downhill incline fix.", 0.0, 1.0)
+local g_cvUphill = CreateConVar("rngfix_uphill", "1", CV_FLAGS,
 	"Enable uphill incline fix. Set to -1 to normalize effects not in the player's favor (not recommended).", -1.0, 1.0)
 local g_cvUseOldSlopefixLogic = CreateConVar("rngfix_useoldslopefixlogic", "0", CV_FLAGS,
 	"Old Slopefix had some logic errors that could cause double boosts.", 0.0, 1.0)
