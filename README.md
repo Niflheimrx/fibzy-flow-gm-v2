@@ -1,16 +1,15 @@
 ![icon24](https://github.com/FiBzYDev/jcs-kawaiiclan-gamemode/assets/58349075/9adb96b4-0485-408e-b52e-8ec65a2391ac) 
 
-# Kawaiiclan mega release "justa's cool server" gamemode v1.4.4
+# Kawaiiclan mega release "justa's cool server" gamemode v1.44
 
 Released by fibzy (https://steamcommunity.com/id/fibzysending/)
 
-This gamemode was edited and heavy modified from kawaiiclan gamemode.
-
+This gamemode was edited and heavy modified from Kawaiiclan Gamemode.
 Contains code from 2014 all the way up to 2024
 
 Includes almost all of justa's code and fixes. My Backstory is at the bottom of README
 
-Original Gamemode (https://github.com/bhopbhop/kawaiiclan-gamemode)
+Original Gamemode: (https://github.com/bhopbhop/kawaiiclan-gamemode)
 
 Added
 - Main Menu/Options Base (Niflheimrx)
