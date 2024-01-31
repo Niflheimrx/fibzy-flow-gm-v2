@@ -641,9 +641,16 @@ local function StripMovements( ply, data )
 			if data:GetSideSpeed() > 0 then
 				data:SetSideSpeed( 0 )
 			end
-		elseif st == 3 and (data:GetForwardSpeed() == 0 or data:GetSideSpeed() == 0) then
-			data:SetForwardSpeed( 0 )
-			data:SetSideSpeed( 0 )
+		elseif (st == 3  and bit.band(data:GetButtons(), 16) > 0) then
+			local bd = data:GetButtons()
+			if (bit.band(bd, 512) > 0) or (bit.band(bd, 1024) > 0) then
+				data:SetForwardSpeed(0)
+				data:SetSideSpeed(0)
+			end
+		end
+		if (data:GetForwardSpeed() == 0) or (data:GetSideSpeed() == 0) then
+			data:SetForwardSpeed(0)
+			data:SetSideSpeed(0)
 		end
 	end
 end
