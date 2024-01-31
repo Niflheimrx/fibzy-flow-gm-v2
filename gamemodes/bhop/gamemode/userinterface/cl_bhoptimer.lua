@@ -518,7 +518,7 @@ function SurfTimer.Open()
 			panel:SetMouseInputEnabled( false )
 			panel:SetKeyboardInputEnabled( false )
 
-			--Help:Open()
+			Help:Open()
 
 			timer.Simple( 0.5, function()
 				panel:Remove()

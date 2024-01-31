@@ -19,6 +19,9 @@ include( "userinterface/sh_init.lua" )
 include( "userinterface/cl_bhoptimer.lua" )
 include( "userinterface/cl_interface.lua" )
 include( "userinterface/cl_extensions.lua" )
+include( "userinterface/cl_help.lua" )
+include( "userinterface/cl_devtools.lua" )
+include( "userinterface/cl_cheats.lua" )
 
 include( "userinterface/cl_scoreboard.lua" )
 
