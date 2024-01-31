@@ -1,6 +1,3 @@
--- "addons\\css_content_fix\\lua\\autorun\\client\\cl_cssfix.lua"
--- Retrieved by https://github.com/lewisclark/glua-steal
-
 surface.CreateFont( "cssfix_title", {
 	font = "Arial",
 	size = 20,
