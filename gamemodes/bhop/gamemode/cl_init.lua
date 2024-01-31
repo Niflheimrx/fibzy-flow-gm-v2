@@ -172,7 +172,7 @@ local function DispatchChatWR(um)
 	local mode = um:ReadString()
 	local STEAMID = um:ReadString()
 				
-	chat.AddText(Color(255, 109, 10), "Server ", Color(255, 255 , 255), "| " .. ply .. "s run", Color(255, 255 , 255), " as recorded by the ", Color(255, 0, 0), "R", Color(55, 127, 0), "e", Color(255, 255, 0), "c", Color(0, 255, 0), "o", Color(0, 0, 255), "r", Color(75, 0, 130), "d ", Color(148, 0, 211), "B", Color(255, 0 , 0), "o", Color(255, 127, 0), "t", Color(255, 255, 0), "!", Color( 255, 255, 255 ), " Congratulations")
+	chat.AddText(Color(255, 109, 10), "Server ", Color(255, 255 , 255), "| " .. ply .. "'s run", Color(255, 255 , 255), " as recorded by the ", Color(255, 0, 0), "R", Color(55, 127, 0), "e", Color(255, 255, 0), "c", Color(0, 255, 0), "o", Color(0, 0, 255), "r", Color(75, 0, 130), "d ", Color(148, 0, 211), "B", Color(255, 0 , 0), "o", Color(255, 127, 0), "t", Color(255, 255, 0), "!", Color( 255, 255, 255 ), " Congratulations")
 end
 usermessage.Hook("DispatchChatWR", DispatchChatWR)
 
