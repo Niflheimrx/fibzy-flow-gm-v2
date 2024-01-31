@@ -258,8 +258,8 @@ local CHAT_COMMANDS = {
 	[HideClips] =       { "hideclips", "hideclip" },
 
 	[ToggleTriggers] =  { "triggers", "trigger", "toggletriggers" },
-	[ShowTriggers] =    { "showtriggers", "showtrigger" },
-	[HideTriggers] =    { "hidetriggers", "hidetrigger" },
+	[ShowTriggers] =    { "st", "showtriggers", "showtrigger" },
+	[HideTriggers] =    { "hidest", "hidetriggers", "hidetrigger" },
 
 	[ToggleProps] =     { "staticprops", "togglestaticprops" },
 	[ShowProps] =       { "showprops", "showstaticprops" },
