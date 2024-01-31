@@ -37,6 +37,7 @@ Added
 - Round Error Fixes (Niflheimrx)
 - Improved Score Board based off justa's (fibzy)
 - Improved Stepsize hulls (fibzy)
+- Auto Strafe Style (fibzy)
 - Jhud updates based off justa's (justa | fibzy)
 - Center Spawn with save last eye angles (fibzy)
 - Telefix fully works - updates (fibzy)
