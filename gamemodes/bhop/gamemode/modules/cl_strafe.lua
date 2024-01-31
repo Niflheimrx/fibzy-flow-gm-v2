@@ -15,6 +15,7 @@ local function norm( i ) if i > 180 then i = i - 360 elseif i < -180 then i = i 
 local StrafeData -- Your Sync value is stored here
 local KeyADown, KeyDDown -- For displaying on the HUD
 local MouseLeft, MouseRight --- For displaying on the HUD
+local LastUpdate = CurTime()
 
 local ViewGUI = CreateClientConVar( "kawaii_keys", "1", true, false ) -- GUI visibility
 surface.CreateFont( "HUDFont2", { size = 20, weight = 800, font = "Tahoma" } )
@@ -22,49 +23,36 @@ surface.CreateFont( "HUDFont2", { size = 20, weight = 800, font = "Tahoma" } )
 function ResetStrafes() StrafeCounter = 0 end -- Resets your stafes (global)
 function SetSyncData( data ) StrafeData = data end -- Sets your sync data (global)
 
--- Monitors the buttons and angles
+-- Monitors the buttons and strafe angles
 local function MonitorInput( ply, data )
-	StrafeButtons = data:GetButtons()
-	
 	local ang = data:GetAngles().y
-	local difference = norm( ang - StrafeAxis )
-	
-	if difference > 0 then
-		StrafeDirection = -1
-		StrafeStill = 0
-	elseif difference < 0 then
-		StrafeDirection = 1
-		StrafeStill = 0
-	else
-		if StrafeStill > 20 then
-			StrafeDirection = nil
+
+	if not ply:IsFlagSet(FL_ONGROUND + FL_INWATER) and ply:GetMoveType() == MOVETYPE_WALK then 
+		local difference = norm( ang - StrafeAxis )
+		local l, r = bit.band( data:GetOldButtons(), IN_MOVELEFT ) > 0, bit.band( data:GetOldButtons(), IN_MOVERIGHT ) > 0
+
+		if difference != 0 then 
+			if l or r then 
+				if LastUpdate + 0.02 > CurTime() then return end 
+				LastUpdate = CurTime() + 0.02
+				if difference > 0 then
+					if (l and not r) and StrafeDirection != IN_MOVELEFT and data:GetSideSpeed() < 0 then 
+						StrafeDirection = IN_MOVELEFT 
+						StrafeCounter = StrafeCounter + 1
+					end
+				elseif difference < 0 then
+					if (r and not l) and StrafeDirection != IN_MOVERIGHT and data:GetSideSpeed() > 0 then 
+						StrafeDirection = IN_MOVERIGHT 
+						StrafeCounter = StrafeCounter + 1
+					end
+				end
+			end
 		end
-		
-		StrafeStill = StrafeStill + 1
 	end
-	
-	StrafeAxis = ang
+
+	StrafeAxis = ang 
 end
 hook.Add( "SetupMove", "MonitorInput", MonitorInput )
-
--- Monitors your key presses for strafe counting
-local function StrafeKeyPress( ply, key )
-	if ply:IsOnGround() then return end
-	
-	local SetLast = true
-	if key == IN_MOVELEFT or key == IN_MOVERIGHT then
-		if StrafeLast != key then
-			StrafeCounter = StrafeCounter + 1
-		end
-	else
-		SetLast = false
-	end
-	
-	if SetLast then
-		StrafeLast = key
-	end
-end
-hook.Add( "KeyPress", "StrafeKeys", StrafeKeyPress )
 
 -- Paints the actual HUD
 local function HUDPaintB()

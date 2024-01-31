@@ -241,20 +241,21 @@ local function DistributeStatistics()
 end
 timer.Create( "SyncDistribute", 2, 0, DistributeStatistics )
 
-
 local function norm( i ) if i > 180 then i = i - 360 elseif i < -180 then i = i + 360 end return i end
 local fb = bit.band
 
 local function MonitorInputSync( ply, data )
 	if not Monitored[ ply ] then return end
 
-	local buttons = data:GetButtons()
+	local buttons = data:GetOldButtons()
 	local ang = data:GetAngles().y
 
 	if not ply:IsFlagSet( FL_ONGROUND + FL_INWATER ) and ply:GetMoveType() != MOVETYPE_LADDER then
 		local difference = norm( ang - MonitorAngle[ ply ] )
 		
 		if difference > 0 then
+			if LastUpdate + 0.02 > CurTime() then return end 
+			LastUpdate = CurTime() + 0.02
 			SyncTotal[ ply ] = SyncTotal[ ply ] + 1
 				
 			if (fb( buttons, IN_MOVELEFT ) > 0) and not (fb( buttons, IN_MOVERIGHT ) > 0) then
