@@ -247,7 +247,7 @@ local fb = bit.band
 local function MonitorInputSync( ply, data )
 	if not Monitored[ ply ] then return end
 
-	local buttons = data:GetOldButtons()
+	local buttons = data:GetButtons()
 	local ang = data:GetAngles().y
 
 	if not ply:IsFlagSet( FL_ONGROUND + FL_INWATER ) and ply:GetMoveType() != MOVETYPE_LADDER then
