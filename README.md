@@ -13,6 +13,7 @@ Includes almost all of justa's code and fixes. My Backstory is at the bottom of 
 Original Gamemode (https://github.com/bhopbhop/kawaiiclan-gamemode)
 
 Added
+- Main Menu/Options Base (Niflheimrx)
 - Momentum Mod Hud (justa)
 - Simple Hud (justa)
 - Crouch Boost fixes / CB Stop Time fix [This is broken on pG Gamemode] (fibzy)
