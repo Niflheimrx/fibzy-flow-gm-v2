@@ -793,6 +793,15 @@ function Command:Init()
 		end
 	end )
 
+	self:Register( { "wras", "wrautostrafe" }, function( ply, args )
+		local nStyle, nPage = _C.Style.AutoStrafe, 1
+		if #args > 0 then
+			Player:SendRemoteWRList( ply, args[ 1 ], nStyle, nPage )
+		else
+			UI:SendToClient(ply, "wr", Timer:GetRecordList( nStyle, nPage ), nStyle, nPage, Timer:GetRecordCount( nStyle ))
+		end
+	end )
+
 	self:Register( { "wrl", "wrlegit", "lwr" }, function( ply, args )
 		local nStyle, nPage = _C.Style.Legit, 1
 		if #args > 0 then

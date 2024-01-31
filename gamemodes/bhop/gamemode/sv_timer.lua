@@ -224,7 +224,8 @@ RC = {
 	[_C.Style["Easy Scroll"]] = { Total = 0, Count = 0, Average = 0 },
 	[_C.Style.Legit] = { Total = 0, Count = 0, Average = 0 },
 	[_C.Style.Bonus] = { Total = 0, Count = 0, Average = 0 },
-	[_C.Style.Segment] = { Total = 0, Count = 0, Average = 0 }
+	[_C.Style.Segment] = { Total = 0, Count = 0, Average = 0 },
+	[_C.Style.AutoStrafe] = { Total = 0, Count = 0, Average = 0 }
 }
 
 TC = {
@@ -236,7 +237,8 @@ TC = {
 	[_C.Style["Easy Scroll"]] = {},
 	[_C.Style.Legit] = {},
 	[_C.Style.Bonus] = {},
-	[_C.Style.Segment] = {}
+	[_C.Style.Segment] = {},
+	[_C.Style.AutoStrafe] = {}
 }
 
 local IR = {}
