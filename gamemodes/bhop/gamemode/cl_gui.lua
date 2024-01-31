@@ -30,7 +30,7 @@ surface.CreateFont( "HUDCounter", { size = 144, weight = 800, font = "Coolvetica
 
 Window = {}
 Window.Unclosable = { "Vote" }
-Window.NoThink = { "Radio", "Admin", "VIP" }
+Window.NoThink = { "Admin", "VIP" }
 
 Window.List = {
 	WR = { Dim = { 280, 226 }, Title = "Records" },
