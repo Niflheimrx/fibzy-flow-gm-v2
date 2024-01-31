@@ -393,7 +393,7 @@ function Command:Init()
 		end
 	end )
 
-	self:Register( { "glock", "usp", "knife", "p90", "mp5", "crowbar", "deagle", "fiveseven", "m4a1", "ump45", "scout" }, function( ply, args )
+	self:Register( { "glock", "usp", "knife", "p90", "mp5", "deagle", "fiveseven", "m4a1", "ump45", "scout", "awp" }, function( ply, args )
 		if ply.Spectating or ply:Team() == TEAM_SPECTATOR then
 			return Core:Send( ply, "Print", { "Notification", Lang:Get( "SpectateWeapon" ) } )
 		else
