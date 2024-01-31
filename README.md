@@ -24,6 +24,7 @@ Added
 - Movement Code (bigdogmatt | justa | Niflheimrx)
 - Get Gravity fixes (justa | fibzy)
 - Fullbright (Niflheimrx)
+- Show Keys (Niflheimrx)
 - Custom Rabbit Model (fibzy)
 - Set Spawn (justa | fibzy)
 - Check Crouch fix (george ri)
