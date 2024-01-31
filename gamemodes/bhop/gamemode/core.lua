@@ -788,22 +788,6 @@ local function ProcessDuckMove(ply, data)
 end
 hook.Add("SetupMove", "sm_duckbug_fix", ProcessDuckMove)
 
--- These constants are defined from Valve's SDK 2013 --
-local VEC_HULL_MIN = Vector(-16, -16, 0)
-local VEC_HULL_MAX = Vector(16, 16, 62)
-local VEC_VIEW     = Vector(0, 0, 59)
-
-local VEC_DUCK_HULL_MIN = Vector(-16, -16, 0)
-local VEC_DUCK_HULL_MAX = Vector(16, 16, 45)
-local VEC_DUCK_VIEW     = Vector(0, 0, 42)
-
-local DUCK_SPEED_MULTIPLIER = 0.34
-
-local TIME_TO_UNDUCK = 0.2
-local TIME_TO_DUCK   = 0.4
-
-local EYE_CLEARANCE = 12
-
 do
 	local result = {}
 	local fudge  = Vector(1, 1, 0)
@@ -947,14 +931,6 @@ do
 	end
 end
 
-local VEC_HULL_MIN = Vector(-16, -16, 0)
-local VEC_HULL_MAX = Vector(16, 16, 62)
-local VEC_VIEW     = Vector(0, 0, 59)
-
-local VEC_DUCK_HULL_MIN = Vector(-16, -16, 0)
-local VEC_DUCK_HULL_MAX = Vector(16, 16, 45)
-local VEC_DUCK_VIEW     = Vector(0, 0, 42)
-
 RNGFix = {}
 RNGFix.Enabled = CreateConVar("rngfix_enabled", "1", FCVAR_NOTIFY, "Enable RNGFix", 0, 1):GetBool()
 RNGFix.Telehop = CreateConVar("rngfix_telefix", "1", FCVAR_NOTIFY, "Enable TeleFix", 0, 1):GetBool()
@@ -964,7 +940,7 @@ LAND_HEIGHT = 2.0
 NON_JUMP_VELOCITY = 140.0
 MIN_STANDABLE_ZNRM = 0.7
 DEFAULT_JUMP_IMPULSE = 301.99337741
-SERVER_GRAVITY = 50
+SERVER_GRAVITY = 800
 
 TRIGGER_PUSH = 1
 TRIGGER_BASEVEL = 2
