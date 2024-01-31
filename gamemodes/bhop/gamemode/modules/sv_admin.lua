@@ -933,7 +933,7 @@ function Admin:HandleButton( ply, args )
 			Core:Send( ply, "Print", { "Admin", "Couldn't find a valid player with Steam ID: " .. Steam } )
 		end
 	elseif ID == 5 then
-		local tabRequest = Admin:GenerateRequest( "Enter the map to change to (Default is the current map - Note: Changing to the same map might cause glitches)", "Change map", game.GetMap(), ID )
+		local tabRequest = Admin:GenerateRequest( "Enter the map to change to (Default is the current map - Note: Changing to the same map will not save Replays)", "Change map", game.GetMap(), ID )
 		Core:Send( ply, "Admin", { "Request", tabRequest } )
 	elseif ID == 6 then
 		Zones:Reload()
