@@ -815,13 +815,13 @@ local function SSJ_HUD()
 
 	if jump <= 1 then 
 	else 
-		draw.SimpleText(speed - jump + 3, "JHUDMainBIG2", ScrW() / 2, (ScrH() / 2) - 140, color355, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+		draw.SimpleText(math.Round(speed + 0.5) - jump + 3, "JHUDMainBIG2", ScrW() / 2, (ScrH() / 2) - 140, color355, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	end
 
 	if jump <= 1 then 
-		draw.SimpleText(speed, "JHUDMainBIG", ScrW() / 2, (ScrH() / 2) - 100, color355, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+		draw.SimpleText(math.Round(speed + 0.5), "JHUDMainBIG", ScrW() / 2, (ScrH() / 2) - 100, color355, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	else
-		draw.SimpleText(speed, "JHUDMainBIG", ScrW() / 2, (ScrH() / 2) - 100, color, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+		draw.SimpleText(math.Round(speed + 0.5), "JHUDMainBIG", ScrW() / 2, (ScrH() / 2) - 100, color, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	end
 
 	if jump <= 1 then 
@@ -847,7 +847,7 @@ local function SSJ_HUD()
 	if kawaiihud == 2 and jump <= 0 then 
 		draw.SimpleText("", "HUDTimer2", ScrW() / 2, yPos + 123, color77, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	else
-		draw.SimpleText(speed .. " (" .. sync .. "%, +" .. math.Round(speed / 10) .. ")", "HUDTimer2", ScrW() / 2, yPos + 123, color77, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+		draw.SimpleText(math.Round(speed + 0.5) .. " (" .. sync .. "%, +" .. math.Round(speed / 10) .. ")", "HUDTimer2", ScrW() / 2, yPos + 123, color77, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	end
 
 end
