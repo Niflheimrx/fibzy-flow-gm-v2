@@ -94,6 +94,7 @@ TO DO:
 
 - Make the Momentum Hud 1440p version for 1080p Resolution
 - Finsih new progress replay code
+- WR Sounds?
 - Add FJT and Pre-Speed to Jhud
 - Finish Main Menu Hud
 - Add my version of CS:S Hud?
@@ -115,7 +116,7 @@ Private Commands:
 - sm_paint | Painter for routes
   
 Follow rawinput2.txt in other https://github.com/Haze1337/RawInput2/releases
-- I use + 0.031250 (Pos rounded) added to my sensitivity so if you use 1.3 it will then be sensitivity 1.33125
+- I use + 0.031250 (PoS Rounded) added to my Sensitivity so if you use 1.3 it will then be sensitivity 1.33125.
 - Run GMod in 86x bit mode
   
 Comes with:
