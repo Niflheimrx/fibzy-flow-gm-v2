@@ -61,7 +61,7 @@ local HelpData, HelpLength
 
 
 function Command:Init()
-	self:Register( { "menu", "mainmenu", "settings" }, function( ply, args )
+	self:Register( { "menu", "mainmenu", "settings", "options" }, function( ply, args )
 		Core:Send( ply, "MainMenu" )
 	end )
 
