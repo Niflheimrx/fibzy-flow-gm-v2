@@ -58,6 +58,11 @@ Thanks to Niflheimrx and all the creators who contributed to this code.
 ![download](https://github.com/FiBzYDev/jcs-kawaiiclan-gamemode/assets/58349075/e150a6c6-6f89-4a96-b910-4d0cfd9221db)
 ![20240128004208_1](https://github.com/FiBzYDev/jcs-kawaiiclan-gamemode/assets/58349075/9c3da4fe-7059-401e-b8ff-f519858bdf69)
 
+UI
+
+![20240131020229_1](https://github.com/FiBzYDev/jcs-kawaiiclan-gamemode/assets/58349075/8cda079d-aabc-4d5e-a3c1-6d9c99dc668d)
+
+
 
 Paint preview:
 
