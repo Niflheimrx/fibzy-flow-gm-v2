@@ -98,14 +98,14 @@ function SetSpawn:Save(pl)
 	end
 
 	-- Set
-	if (pl.SetSpawn[current + 1]) then 
-		self:ReorderFrom(pl, current + 1, "add")
+	if (pl.SetSpawn[current < 0]) then 
+		self:ReorderFrom(pl, current < 0, "add")
 	end
 
-	pl.SetSpawn[current + 1] = {vel, pos, angles}
+	pl.SetSpawn[current < 0] = {vel, pos, angles}
 
 	-- Update current
-	self:SetCurrent(pl, current + 1)
+	self:SetCurrent(pl, current < 0)
 end
 
 -- TeleportTo

@@ -159,6 +159,28 @@ function PLAYER:StopAnyTimer()
 	return true
 end
 
+local ZoneEnts = {}
+
+function PLAYER:InSpawn( pos )
+	pos = pos or self:GetPos()
+
+	for _,zone in pairs( ZoneEnts ) do
+		if IsValid( zone ) then
+			if self.Bonus then
+				if zone.zonetype == Zones.Type["Bonus Start"] then
+
+				end
+			elseif zone.zonetype != Zones.Type["Normal Start"] then
+				continue
+			end
+
+			if pos.x >= zone.min.x and pos.y >= zone.min.y and pos.z >= zone.min.z and pos.x <= zone.max.x and pos.y <= zone.max.y and pos.z <= zone.max.z then
+				return true
+			end
+		end
+	end
+end
+
 function PLAYER:StartFreestyle()
 	if not ValidTimer( self ) then return end
 
