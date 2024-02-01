@@ -90,11 +90,10 @@ https://github.com/FiBzYDev/jcs-kawaiiclan-gamemode/assets/58349075/2e6df12c-d80
 
 
 
-TO DO:
+TO DO (UI):
 
 - Make the Momentum Hud 1440p version for 1080p Resolution
 - Finsih new progress replay code
-- WR Sounds?
 - Add FJT and Pre-Speed to Jhud
 - Finish Main Menu Hud
 - Add my version of CS:S Hud?
