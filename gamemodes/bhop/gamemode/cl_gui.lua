@@ -929,44 +929,65 @@ function Window.MakeTextBox( t )
 	return txt
 end
 
-function Window.MakeQuery( c, t, ... )
-	local qry = Derma_Query( c, t, ... )
-	local arg = { ... }
+function Window.MakeQuery( cap, t, ... )
+	cap = string.Explode("\n", cap)
+	local panel = SMPanels.ContentFrame({title = t, center = true, noclose = true, content = cap})
 
-	if #arg < 9 then return end
-	
-	local nTall = math.ceil( #arg / 8 ) * 30
-	local nExtra = nTall - 30
-	local x, y, c = 5, 25, 1
-	local dPanel = nil
-	
-	for _,panel in pairs( qry:GetChildren() ) do
-		if panel:GetClassName() == "Panel" then
-			if panel:GetTall() == 30 then
-				panel:SetTall( nTall )
-				dPanel = panel
-			end
+	local arg = {...}
+	local bezel = Interface:GetBezel "Medium"
+	local sizex, sizey = unpack(SMPanels.BoxButton[Interface.Scale])
+	local x, y, c = bezel, panel:GetTall() - sizey - bezel, 1
+
+	for k = 1, #arg, 2 do
+		local text, func = arg[k], arg[k + 1] or function() end
+		local newFunc = function()
+			func()
+			panel:Remove()
 		end
+
+		SMPanels.Button( { parent = panel, text = text, font = Interface:GetTinyFont(), func = newFunc, x = x, y = y } )
+
+		x, c = x + sizex + bezel, c + 1
+		if c > 4 then x, y, c = bezel, y + sizey + bezel, 1 end
 	end
 
-	for k=9, #arg, 2 do
-		local Text, Func = arg[ k ], arg[ k + 1 ] or function() end
-		local Button = vgui.Create( "DButton", dPanel )
-			Button:SetText( Text )
-			Button:SizeToContents()
-			Button:SetTall( 20 )
-			Button:SetWide( Button:GetWide() + 20 )
-			Button.DoClick = function() qry:Close(); Func() end
-			Button:SetPos( x, y + 5 )
-			
-		x, c = x + Button:GetWide() + 5, c + 1
-
-		if c > 4 then x, y, c = 5, y + 25, 1 end
-	end
-	
-	qry:SetTall( qry:GetTall() + nExtra )
+	panel:SizeToChildren(true, true)
+	local finalx, finaly = panel:GetWide(), panel:GetTall()
+	panel:SetSize(finalx + bezel, finaly + bezel)
+	panel:Center()
 end
 
-function Window.MakeRequest( c, t, d, f, l )
-	Derma_StringRequest( t, c, d or "", f, l )
+function Window.MakeRequest( cap, t, d, f, l )
+	cap = string.Explode("\n", cap)
+	local panel = SMPanels.ContentFrame({title = t, center = true, noclose = true, content = cap})
+
+	local bezel = Interface:GetBezel "Medium"
+	local sizex, sizey = unpack(SMPanels.BoxButton[Interface.Scale])
+	local x, y = bezel, panel:GetTall() - sizey - bezel
+	local buttonSize = SMPanels.GenericSize[Interface.Scale]
+
+	local mid = (panel:GetWide() / 2)
+
+	local response
+	local submitFunc = function()
+		local text = response:GetText()
+		f(text)
+		ActiveWindow:Close()
+		panel:Remove()
+	end
+
+	local failFunc = function()
+		l()
+		panel:Remove()
+	end
+
+	response = SMPanels.TextEntry( { parent = panel, x = x, y = y, w = panel:GetWide() - bezel, h = buttonSize, text = d or "", noremove = true, func = submitFunc } )
+	response:RequestFocus()
+	SMPanels.Button( { parent = panel, text = "Submit", font = Interface:GetFont(), func = submitFunc, x = mid - sizex - bezel, y = y + buttonSize + bezel } )
+	SMPanels.Button( { parent = panel, text = "Cancel", font = Interface:GetFont(), func = failFunc, x = mid + bezel, y = y + buttonSize + bezel } )
+
+	panel:SizeToChildren(true, true)
+	local finalx, finaly = panel:GetWide(), panel:GetTall()
+	panel:SetSize(finalx + bezel, finaly + bezel)
+	panel:Center()
 end

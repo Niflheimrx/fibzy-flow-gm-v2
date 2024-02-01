@@ -91,6 +91,36 @@ local CSteam = CreateClientConVar( "sl_steamgroup", "1", true, false )
 local CCrosshair = CreateClientConVar( "sl_crosshair", "1", true, false )
 local CTargetID = CreateClientConVar( "sl_targetids", "0", true, false )
 local Connection = CreateClientConVar( "sl_connection", "0", true, false )
+
+ShowZones = CreateClientConVar( "sl_showzones", "1", true, false, "Toggles the visibility of the server zones. Change this if you want to see the lazer zones." )
+ShowAltZones = CreateClientConVar( "sl_showaltzones", "0", true, false, "Toggles the visibility of the alternate server zones. This includes zones outside of the Normal and Bonus zones." )
+Prestrafe = CreateClientConVar( "sl_prestrafe", "1", true, false, "Toggles the prestrafe view in your timer." )
+Comparison = CreateClientConVar( "sl_comparison_type", "1", true, true, "Toggles the prestrafe view in your timer." )
+Velocity = CreateClientConVar( "sl_velocitytype", "1", true, false, "Toggles the velocity type in your timer. 0 represents XY while 1 represents XYZ." )
+VelocityBar = CreateClientConVar( "sl_velocitybar", "1", true, false, "Toggles the velocity bar in your timer. 0 disables the color inside the velocity status." )
+Blur = CreateClientConVar( "sl_blur", "1", true, false, "Toggles the visibility of blur menus. Use 0 for better performance." )
+Decimals = CreateClientConVar( "sl_enumerator", "2", true, false, "Changes the amount of numbers after the decimal in your timer. 2 is the default enumerator." )
+PrintPref = CreateClientConVar( "sl_printchat", "1", true, false, "Decides whether or not to print messages to your chatbox. Use 0 if you want your messages to be printed in the console." )
+TotalTime = CreateClientConVar( "sl_totaltime", "1", true, true, "Toggles the total time display.")
+Footsteps = CreateClientConVar( "sl_footsteps", "1", true, true, "Toggles the footstep sounds for every player in the server." )
+ChatTick = CreateClientConVar( "sl_chattick", "default", true, true, "Changes the sound type of the chat ticker. Use \"Default\" as the default ticker." )
+MenuClicker = CreateClientConVar( "sl_clicker", "1", true, false, "When pressing a number inside a menu, a sound will play." )
+ShowPing = CreateClientConVar( "sl_showping", "0", true, true, "Toggles between the Ping and Style labels and info when clicked on either label button." )
+GUILess = CreateClientConVar( "sl_guiless", "0", true, false, "If supported, allows some GUI elements to open a window with easy to browse information similar to the profile menu." )
+ForceBloom = CreateClientConVar( "sl_forcebloom", "0", true, false, "If supported, forces the bloom rendering." )
+ForceMotion = CreateClientConVar( "sl_forcemotion", "0", true, false, "If supported, forces the rendering of motion blurs." )
+ForceFocus = CreateClientConVar( "sl_forcefocus", "0", true, false, "If supported, forces the focus to loosen on the bottom and top of your display." )
+GlobalCheckpoints = CreateClientConVar( "sl_globalcheckpoints", "0", true, true, "Enables the usage of creating/loading global checkpoints." )
+SpeedStats = CreateClientConVar( "sl_speedstats", "0", true, true, "Displays your Velocity stats when finishing a zone." )
+ShowSpecialRanks = CreateClientConVar( "sl_special_ranks", "1", true, true, "Shows players' special ranks whenever possible" )
+
+CustomChat = CreateClientConVar( "sl_customchat", "0", true, false, "Enables the future look of the chatbox." ):GetBool()
+CustomSurfTimer = CreateClientConVar( "sl_customsurftimer", "0", true, false, "Allows custom color scheming for SMPanel-based UIs." )
+CustomChatColors = CreateClientConVar( "sl_chattheme", "0", true, false, "Changes the color palette for colored chat messages printed from [Surf Timer]." )
+
+SmoothNoclipping = CreateClientConVar( "sl_smoothnoclip", "0", true, true, "Enables the smooth noclip movement." )
+UltrawideCenter = CreateClientConVar( "sl_ultracenter", "0", true, false, "Allows aspect ratios higher than 16:9 to render HUD elements in the center rather than the edges" )
+
 local HUDItems = { "CHudHealth", "CHudBattery", "CHudAmmo", "CHudSecondaryAmmo", "CHudSuitPower" }
 
 CreateClientConVar("kawaii_fov", 100)
@@ -106,7 +136,22 @@ suppress_viewpunch_wep.Enabled = CreateClientConVar( "kawaii_suppress_viewpunch_
 steady_view = {}
 steady_view.Enabled = CreateClientConVar( "kawaii_steady_view", "0", true, false, "Steady weapon view not moving" )
 
-local amountposfix =  GetConVarNumber("jcs_movement_ang")
+function GM:RenderScreenspaceEffects()
+	if ForceBloom:GetInt() == 1 then
+		RunConsoleCommand( "pp_bloom", 1 )
+		DrawBloom( 0.65, 3, 9, 9, 1, 1, 1, 1, 1 )
+	else
+		RunConsoleCommand( "pp_bloom", 0 )
+	end
+
+	if ForceMotion:GetInt() == 1 then
+		DrawMotionBlur( 0.4, 0.4, 0.01 )
+	end
+
+	if ForceFocus:GetInt() == 1 then
+		DrawToyTown( 2, ScrH() / 2 )
+	end
+end
 
 hook.Add("CalcViewModelView", "FixPos", function(wep, vm, oldPos, oldAng, pos, ang)
 	pos = pos - ang:Forward() * 5

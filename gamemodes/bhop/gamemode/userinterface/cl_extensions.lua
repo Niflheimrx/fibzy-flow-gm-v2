@@ -242,7 +242,7 @@ function SMPanels.ContentFrame( c )
 		draw.RoundedBox( 6, 0, 0, w, h, Interface.BackgroundColor )
 		draw.RoundedBoxEx( 6, 0, 0, w, bezel, Interface.ForegroundColor, true, true )
 
-		draw.SimpleText( self.Title, Interface:GetBoldFont(), w / 2, Interface:GetBezel( "Large" ), CL.White, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
+		draw.SimpleText( self.Title, Interface:GetBoldFont(), w / 2, Interface:GetBezel( "Large" ), color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
 
 		for i,text in pairs( content ) do
 			draw.SimpleText( text, Interface:GetFont(), Interface:GetBezel( "Medium" ), bezel + Interface:GetBezel( "Large" ) + ( Interface.FontHeight[Interface.Scale] * ( i - 1 ) ), color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER )

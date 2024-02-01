@@ -24,9 +24,7 @@ local themeOptions = {
 	[1] = "CS:S",
 	[2] = "Simple",
 	[3] = "Momentum Mod",
-	[4] = "Flow",
-	[6] = "Custom",
-	[7] = "No-Draw"
+	[4] = "Flow"
 }
 
 local enumeratorOptions = {
@@ -195,7 +193,7 @@ function SurfTimer.Open()
 	end
 
 	local bezel = Interface:GetBezel( "Medium" )
-	local padSize = SMPanels.ConvarSize[Interface.Scale]
+	local padSize = SMPanels.ConvarSize[Interface.Scale] - 5
 	local boxSize = SMPanels.GenericSize[Interface.Scale]
 	local barSize = SMPanels.BarSize[Interface.Scale]
 	local fontHeight = Interface.FontHeight[Interface.Scale]
@@ -216,17 +214,9 @@ function SurfTimer.Open()
 			local themeSkin = themeOptions[int]
 			if !themeSkin then return end
 
-			if (int == 2) then
-				ThemeWarningNotify()
-			end
+			RunConsoleCommand( "kawaii_hud", tostring(int - 0) )
 
-			if (int == 4) or (int == 5) or (int == 6) then
-				CustomNotify()
-			end
-
-			RunConsoleCommand( "sl_theme", tostring(int - 1) )
-
-			Link:Print( "Surf Timer", "Your theme has been changed to " .. themeSkin .. "" )
+			Link:Print( "Timer", "Your theme has been changed to " .. themeSkin .. "" )
 		end
 
 		function SurfTimer.ChangeEnumerator( int )
@@ -235,7 +225,7 @@ function SurfTimer.Open()
 
 			RunConsoleCommand( "sl_enumerator", tostring(int - 1) )
 
-			Link:Print( "Surf Timer", "Your decimal count has been set to " .. enumatorValue .. " points" )
+			Link:Print( "Timer", "Your decimal count has been set to " .. enumatorValue .. " points" )
 		end
 
 		function SurfTimer.ChangeComparison( int )
@@ -244,7 +234,7 @@ function SurfTimer.Open()
 
 			RunConsoleCommand( "sl_comparison_type", tostring(int - 1) )
 
-			Link:Print( "Surf Timer", "Your comparison type has been set to " .. comparisonValue )
+			Link:Print( "Timer", "Your comparison type has been set to " .. comparisonValue )
 		end
 
 		function SurfTimer.ChangeSideTimerPosition( int )
@@ -253,7 +243,7 @@ function SurfTimer.Open()
 
 			RunConsoleCommand( "sl_sidetimer_pos", tostring(int - 1) )
 
-			Link:Print( "Surf Timer", "Your SideTimer Position has been set to the " .. sideTimerValue .. " side" )
+			Link:Print( "Timer", "Your SideTimer Position has been set to the " .. sideTimerValue .. " side" )
 		end
 
 		function SurfTimer.ChangeShowKeysPosition( int )
@@ -262,7 +252,7 @@ function SurfTimer.Open()
 
 			RunConsoleCommand( "kawaii_showkeys_pos", tostring(int - 1) )
 
-			Link:Print( "Surf Timer", "Your ShowKeys Position has been moved towards the " .. showKeysValue )
+			Link:Print( "Timer", "Your ShowKeys Position has been moved towards the " .. showKeysValue )
 		end
 
 		function SurfTimer.ChangeChatColorPalette( int )
@@ -271,9 +261,9 @@ function SurfTimer.Open()
 
 			RunConsoleCommand( "sl_chattheme", tostring(int - 1) )
 
-			Link:Print( "Surf Timer", "Your Chat Color Palette has been set to " .. paletteValue )
+			Link:Print( "Timer", "Your Chat Color Palette has been set to " .. paletteValue )
 			timer.Simple( 0, function()
-				Link:ProcessMessage( "Your chat message will display like this:\n", "#CL.Yellow#", "A player's name ", "#CL.Blue#", "9334", #CL.White, " as a number ", "#CL.Green#", "An object"  )
+				--Link:ProcessMessage( "Your chat message will display like this:\n", "#CL.Yellow#", "A player's name ", "#CL.Blue#", "9334", #color_white, " as a number ", "#CL.Green#", "An object"  )
 			end )
 		end
 
@@ -282,9 +272,9 @@ function SurfTimer.Open()
 			if !recordValue then return end
 
 			RunConsoleCommand( "sl_sound_theme", tostring(int - 1) )
-			WRSound.Play(1, 1, int - 1)
+			--WRSound.Play(1, 1, int - 1)
 
-			Link:Print( "Surf Timer", "Your Record Soundtrack has been set to " .. recordValue )
+			Link:Print( "Timer", "Your Record Soundtrack has been set to " .. recordValue )
 		end
 
 		function SurfTimer.ChangeHUDOpacity(int)
@@ -316,20 +306,20 @@ function SurfTimer.Open()
 		end
 
 		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel, text = "Show User Interface", convar = "sl_showgui", tip = "Toggles the user interface visibility" } )
-		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 1 ), text = "Show Prestrafes", convar = "sl_prestrafe", tip = "Toggles the visibility of the prestrafe value in your timer" } )
-		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 2 ), text = "Enable Record Sounds", convar = "sl_sound", tip = "Toggles the record sounds on the server" } )
-		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 3 ), text = "Use 2D Velocity", convar = "sl_velocitytype", tip = "If enabled, shows the velocity units in 2D space, otherwise it's shown as 3D" } )
+		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 1 ), text = "Show Prestrafes", convar = "sl_showgui", tip = "Toggles the visibility of the prestrafe value in your timer" } )
+		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 2 ), text = "Enable Record Sounds", convar = "sl_showgui", tip = "Toggles the record sounds on the server" } )
+		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 3 ), text = "Use 2D Velocity", convar = "sl_showgui", tip = "If enabled, shows the velocity units in 2D space, otherwise it's shown as 3D" } )
 		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 4 ), text = "Show Spectators", convar = "sl_showspec", tip = "Toggles the visibility of the spectator listings" } )
-		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 5 ), text = "Show Keys", convar = "sl_showkeys", tip = "Toggles the visibility of the showkeys plugin" } )
-		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 6 ), text = "Show SideTimer", convar = "sl_sidetimer", tip = "Toggles the visibility of the SideTimer plugin" } )
-		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 7 ), text = "Show Velocity Bar", convar = "sl_velocitybar", tip = "Toggles the visibility of the velocity bar inside your unit space" } )
-		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 8 ), text = "Show Checkpoint HUD", convar = "sl_checkpoint_hud", tip = "Displays Checkpoint time and difference in the middle of the screenspace" } )
-		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 9 ), text = "Show Units in Center", convar = "sl_velocity_center", tip = "Displays the unit velocity in the middle of the screenspace" } )
-		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 10 ), text = "Show Total Time", convar = "sl_totaltime", tip = "Messages you the total time of your run when completing a stage" } )
-		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 11 ), text = "Use Global Checkpoints", convar = "sl_globalcheckpoints", tip = "Toggles the checkpoint type on the saveloc plugin" } )
-		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 12 ), text = "Show Speed Stats", convar = "sl_speedstats", tip = "Toggles the visibility of Speed Stats when completing a zone" } )
-		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 13 ), text = "Show Special Ranks", convar = "sl_special_ranks", tip = "Displays players' special ranks whenever possible" } )
-		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 14 ), text = "Enable Strafe Trainer", convar = "sm_strafetrainer", tip = "Enables the strafetrainer display" } )
+		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 5 ), text = "Show Keys", convar = "kawaii_showkeys", tip = "Toggles the visibility of the showkeys plugin" } )
+		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 6 ), text = "Show SideTimer", convar = "kawaii_showkeys", tip = "Toggles the visibility of the SideTimer plugin" } )
+		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 7 ), text = "Show Velocity Bar", convar = "kawaii_showkeys", tip = "Toggles the visibility of the velocity bar inside your unit space" } )
+		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 8 ), text = "Show Checkpoint HUD", convar = "kawaii_showkeys", tip = "Displays Checkpoint time and difference in the middle of the screenspace" } )
+		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 9 ), text = "Show Units in Center", convar = "kawaii_showkeys", tip = "Displays the unit velocity in the middle of the screenspace" } )
+		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 10 ), text = "Show Total Time", convar = "kawaii_showkeys", tip = "Messages you the total time of your run when completing a stage" } )
+		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 11 ), text = "Use Global Checkpoints", convar = "kawaii_showkeys", tip = "Toggles the checkpoint type on the saveloc plugin" } )
+		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 12 ), text = "Show Speed Stats", convar = "kawaii_showkeys", tip = "Toggles the visibility of Speed Stats when completing a zone" } )
+		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 13 ), text = "Show Special Ranks", convar = "kawaii_showkeys", tip = "Displays players' special ranks whenever possible" } )
+		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 14 ), text = "Enable Strafe Trainer", convar = "kawaii_showkeys", tip = "Enables the strafetrainer display" } )
 
 		local tmSize = panParent:GetWide() - Interface:GetTextWidth( { "Change Theme" }, Interface:GetFont() )
 		local emSize = panParent:GetWide() - Interface:GetTextWidth( { "Set Decimal Count" }, Interface:GetFont() )
@@ -366,7 +356,7 @@ function SurfTimer.Open()
 			chattickButton:SetText( "Set Chat Tick" )
 			RunConsoleCommand( "sl_chattick", chatTickValue )
 
-			Link:Print( "Surf Timer", "Your chat tick sound is set to " .. chatTickValue )
+			Link:Print( "Timer", "Your chat tick sound is set to " .. chatTickValue )
 			if chatTickPointer[chatTickValue] then
 				surface.PlaySound( chatTickPointer[chatTickValue] )
 			else
@@ -383,7 +373,7 @@ function SurfTimer.Open()
 			footstepButton:SetText( "Set Footstep Preference" )
 			RunConsoleCommand( "sl_footsteps", tostring(int - 1) )
 
-			Link:Print( "Surf Timer", "Your Footstep Preference has been set to " .. footStepValue )
+			Link:Print( "Timer", "Your Footstep Preference has been set to " .. footStepValue )
 		end
 
 		local function ToggleMulticore()
@@ -398,7 +388,7 @@ function SurfTimer.Open()
 				RunConsoleCommand( "mat_queue_mode", "-1" )
 			end
 
-			Link:Print( "Surf Timer", "Multicore Rendering has been " .. (not multicoreValue and "Enabled" or "Disabled" ) )
+			Link:Print( "Timer", "Multicore Rendering has been " .. (not multicoreValue and "Enabled" or "Disabled" ) )
 		end
 
 		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel, text = "Render 3D Sky", convar = "r_3dsky", tip = "Renders the 3D skybox on maps which contain them. Disabling this will drastically improve your fps under certain scenarios" } )

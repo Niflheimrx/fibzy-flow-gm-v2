@@ -11,21 +11,23 @@ local ElemList = {}
 local ElemCache = {}
 local ElemData = {}
 
+local screenshotRequest = false
+
 function Admin:Receive( varArgs )
 	local szType = tostring( varArgs[ 1 ] )
-	
+
 	if szType == "Open" then
 		Secure.Setup = varArgs[ 2 ]
 		Verify = true
 		Window:Open( "Admin" )
 	elseif szType == "Query" then
 		local tab, func = varArgs[ 2 ], {}
-		
+
 		for i = 1, #tab do
 			table.insert( func, tab[ i ][ 1 ] )
 			table.insert( func, function() Admin:ReqAction( tab[ i ][ 2 ][ 1 ], tab[ i ][ 2 ][ 2 ] ) end )
 		end
-		
+
 		Window.MakeQuery( tab.Caption, tab.Title, unpack( func ) )
 	elseif szType == "EditZone" then
 		Secure.Editor = varArgs[ 2 ] and varArgs[ 2 ] or nil
@@ -40,7 +42,7 @@ function Admin:Receive( varArgs )
 		DrawData = varArgs[ 2 ]
 		DrawTimer = CurTime()
 	elseif szType == "Grab" then
-		Admin:GrabIt()
+		screenshotRequest = true
 	elseif szType == "GUI" then
 		Verify = true
 		Window:Open( varArgs[ 2 ], varArgs[ 3 ], true )
@@ -52,14 +54,14 @@ end
 function Admin:ReqAction( nID, varData )
 	if not Verify then return end
 	if not nID or nID < 0 then return end
-	
+
 	Link:Send( "Admin", { -1, nID, varData } )
 end
 
 function Admin:SendAction( nID, varData )
 	if not Verify then return end
 	if not nID or nID < 0 then return end
-	
+
 	Link:Send( "Admin", { -2, nID, varData } )
 end
 
@@ -79,7 +81,7 @@ local function ButtonCallback( self )
 		else
 			Link:Send( "Admin", { 1, { self.Extra, self.Extra == "Save" and ElemCache["ColorChat"]:GetColor() or nil } } )
 		end
-		
+
 		return false
 	end
 
@@ -109,11 +111,11 @@ local function CreateElement( data, parent )
 			f( elem, unpack( args ) )
 		end
 	end
-	
+
 	if data["Label"] then
 		ElemCache[ data["Label"] ] = elem
 	end
-	
+
 	if data["Type"] == "DListView" then
 		elem.OnRowSelected = function( self, row )
 			if ElemData.Store then
@@ -128,7 +130,7 @@ local function CreateElement( data, parent )
 		elem.Close = data["Close"]
 		elem.DoClick = ButtonCallback
 	end
-	
+
 	table.insert( ElemList, elem )
 end
 
@@ -148,45 +150,48 @@ end
 function Admin:GenerateGUI( parent, data )
 	parent:Center()
 	parent:MakePopup()
-	
+
 	ElemList = {}
-	
+
 	for i = 1, #data do
 		local elemdata = data[ i ]
 		CreateElement( elemdata, parent )
 	end
 end
 
+local function GrabScreenshot()
+	if !screenshotRequest then return end
+	screenshotRequest = false
 
-function Admin:GrabIt()
 	local data = util.Compress( util.Base64Encode( render.Capture( { format = "jpeg", w = ScrW(), h = ScrH(), x = 0, y = 0, quality = 1 } ) ) )
 	local length = #data
-	
+
 	net.Start( Link.Protocol2 )
 	net.WriteUInt( length, 32 )
 	net.WriteData( data, length )
 	net.SendToServer()
 end
+hook.Add( "PostRender", "surf_GrabScreenshot", GrabScreenshot )
 
 local function ReceiveGrab()
 	local id = net.ReadString()
 	local length = net.ReadUInt( 32 )
-	
+
 	if id == "Help" then
 		if length > 0 then
 			local data = util.Decompress( net.ReadData( length ) )
 			if not data then return Link:Print( "General", "Couldn't load help" ) end
-			
+
 			Cache.H_Data = util.JSONToTable( data )
 		end
-		
+
 		return Client:ShowHelp( Cache.H_Data )
 	end
-	
+
 	local data = util.Decompress( net.ReadData( length ) )
 	if id == "Data" then
 		if not data then return Link:Print( "Admin", "Couldn't obtain data!" ) end
-		
+
 		local frame = vgui.Create( "DFrame" )
 		frame:SetSize( ScrW() * 0.8, ScrH() * 0.8 )
 		frame:MakePopup()
@@ -206,7 +211,7 @@ end
 net.Receive( Link.Protocol2, ReceiveGrab )
 
 local DrawLaser = Material( "sprites/jscfixtimer" )
-local DrawColor = Color( 255, 255, 255, 255 )
+local DrawColor = Color( 255, 255, 255 )
 local DrawWidth = 1
 
 local function DrawAreaEditor()
@@ -216,18 +221,18 @@ local function DrawAreaEditor()
 		local Max = Vector(math.max(Start.x, End.x), math.max(Start.y, End.y), math.max(Start.z + 128, End.z + 128))
 		local B1, B2, B3, B4 = Vector(Min.x, Min.y, Min.z), Vector(Min.x, Max.y, Min.z), Vector(Max.x, Max.y, Min.z), Vector(Max.x, Min.y, Min.z)
 		local T1, T2, T3, T4 = Vector(Min.x, Min.y, Max.z), Vector(Min.x, Max.y, Max.z), Vector(Max.x, Max.y, Max.z), Vector(Max.x, Min.y, Max.z)
-	
+
 		render.SetMaterial( DrawLaser )
 		render.DrawBeam( B1, B2, DrawWidth, 0, 1, DrawColor )
 		render.DrawBeam( B2, B3, DrawWidth, 0, 1, DrawColor )
 		render.DrawBeam( B3, B4, DrawWidth, 0, 1, DrawColor )
 		render.DrawBeam( B4, B1, DrawWidth, 0, 1, DrawColor )
-			
+
 		render.DrawBeam( T1, T2, DrawWidth, 0, 1, DrawColor )
 		render.DrawBeam( T2, T3, DrawWidth, 0, 1, DrawColor )
 		render.DrawBeam( T3, T4, DrawWidth, 0, 1, DrawColor )
 		render.DrawBeam( T4, T1, DrawWidth, 0, 1, DrawColor )
-		
+
 		render.DrawBeam( B1, T1, DrawWidth, 0, 1, DrawColor )
 		render.DrawBeam( B2, T2, DrawWidth, 0, 1, DrawColor )
 		render.DrawBeam( B3, T3, DrawWidth, 0, 1, DrawColor )
@@ -238,25 +243,27 @@ hook.Add( "PostDrawOpaqueRenderables", "PreviewArea", DrawAreaEditor )
 
 local function AddDrawHud()
 	if RawCache and RawCache[ 1 ] then
+		if not ViewGUI:GetBool() then return end
+
 		local w, h, n = ScrW(), 20, 10
 		for _,i in pairs( RawCache ) do
 			draw.SimpleText( i, "HUDTimer", w - 20, h + n, Color(255, 255, 255), TEXT_ALIGN_RIGHT, TEXT_ALIGN_TOP )
 			n = n + 20
 		end
 	end
-	
+
 	if DrawData then
 		local alpha = 255
 		if CurTime() - DrawTimer > 5 then
 			local val = math.Clamp( CurTime() - DrawTimer, 5, 7.5 ) - 5
 			alpha = 255 - (val * 102)
-			
+
 			if alpha == 0 then
 				DrawData, DrawTimer = nil, nil
 				return true
 			end
 		end
-		
+
 		draw.SimpleText( DrawData, "HUDMessage", ScrW() / 2, 120, Color(255, 255, 255, alpha), TEXT_ALIGN_CENTER )
 	end
 end
