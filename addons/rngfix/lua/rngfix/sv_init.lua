@@ -497,15 +497,15 @@ hook.Add("SetupMove","CheckCrouch",CheckCrouch)
 local function AirAccelerate2( ply, data )
 	if ply:IsOnGround() or not ply:Alive() and ply:WaterLevel() < 2 then return end
 
-	local aim = data:GetMoveAngles()
+	local aim = data:GetMoveAngles(ply:GetAngles() - Angle(-100, -100, 0))
 	local forward, right = aim:Forward(), aim:Right()
-	local fmove = data:GetForwardSpeed()
-	local smove = data:GetSideSpeed()
+	local fmove = data:GetForwardSpeed(ply:GetAngles() - Angle(-100, -100, 0))
+	local smove = data:GetSideSpeed(ply:GetAngles() - Angle(-100, -100, 0))
 
 	forward.z = 0
  	right.z = 0
-	forward:Normalize()
-	right:Normalize()
+	forward:Normalize(ply:GetAngles() - Angle(-100, -100, 0))
+	right:Normalize(ply:GetAngles() - Angle(-100, -100, 0))
 
 	local mv, vel, absVel, ang = 30.0, Vector(data:GetForwardSpeed(), data:GetSideSpeed(), 0), ply:GetAbsVelocity(), aim
 	local fore, side = ang:Forward(), ang:Right()
