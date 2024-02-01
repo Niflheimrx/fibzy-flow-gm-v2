@@ -180,7 +180,7 @@ function JAC:StartCheck(client)
 	end
 
 	-- If at any point I wanna see a players stats in console
-	if (self.Debug) then 
+	/*if (self.Debug) then 
 		local c = "-----------------------------[ Client: "..client:Nick().." ]-----------------------------"
 		print("\n"..c.."\n")
 		print("\tTotal Strafes: " .. TotalLeft[client]+TotalRight[client] .. " [Right: " .. TotalRight[client] .. "] [Left: " .. TotalLeft[client] .. "]")
@@ -188,7 +188,7 @@ function JAC:StartCheck(client)
 		print("\tConsistant Strafes: " .. CLeft[client]+CRight[client] .. " [Right: " .. CRight[client] .. " (" .. math.Round(consistantRightPer*100,2) .."%)] [Left: " .. CLeft[client] .. " (".. math.Round(consistantLeftPer*100,2) .."%)]" )
 		print("\tSuspected Cheat: " .. ((consistantBan or perfectBan) and "Yes" or "No"))
 		print("\n"..string.rep("-", #c))
-	end
+	end*/
 
 	self:Refresh(client)
 end
