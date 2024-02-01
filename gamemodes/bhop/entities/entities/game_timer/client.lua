@@ -38,7 +38,13 @@ end
 -- Edited: justa
 -- Show ACs
 
+ZONES = {}
+ZONES.Enabled = CreateClientConVar( "kawaii_showzones", "1", true, false, "Show Timer Zones" )
+
 function ENT:Draw()
+	local ZONES = ZONES.Enabled:GetBool()
+	if !ZONES then return end
+
 	-- Color refresh
 	DrawArea[Zone.MStart] = Color( 255, 255, 255 )
 	DrawArea[Zone.MEnd] = Settings:GetValue("EndZone")

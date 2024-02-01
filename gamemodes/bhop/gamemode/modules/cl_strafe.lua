@@ -143,8 +143,14 @@ net.Receive("train_update", function(_, _)
 	value = net.ReadFloat()
 end)	
 
+STRAFETRAINER = {}
+STRAFETRAINER.Enabled = CreateClientConVar( "kawaii_strafetrainer", "0", true, false, "Strafe Trainer hud display" )
+
 local lp = LocalPlayer
 local function Display()
+	local STRAFETRAINER = STRAFETRAINER.Enabled:GetBool()
+	if !STRAFETRAINER then return end
+
 	if not lp():GetNWBool("strafetrainer") then return end
 	if IsValid(lp():GetObserverTarget()) and lp():GetObserverTarget():IsBot() then return end
 	if LocalPlayer():IsOnGround() then return end
@@ -186,4 +192,4 @@ local function Display()
 
 	draw.SimpleText(endingval, "HUDcss", x, y - h - spacing, c, TEXT_ALIGN_CENTER, TEXT_ALIGN_BOTTOM)
 end 
-hook.Add("HUDPaint", "StrafeTrainer", Display)--]]
+hook.Add("HUDPaint", "StrafeTrainer", Display)

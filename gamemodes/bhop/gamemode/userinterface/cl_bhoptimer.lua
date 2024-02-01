@@ -43,8 +43,9 @@ local comparisonOptions = {
 }
 
 local sideTimerOptions = {
-	[1] = "Left",
-	[2] = "Right"
+	[1] = "90",
+	[2] = "100",
+	[3] = "110"
 }
 
 local showKeysOptions = {
@@ -148,10 +149,10 @@ local emitSoundOptions = {
 }
 
 local chatColorPaletteOptions = {
-	[1] = "Ocean",
-	[2] = "Sakura",
-	[3] = "Liquid",
-	[4] = "Magma"
+	[1] = "40",
+	[2] = "10",
+	[3] = "60",
+	[4] = "5"
 }
 
 local recordSoundOptions = {
@@ -241,9 +242,9 @@ function SurfTimer.Open()
 			local sideTimerValue = sideTimerOptions[int]
 			if !sideTimerValue then return end
 
-			RunConsoleCommand( "sl_sidetimer_pos", tostring(int - 1) )
+			RunConsoleCommand( "kawaii_fov", sideTimerValue )
 
-			Link:Print( "Timer", "Your SideTimer Position has been set to the " .. sideTimerValue .. " side" )
+			Link:Print( "Timer", "Your FoV has been set to " .. sideTimerValue .. "." )
 		end
 
 		function SurfTimer.ChangeShowKeysPosition( int )
@@ -259,12 +260,9 @@ function SurfTimer.Open()
 			local paletteValue = chatColorPaletteOptions[int]
 			if !paletteValue then return end
 
-			RunConsoleCommand( "sl_chattheme", tostring(int - 1) )
-
-			Link:Print( "Timer", "Your Chat Color Palette has been set to " .. paletteValue )
-			timer.Simple( 0, function()
-				--Link:ProcessMessage( "Your chat message will display like this:\n", "#CL.Yellow#", "A player's name ", "#CL.Blue#", "9334", #color_white, " as a number ", "#CL.Green#", "An object"  )
-			end )
+			RunConsoleCommand( "kawaii_skybox_speed", paletteValue )
+	
+			Link:Print( "Timer", "Your Skybox Speed has been set to " .. paletteValue )
 		end
 
 		function SurfTimer.ChangeRecordSound( int )
@@ -306,37 +304,38 @@ function SurfTimer.Open()
 		end
 
 		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel, text = "Show User Interface", convar = "sl_showgui", tip = "Toggles the user interface visibility" } )
-		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 1 ), text = "Show Prestrafes", convar = "sl_showgui", tip = "Toggles the visibility of the prestrafe value in your timer" } )
-		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 2 ), text = "Enable Record Sounds", convar = "sl_showgui", tip = "Toggles the record sounds on the server" } )
-		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 3 ), text = "Use 2D Velocity", convar = "sl_showgui", tip = "If enabled, shows the velocity units in 2D space, otherwise it's shown as 3D" } )
+		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 1 ), text = "Show Jump Hud", convar = "kawaii_secret", tip = "Toggles the visibility of the Jump Hud in your timer" } )
+		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 2 ), text = "Enable Record Sounds", convar = "kawaii_recordsound", tip = "Toggles the record sounds on the server" } )
+		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 3 ), text = "Show Anti-Cheats", convar = "kawaii_anticheats", tip = "If enabled, shows the Anti-Cheat Zones, otherwise hidden" } )
 		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 4 ), text = "Show Spectators", convar = "sl_showspec", tip = "Toggles the visibility of the spectator listings" } )
 		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 5 ), text = "Show Keys", convar = "kawaii_showkeys", tip = "Toggles the visibility of the showkeys plugin" } )
 		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 6 ), text = "Show SideTimer", convar = "kawaii_showkeys", tip = "Toggles the visibility of the SideTimer plugin" } )
-		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 7 ), text = "Show Velocity Bar", convar = "kawaii_showkeys", tip = "Toggles the visibility of the velocity bar inside your unit space" } )
-		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 8 ), text = "Show Checkpoint HUD", convar = "kawaii_showkeys", tip = "Displays Checkpoint time and difference in the middle of the screenspace" } )
+		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 7 ), text = "Show Momentum Velocity Bar", convar = "kawaii_momentum_speed_hud", tip = "Toggles the visibility of the velocity bar inside your unit space" } )
+		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 8 ), text = "Enable Rawinput2", convar = "kawaii_rawinput", tip = "Displays Checkpoint time and difference in the middle of the screenspace" } )
 		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 9 ), text = "Show Units in Center", convar = "kawaii_showkeys", tip = "Displays the unit velocity in the middle of the screenspace" } )
 		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 10 ), text = "Show Total Time", convar = "kawaii_showkeys", tip = "Messages you the total time of your run when completing a stage" } )
-		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 11 ), text = "Use Global Checkpoints", convar = "kawaii_showkeys", tip = "Toggles the checkpoint type on the saveloc plugin" } )
+		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 11 ), text = "Show Zones", convar = "kawaii_showzones", tip = "Toggles the checkpoint type on the saveloc plugin" } )
 		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 12 ), text = "Show Speed Stats", convar = "kawaii_showkeys", tip = "Toggles the visibility of Speed Stats when completing a zone" } )
-		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 13 ), text = "Show Special Ranks", convar = "kawaii_showkeys", tip = "Displays players' special ranks whenever possible" } )
-		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 14 ), text = "Enable Strafe Trainer", convar = "kawaii_showkeys", tip = "Enables the strafetrainer display" } )
+		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 13 ), text = "Enable Strafe Trainer", convar = "kawaii_strafetrainer", tip = "Enables the strafetrainer display" } )
+		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 14 ), text = "Suppress Viewpunch", convar = "kawaii_suppress_viewpunch", tip = "Enables the Suppress Viewpunch" } )
+		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 15 ), text = "Suppress Viewpunch Weapon", convar = "kawaii_suppress_viewpunch_wep", tip = "Enables the Weapon Suppress Viewpunch" } )
 
 		local tmSize = panParent:GetWide() - Interface:GetTextWidth( { "Change Theme" }, Interface:GetFont() )
 		local emSize = panParent:GetWide() - Interface:GetTextWidth( { "Set Decimal Count" }, Interface:GetFont() )
 		local cpSize = panParent:GetWide() - Interface:GetTextWidth( { "Set Comparison Type" }, Interface:GetFont() )
-		local stSize = panParent:GetWide() - Interface:GetTextWidth( { "Set SideTimer Position" }, Interface:GetFont() )
+		local stSize = panParent:GetWide() - Interface:GetTextWidth( { "Set FoV Value" }, Interface:GetFont() )
 		local dtSize = panParent:GetWide() - Interface:GetTextWidth( { "Open DevTools" }, Interface:GetFont() )
 		local skSize = panParent:GetWide() - Interface:GetTextWidth( { "Set ShowKeys Position" }, Interface:GetFont() )
-		local ctSize = panParent:GetWide() - Interface:GetTextWidth( { "Set Chat Color Palette" }, Interface:GetFont() )
+		local ctSize = panParent:GetWide() - Interface:GetTextWidth( { "Rainbow Skybox Speed" }, Interface:GetFont() )
 		local srSize = panParent:GetWide() - Interface:GetTextWidth( { "Set Record Sound Theme" }, Interface:GetFont() )
 		local hoSize = panParent:GetWide() - Interface:GetTextWidth( { "Set HUD Opacity" }, Interface:GetFont() )
 
 		SMPanels.MultiButton( { parent = panParent, text = "Change Theme", tip = "Changes the look of your Timer/GUI menus", select = themeOptions, func = SurfTimer.ChangeTheme, x = tmSize - bezel, y = bezel, norep = true } )
 		SMPanels.MultiButton( { parent = panParent, text = "Set Decimal Count", tip = "Determines what the timer will round nearest to", select = enumeratorOptions, func = SurfTimer.ChangeEnumerator, x = emSize - bezel, y = bezel + (boxSize * 1), norep = true } )
 		SMPanels.MultiButton( { parent = panParent, text = "Set Comparison Type", tip = "Determines what your timer will compare to in runs", select = comparisonOptions, func = SurfTimer.ChangeComparison, x = cpSize - bezel, y = bezel + (boxSize * 2), norep = true } )
-		SMPanels.MultiButton( { parent = panParent, text = "Set SideTimer Position", tip = "Changes the position of the SideTimer text", select = sideTimerOptions, func = SurfTimer.ChangeSideTimerPosition, x = stSize - bezel, y = bezel + (boxSize * 3), norep = true } )
+		SMPanels.MultiButton( { parent = panParent, text = "Set FoV Value", tip = "Changes the players FoV", select = sideTimerOptions, func = SurfTimer.ChangeSideTimerPosition, x = stSize - bezel, y = bezel + (boxSize * 3), norep = true } )
 		SMPanels.MultiButton( { parent = panParent, text = "Set ShowKeys Position", tip = "Changes the position of your ShowKeys icons/text", select = showKeysOptions, func = SurfTimer.ChangeShowKeysPosition, x = skSize - bezel, y = bezel + (boxSize * 4), norep = true } )
-		SMPanels.MultiButton( { parent = panParent, text = "Set Chat Color Palette", tip = "Changes the color palette for colored server chat messages", select = chatColorPaletteOptions, func = SurfTimer.ChangeChatColorPalette, x = ctSize - bezel, y = bezel + ( boxSize * 5 ), norep = true } )
+		SMPanels.MultiButton( { parent = panParent, text = "Rainbow Skybox Speed", tip = "Changes the speed of the Rainbow Skybox", select = chatColorPaletteOptions, func = SurfTimer.ChangeChatColorPalette, x = ctSize - bezel, y = bezel + ( boxSize * 5 ), norep = true } )
 		SMPanels.MultiButton( { parent = panParent, text = "Set Record Sound Theme", tip = "Changes the record soundtrack for your runs", select = recordSoundOptions, func = SurfTimer.ChangeRecordSound, x = srSize - bezel, y = bezel + ( boxSize * 6 ), norep = true } )
 		SMPanels.MultiButton( { parent = panParent, text = "Set HUD Opacity", tip = "Changes how transparent your HUD will appear", select = opacityOptions, func = SurfTimer.ChangeHUDOpacity, x = hoSize - bezel, y = bezel + ( boxSize * 7 ), norep = true } )
 
@@ -392,21 +391,25 @@ function SurfTimer.Open()
 		end
 
 		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel, text = "Render 3D Sky", convar = "r_3dsky", tip = "Renders the 3D skybox on maps which contain them. Disabling this will drastically improve your fps under certain scenarios" } )
-		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 1 ), text = "Render Other Players", convar = "sl_showothers", tip = "Renders other players on the server. Disabling this will improve your fps if your graphics card struggles with player animations" } )
-		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 2 ), text = "Render Water Reflections", convar = "r_waterdrawreflection", tip = "Renders the water reflections. Disabling this will improve your fps on water-heavy maps" } )
-		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 3 ), text = "Render Speculars", convar = "mat_specular", tip = "Renders the specularity for perf testing. Disabling this will drastically improve your fps under heavy reflective maps" } )
-		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 4 ), text = "Use Increased Gamma", convar = "mat_monitorgamma_tv_enabled", tip = "Increases the overall brightness by increasing the gamma." } )
-		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 5 ), text = "Compress Textures", convar = "mat_compressedtextures", tip = "Compress all texture materials. This doesn't affect performance in most cases." } )
-		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 6 ), text = "Render Zones", convar = "sl_showzones", tip = "Renders the zone boxes. Disabling this might improve your fps on maps with overbuffered entities" } )
-		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 7 ), text = "Render Extra Zones", convar = "sl_showaltzones", tip = "Similar to Render Zones but adds more zones to the render list which are normally not shown by default" } )
-		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 8 ), text = "Render Target IDs", convar = "sl_targetids", tip = "Renders the targetid text when looking at a player. This is enabled by default" } )
-		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 9 ), text = "Render Derma Blurs", convar = "sl_blur", tip = "Renders the blur animation when opening a derma panel. Disabling this will improve your fps" } )
-		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 10 ), text = "Display Server Messages", convar = "sl_printchat", tip = "Shows server messages in chat. This should normally be on by default. This does not disable the chat" } )
-		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 11 ), text = "Render Developer Bloom", convar = "sl_forcebloom", tip = "DEVELOPER USE ONLY | Renders the bloom used on the sandbox engine" } )
-		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 12 ), text = "Render Developer Blur", convar = "sl_forcemotion", tip = "DEVELOPER USE ONLY | Renders the motion blur used on the sandbox engine" } )
-		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 13 ), text = "Render Developer Focus", convar = "sl_forcefocus", tip = "DEVELOPER USE ONLY | Renders the toytown vision used on the sandbox engine" } )
-		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 14 ), text = "Render Developer Bokeh", convar = "pp_bokeh", tip = "DEVELOPER USE ONLY | Renders the bokeh effect used on the sandbox engine" } )
+		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 1 ), text = "Render Skybox", convar = "r_sky", tip = "Renders the skybox on maps which contain them." } )
+		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 2 ), text = "Render Rainbow Skybox", convar = "kawaii_skybox", tip = "Renders the Rainbow skybox option." } )
+		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 3 ), text = "Render Other Players", convar = "sl_showothers", tip = "Renders other players on the server. Disabling this will improve your fps if your graphics card struggles with player animations" } )
+		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 4 ), text = "Render Water Reflections", convar = "r_waterdrawreflection", tip = "Renders the water reflections. Disabling this will improve your fps on water-heavy maps" } )
+		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 5 ), text = "Render Speculars", convar = "mat_specular", tip = "Renders the specularity for perf testing. Disabling this will drastically improve your fps under heavy reflective maps" } )
+		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 6 ), text = "Use Increased Gamma", convar = "mat_monitorgamma_tv_enabled", tip = "Increases the overall brightness by increasing the gamma." } )
+		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 7 ), text = "Compress Textures", convar = "mat_compressedtextures", tip = "Compress all texture materials. This doesn't affect performance in most cases." } )
+		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 8 ), text = "Render Zones", convar = "sl_showzones", tip = "Renders the zone boxes. Disabling this might improve your fps on maps with overbuffered entities" } )
+		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 9 ), text = "Render Extra Zones", convar = "sl_showaltzones", tip = "Similar to Render Zones but adds more zones to the render list which are normally not shown by default" } )
+		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 10 ), text = "Render Target IDs", convar = "sl_targetids", tip = "Renders the targetid text when looking at a player. This is enabled by default" } )
+		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 11 ), text = "Render Derma Blurs", convar = "sl_blur", tip = "Renders the blur animation when opening a derma panel. Disabling this will improve your fps" } )
+		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 12 ), text = "Display Server Messages", convar = "sl_printchat", tip = "Shows server messages in chat. This should normally be on by default. This does not disable the chat" } )
+		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 13 ), text = "Render Developer Bloom", convar = "sl_forcebloom", tip = "DEVELOPER USE ONLY | Renders the bloom used on the sandbox engine" } )
+		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 14 ), text = "Render Developer Blur", convar = "sl_forcemotion", tip = "DEVELOPER USE ONLY | Renders the motion blur used on the sandbox engine" } )
+		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 15 ), text = "Render Developer Focus", convar = "sl_forcefocus", tip = "DEVELOPER USE ONLY | Renders the toytown vision used on the sandbox engine" } )
+		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 16 ), text = "Render Developer Bokeh", convar = "pp_bokeh", tip = "DEVELOPER USE ONLY | Renders the bokeh effect used on the sandbox engine" } )
+		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 17 ), text = "Render Motion Blur", convar = "kawaii_motion", tip = "DEVELOPER USE ONLY | Renders the Motion Blur effect" } )
 
+		
 		local mcSize = panParent:GetWide() - Interface:GetTextWidth( { "Toggle Multicore Rendering" }, Interface:GetFont() )
 		local ctSize = panParent:GetWide() - Interface:GetTextWidth( { "Set Chat Tick" }, Interface:GetFont() )
 		local fsSize = panParent:GetWide() - Interface:GetTextWidth( { "Set Footstep Preference" }, Interface:GetFont() )
