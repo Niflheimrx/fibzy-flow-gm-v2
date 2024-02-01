@@ -515,9 +515,9 @@ do
 
 		vel = vel + (wishdir * accelspeed)
 
-		if not game.GetMap() == "bhop_kasvihuone" then
+		/*if not game.GetMap() == "bhop_kasvihuone" then
 			vel.z = vel.z - (ply:GetGravity() * 800 * FrameTime() * 0.5)
-		end
+		end*/
 
 		data:SetVelocity(vel)
 
