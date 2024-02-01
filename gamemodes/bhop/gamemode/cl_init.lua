@@ -36,6 +36,7 @@ function GM:AdjustMouseSensitivity() end
 function GM:CalcViewModelView() end
 function GM:PreDrawViewModel() end
 function GM:PostDrawViewModel() end
+function GM:HUDDrawTargetID() end
 
 function GM:Think() return true end
 function GM:Tick() return true end
