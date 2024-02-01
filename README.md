@@ -93,7 +93,7 @@ https://github.com/FiBzYDev/jcs-kawaiiclan-gamemode/assets/58349075/2e6df12c-d80
 TO DO (UI):
 
 - Make the Momentum Hud 1440p version for 1080p Resolution
-- Finsih new progress replay code
+- Finish new Progress Replay code
 - Add FJT and Pre-Speed to Jhud
 - Finish Main Menu Hud
 - Add my version of CS:S Hud?
@@ -120,13 +120,13 @@ Follow rawinput2.txt in other https://github.com/Haze1337/RawInput2/releases
   
 Comes with:
 
-  - A fully custom bhop gamemode
-  - Custom workshop fixes
+  - A fully custom Buny Hop Gamemode
+  - Custom Workshop fixes
   - Database
   - sv.db
   - Lua bin files
   - Custom server.cfg
-  - 2 Fps fixs
+  - 2 FPS fixs
   - Movement codes to learn from
     
 FastDL Link | https://main.fastdl.me/
