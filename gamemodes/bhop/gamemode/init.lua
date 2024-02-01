@@ -1,28 +1,30 @@
-include( "core.lua" )
-include( "core_lang.lua" )
-include( "core_data.lua" )
-include( "sv_player.lua" )
-include( "sv_command.lua" )
-include( "sh_paint.lua" )
-include( "sv_timer.lua" )
-include( "sv_zones.lua" )
-include( "modules/sv_rtv.lua" )
-include( "modules/sv_admin.lua" )
-include( "modules/sv_bot.lua" )
-include( "modules/sv_spectator.lua" )
-include( "modules/sv_smgr.lua" )
-include( "modules/sv_stats.lua" )
-include("modules/sv_ssj.lua")
-include("modules/sv_trailing.lua")
-include("modules/sv_jac.lua")
-include("modules/sv_boosterfix.lua")
+include "sv_config.lua"
+include "core.lua"
+include "core_lang.lua"
+include "core_data.lua"
+include "sv_player.lua"
+include "sv_command.lua"
+include "sh_paint.lua"
+include "sh_pebblebuster.lua"
+include "sv_timer.lua"
+include "sv_zones.lua"
 
--- Checkpoints
-include( "modules/sv_checkpoint.lua" )
-include( "modules/sv_setspawn.lua" )
-include( "modules/sv_segment.lua" )
+include "modules/sv_rtv.lua"
+include "modules/sv_admin.lua"
+include "modules/sv_bot.lua"
+include "modules/sv_spectator.lua"
+include "modules/sv_smgr.lua"
+include "modules/sv_stats.lua"
+include "modules/sv_ssj.lua"
+include "modules/sv_trailing.lua"
+include "modules/sv_jac.lua"
+include "modules/sv_boosterfix.lua"
 
-gameevent.Listen( "player_connect" )
+include "modules/sv_checkpoint.lua"
+include "modules/sv_setspawn.lua"
+include "modules/sv_segment.lua"
+
+gameevent.Listen "player_connect"
 Core:AddResources()
 
 -- Ensure certain ConVars

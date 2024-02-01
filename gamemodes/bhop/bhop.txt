@@ -11,7 +11,7 @@
 		1
 		{
 			"name"		"bhop"
-			"version"		"1.43"
+			"version"		"1.44"
 			"help"			"Bunny Hop"
 			"type"			"numeric"
 			"default"		"1"

@@ -1,29 +1,31 @@
 Client = {}
 
-include( "core.lua" )
+include "sv_config.lua"
+include "core.lua"
 
--- UI
-include( "userinterface/cl_settings.lua" )
-include( "userinterface/cl_themes.lua" )
-include( "userinterface/cl_ui.lua" )
-include( "userinterface/cl_hud.lua" )
-include( "sh_paint.lua" )
-include( "cl_timer.lua" )
-include( "cl_receive.lua" )
-include( "cl_gui.lua" )
+include "userinterface/cl_settings.lua"
+include "userinterface/cl_themes.lua"
+include "userinterface/cl_ui.lua"
+include "userinterface/cl_hud.lua"
 
-include( "modules/cl_admin.lua" )
-include( "modules/cl_strafe.lua" )
+include "sh_paint.lua"
+include "sh_pebblebuster.lua"
+include "cl_timer.lua"
+include "cl_receive.lua"
+include "cl_gui.lua"
 
-include( "userinterface/sh_init.lua" )
-include( "userinterface/cl_bhoptimer.lua" )
-include( "userinterface/cl_interface.lua" )
-include( "userinterface/cl_extensions.lua" )
-include( "userinterface/cl_help.lua" )
-include( "userinterface/cl_devtools.lua" )
-include( "userinterface/cl_cheats.lua" )
+include "modules/cl_admin.lua"
+include "modules/cl_strafe.lua"
 
-include( "userinterface/cl_scoreboard.lua" )
+include "userinterface/sh_init.lua"
+include "userinterface/cl_bhoptimer.lua"
+include "userinterface/cl_interface.lua"
+include "userinterface/cl_extensions.lua"
+include "userinterface/cl_help.lua"
+include "userinterface/cl_devtools.lua"
+include "userinterface/cl_cheats.lua"
+
+include "userinterface/cl_scoreboard.lua"
 
 -- Destroy resource hogs
 function GM:UpdateAnimation() end
