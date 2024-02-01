@@ -9,7 +9,7 @@ _G.Kawaii ={}
 Kawaii.ServerName = "KawaiiClan"
 
 -- Gamemode
-Kawaii.ReleaseDate = "Jul 22, 2022"
+Kawaii.ReleaseDate = "Feb 1, 2022"
 Kawaii.LastUpdated = "Jan 31, 2024"
 
 -- Verion
@@ -17,11 +17,11 @@ Kawaii.EngineVersion = "9196"
 Kawaii.GMVersion = "1.44"
 
 -- Movement Types
-Kawaii.BaseGainsMovement = "1" -- 1 or 0
-Kawaii.GModGainsMovement = "1" -- 1 or 0
+Kawaii.BaseGainsMovement = "1" -- 1 or 0 (1 Enables Engine Base Gains)
+Kawaii.GModGainsMovement = "1" -- 1 or 0 (1 Enables GMod Gains)
 
-Kawaii.GamemodeTypeBhop = "1" -- 1 or 0
-Kawaii.GamemodeTypeSurf = "0" -- 1 or 0
+Kawaii.GamemodeTypeBhop = "1" -- 1 or 0 (1 Enables Bunny Hop)
+Kawaii.GamemodeTypeSurf = "0" -- 1 or 0 (1 Enables Skill Surf)
 
 -- Credit Info
 Kawaii.CreditsInfo = "This gamemode, Bunny Hop version " .. Kawaii.GMVersion .. ", was developed by fibzy, Niflheimrx, justa, claz, George, and Gravoius."
