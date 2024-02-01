@@ -39,6 +39,7 @@ if SERVER then
 
 	-- Paint command
 	concommand.Add("sm_paint", function(ply)
+		if !ply.IsVIP then return end
 		if ply.Spectating then return end
 
 		if cooldown[ply] and cooldown[ply] > RealTime() then return end
