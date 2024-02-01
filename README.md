@@ -29,6 +29,7 @@ Added:
 - Show Keys (Niflheimrx)
 - Custom Rabbit Model (fibzy)
 - Map Lag fixes (fibzy)
+- New Constant Gravity Boosterfix (DotShark)
 - Set Spawn (justa | fibzy)
 - Check Crouch fix (george ri)
 - Set No Jump fix (george ri)
