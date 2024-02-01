@@ -16,6 +16,7 @@ Added
 - Momentum Mod Hud (justa)
 - Simple Hud (justa)
 - Crouch Boost fixes / CB Stop Time fix [This is broken on pG Gamemode] (fibzy)
+- Get Base Gains (fibzy)
 - RNGFix - Downhill (Now has no prediction errors) (claz | Niflheimrx)
 - Rawinput2 not fully tested - (fibzy)
 - Custom Chat Box (fibzy)
