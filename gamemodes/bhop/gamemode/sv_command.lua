@@ -99,9 +99,6 @@ function Command:Init()
 		Command:RemoveLimit( ply )
 		Command.Restart( ply )
 		SetSpawn:Teleport( ply )
-
-		ply.ssj_data.jumps = {}
-		ply.ssj_data.gains = {}
 	end )
 
 	self:Register( { "spectate", "spec", "watch", "view" }, function( ply, args )
