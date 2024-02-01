@@ -1,45 +1,56 @@
-if CLIENT then
-	SWEP.PrintName			= "AWP"			
-	SWEP.Author				= "Counter-Strike"
-	SWEP.Slot				= 1
-	SWEP.SlotPos			= 0
-	SWEP.IconLetter			= "s"
-	
-	killicon.AddFont( "weapon_awp", "CSKillIcons", SWEP.IconLetter, Color( 255, 80, 0, 255 ) )
-elseif SERVER then
-	AddCSLuaFile()
+if (SERVER) then
+	AddCSLuaFile("shared.lua")
 end
 
-SWEP.HoldType			= "ar2"
-SWEP.Base				= "weapon_cs_base"
+if (CLIENT) then
+	SWEP.PrintName 		= "AWP"
+	SWEP.ViewModelFOV		= 77
+	SWEP.Slot 			= 3
+	SWEP.SlotPos 		= 1
+	SWEP.IconLetter 		= "r"
+
+	killicon.AddFont("weapon_awp", "CSKillIcons", SWEP.IconLetter, Color( 255, 80, 0, 255 ))
+end
+
+/*-------------------------------------------------------*/
+
+
 SWEP.Category			= "Counter-Strike"
 
-SWEP.Spawnable			= true
-SWEP.AdminSpawnable		= true
-SWEP.ViewModelFlip		= false
+SWEP.Base				= "weapon_cs_base"
 
-SWEP.ViewModel 			= "models/weapons/c_snip_awp.mdl"
-SWEP.WorldModel			= "models/weapons/w_snip_awp.mdl"
+SWEP.HoldType 		= "ar2"
 
-SWEP.Weight				= 5
-SWEP.AutoSwitchTo		= false
-SWEP.AutoSwitchFrom		= false
+SWEP.Spawnable 			= true
+SWEP.AdminSpawnable 		= true
 
-SWEP.Primary.Sound		 = Sound( "Weapon_AWP.Single" )
-SWEP.Primary.Damage 		= 40
-SWEP.Primary.Recoil 		= 0 --1
+SWEP.ViewModel 			= "models/weapons/v_snip_awp.mdl"
+SWEP.WorldModel 			= "models/weapons/w_snip_awp.mdl"
+
+SWEP.Primary.Sound 		= Sound("Weapon_awp.Single")
+SWEP.Primary.Damage 		= 80
+SWEP.Primary.Recoil 		= 6
 SWEP.Primary.NumShots 		= 1
-SWEP.Primary.Cone 		= 0
-SWEP.Primary.ClipSize 		= 11
+SWEP.Primary.Cone 		= 0.0001
+SWEP.Primary.ClipSize 		= 10
 SWEP.Primary.Delay 		= 1.2
-SWEP.Primary.DefaultClip 	= 12
+SWEP.Primary.DefaultClip 	= 40
 SWEP.Primary.Automatic 		= false
 SWEP.Primary.Ammo 		= "smg1"
 
-SWEP.Secondary.ClipSize		= -1
-SWEP.Secondary.DefaultClip	= -1
-SWEP.Secondary.Automatic	= false
-SWEP.Secondary.Ammo			= "none"
 
-SWEP.IronSightsPos 		= Vector (4.4777, 0, 2.752)
-SWEP.IronSightsAng 		= Vector (-0.2267, -0.0534, 0)
+-- Weapon Variations
+SWEP.UseScope				= true -- Use a scope instead of iron sights.
+SWEP.ScopeScale 			= 0.55 -- The scale of the scope's reticle in relation to the player's screen size.
+SWEP.ScopeZoom				= 6
+--Only Select one... Only one.
+SWEP.ScopeReddot		= false
+SWEP.ScopeNormal		= true
+SWEP.ScopeMs			= false
+SWEP.BoltAction			= true --Self Explanatory
+-- Accuracy
+SWEP.CrouchCone				= 0.0001 -- Accuracy when we're crouching
+SWEP.CrouchWalkCone			= 0.5 -- Accuracy when we're crouching and walking
+SWEP.WalkCone				= 0.5 -- Accuracy when we're walking
+SWEP.AirCone				= 0.5 -- Accuracy when we're in air
+SWEP.StandCone				= 0.0001 -- Accuracy when we're standing still

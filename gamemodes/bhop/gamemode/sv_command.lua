@@ -71,6 +71,11 @@ function Command:Init()
 		pl:ConCommand("kawaii_thememanager")
 	end)
 
+	-- Recode
+	self:Register( { "jhud" }, function( ply )
+		Core.Send( ply, "GUI_Open", { ID = "JHUD", Dimension = { x = 335, y = 150, px = 20 }, Args = { Title = "[JHUD]", Custom = ply.ssj_data } } )
+	end )
+
 	-- General timer commands
 	self:Register( { "restart", "r", "respawn", "kill" }, function( ply )
 		-- Let's make a nice feature that blocks this command if we're above 5 minutes, unless we confirm.
@@ -94,6 +99,9 @@ function Command:Init()
 		Command:RemoveLimit( ply )
 		Command.Restart( ply )
 		SetSpawn:Teleport( ply )
+
+		ply.ssj_data.jumps = {}
+		ply.ssj_data.gains = {}
 	end )
 
 	self:Register( { "spectate", "spec", "watch", "view" }, function( ply, args )
