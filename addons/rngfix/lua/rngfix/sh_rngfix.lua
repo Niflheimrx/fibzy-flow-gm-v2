@@ -51,9 +51,9 @@ local g_cvTelehop = CreateConVar("rngfix_telehop", "1", CV_FLAGS, "Enable teleho
 local g_cvTriggerjump = CreateConVar("rngfix_triggerjump", "0", CV_FLAGS, "Enable trigger jump fix.", 0.0, 1.0)
 
 -- Core physics ConVars
-local g_cvMaxVelocity = GetConVar("sv_maxvelocity")
-local g_cvGravity = GetConVar("sv_gravity")
-local g_cvAirAccelerate = GetConVar("sv_airaccelerate")
+local g_cvMaxVelocity = 80000000000000000000000000000000000000
+local g_cvGravity = 800
+local g_cvAirAccelerate = 1000.0
 
 -- Local aliases
 local RNGFix, Debug = _G.RNGFix, _G.RNGFix.Debug
@@ -188,7 +188,7 @@ local function CanJump(ply)
 end
 
 local function CheckVelocity(velocity)
-	local max = g_cvMaxVelocity:GetFloat()
+	local max = g_cvMaxVelocity
 	for i = 1, 3 do
 		if velocity[i] > max then
 			velocity[i] = max
@@ -204,7 +204,7 @@ local function StartGravity(ply, velocity)
 	if localGravity == 0.0 then localGravity = 1.0 end
 
 	local baseVelocity = ply:GetBaseVelocity()
-	velocity.z = velocity.z + (baseVelocity.z - localGravity * g_cvGravity:GetFloat() * 0.5) * g_flFrameTime[ply]
+	velocity.z = velocity.z + (baseVelocity.z - localGravity * g_cvGravity* 0.5) * g_flFrameTime[ply]
 
 	-- baseVelocity.z would get cleared here but we shouldn't do that since this is just a prediction.
 	return CheckVelocity(velocity)
@@ -214,7 +214,7 @@ local function FinishGravity(ply, velocity)
 	local localGravity = ply:GetGravity()
 	if localGravity == 0.0 then localGravity = 1.0 end
 
-	velocity.z = velocity.z - localGravity * g_cvGravity:GetFloat() * 0.5 * g_flFrameTime[ply]
+	velocity.z = velocity.z - localGravity * g_cvGravity * 0.5 * g_flFrameTime[ply]
 
 	return CheckVelocity(velocity)
 end
@@ -289,7 +289,7 @@ local function AirAccelerate(ply, velocity, mv)
 		local addspeed = wishspd - velocity:Dot(wishdir)
 
 		if addspeed > 0 then
-			local accelspeed = g_cvAirAccelerate:GetFloat() * wishspeed * g_flFrameTime[ply]
+			local accelspeed = g_cvAirAccelerate * wishspeed * g_flFrameTime[ply]
 			if (accelspeed > addspeed) then accelspeed = addspeed end
 
 			for i = 1, 2 do velocity[i] = velocity[i] + accelspeed * wishdir[i] end
@@ -990,20 +990,20 @@ local function FlowCompat()
 
 	GetSpeedCap = function(ply)
 		-- Legit or Easy Scroll
-		if ply.Style == s1 or ply.Style == s2 then return (wishspd - math.abs(current)) / 7.2 end
-		return (wishspd - math.abs(current)) / 7.4 -- Other styles
+		if ply.Style == s1 or ply.Style == s2 then return 30.0 end
+		return 32.8 -- Other styles
 	end
 
 	if Core and Core.Config then
 		GetSpeedCap = function(ply)
 			local st = ply.Style
 			-- Legit, Easy Scroll, Jump pack or Stamina
-			if st == s1 or st == s2 or st == 16 then return (wishspd - math.abs(current)) / 7.2 end
+			if st == s1 or st == s2 or st == 16 then return 30.0 end
 			-- Swift, Unreal, Crazy or Extreme
 			if st == 21 or st == 10 or st == 12 or st == 43 then return 50 end
 			if st == 24 then return 420 end -- MLG
 			if st == 30 then return 1000 end -- Cancer
-			return (wishspd - math.abs(current)) / 7.4 -- Other styles
+			return 30.0 -- Other styles
 		end
 	end
 end
@@ -1012,22 +1012,6 @@ hook.Add("Initialize", "RNGFIX_NewFlowCompat", FlowCompat)
 if RNGFix.Refresh then FlowCompat() end
 
 -- [ Export ] --
-
--- These constants are defined from Valve's SDK 2013 --
-local VEC_HULL_MIN = Vector(-16, -16, 0)
-local VEC_HULL_MAX = Vector(16, 16, 62)
-local VEC_VIEW     = Vector(0, 0, 59)
-
-local VEC_DUCK_HULL_MIN = Vector(-16, -16, 0)
-local VEC_DUCK_HULL_MAX = Vector(16, 16, 45)
-local VEC_DUCK_VIEW     = Vector(0, 0, 42)
-
-local DUCK_SPEED_MULTIPLIER = 0.34
-
-local TIME_TO_UNDUCK = 0.2
-local TIME_TO_DUCK   = 0.4
-
-local EYE_CLEARANCE = 12
 
 RNGFix.GetEdgeBugFixEnabled = GetEdgeBugFixEnabled
 RNGFix.SetEdgeBugFixEnabled = SetEdgeBugFixEnabled

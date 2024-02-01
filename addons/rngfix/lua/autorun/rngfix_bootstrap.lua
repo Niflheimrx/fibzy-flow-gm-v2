@@ -12,8 +12,6 @@ if SERVER then
 	AddCSLuaFile("rngfix/cl_debug.lua")
 	AddCSLuaFile("rngfix/cl_init.lua")
 
-	--include("rngfix/sv_debug.lua")
-	--include("rngfix/sv_boosterfix.lua")
 	include("rngfix/sh_rngfix.lua")
 	include("rngfix/sv_init.lua")
 else
