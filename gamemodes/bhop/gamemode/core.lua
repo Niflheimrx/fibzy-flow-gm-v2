@@ -354,6 +354,49 @@ local function GetPerfectYaw(mv, speed)
 	return speed == 0 and 0 or mabs(mdeg(matan(mv/speed)))
 end
 
+-- Taken from justa's
+local StrafeAxis = 0 -- Saves the last eye angle yaw for checking mouse movement
+local StrafeButtons = nil -- Saves the buttons from SetupMove for displaying
+local StrafeCounter = 0 -- Holds the amount of strafes
+local StrafeLast = nil -- Your last strafe key for counting strafes
+local StrafeDirection = nil -- The direction of your strafes used for displaying
+local StrafeStill = 0 -- Counter to reset mouse movement
+
+local function norm( i ) if i > 180 then i = i - 360 elseif i < -180 then i = i + 360 end return i end -- Custom function to normalize eye angles
+local StrafeData -- Your Sync value is stored here
+local KeyADown, KeyDDown -- For displaying on the HUD
+local MouseLeft, MouseRight --- For displaying on the HUD
+local LastUpdate = CurTime()
+
+-- Strafe angles
+local function StrafeInput( ply, data )
+	local ang = data:GetAngles().y
+
+	if not ply:IsFlagSet(FL_ONGROUND + FL_INWATER) and ply:GetMoveType() == MOVETYPE_WALK then 
+		local difference = norm( ang - StrafeAxis )
+		local l, r = bit.band( data:GetOldButtons(), IN_MOVELEFT ) > 0, bit.band( data:GetOldButtons(), IN_MOVERIGHT ) > 0
+
+		if difference != 0 then 
+			if l or r then 
+				if LastUpdate + 0.02 > CurTime() then return end 
+				LastUpdate = CurTime() + 0.02
+				if difference > 0 then
+					if (l and not r) and StrafeDirection != IN_MOVELEFT and data:GetSideSpeed() < 0 then 
+						StrafeDirection = IN_MOVELEFT 
+					end
+				elseif difference < 0 then
+					if (r and not l) and StrafeDirection != IN_MOVERIGHT and data:GetSideSpeed() > 0 then 
+						StrafeDirection = IN_MOVERIGHT 
+					end
+				end
+			end
+		end
+	end
+
+	StrafeAxis = ang 
+end
+hook.Add( "SetupMove", "StrafeInput", StrafeInput )
+
 -- Bunny Hop Movement --
 -- The following below is movement from Flow v10.0 --
 do
