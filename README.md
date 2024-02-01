@@ -11,7 +11,8 @@ Includes almost all of justa's code and fixes. My Backstory is at the bottom of 
 
 Original Gamemode: (https://github.com/bhopbhop/kawaiiclan-gamemode)
 
-Added
+Added:
+- Editable Config (fibzy)
 - Main Menu/Options Base (Niflheimrx)
 - Momentum Mod Hud (justa)
 - Simple Hud (justa)
