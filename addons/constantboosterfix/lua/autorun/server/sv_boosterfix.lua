@@ -60,7 +60,7 @@ Boosterfix = {
 		if game.GetMap() == "bhop_effigy" then return end
 		if game.GetMap() == "kz_bhop_badg3s" then return end
 		if game.GetMap() == "kz_bhop_skyworld" then return end
-		if game.GetMap() == "bhop_asko_fix" then return end
+		--if game.GetMap() == "bhop_asko" then return end
 		if game.GetMap() == "bhop_orionsbelt_lj" then return end
 		if game.GetMap() == "kz_bhop_sakura" then return end
 		if game.GetMap() == "bhop_jegg_fix" then return end
@@ -184,7 +184,7 @@ Boosterfix = {
 		if game.GetMap() == "bhop_effigy" then return end
 		if game.GetMap() == "kz_bhop_badg3s" then return end
 		if game.GetMap() == "kz_bhop_skyworld" then return end
-		if game.GetMap() == "bhop_asko_fix" then return end
+		--if game.GetMap() == "bhop_asko" then return end
 		if game.GetMap() == "bhop_orionsbelt_lj" then return end
 		if game.GetMap() == "kz_bhop_sakura" then return end
 		if game.GetMap() == "bhop_jegg_fix" then return end
@@ -241,7 +241,7 @@ Boosterfix = {
 		if game.GetMap() == "bhop_effigy" then return end
 		if game.GetMap() == "kz_bhop_badg3s" then return end
 		if game.GetMap() == "kz_bhop_skyworld" then return end
-		if game.GetMap() == "bhop_asko_fix" then return end
+		--if game.GetMap() == "bhop_asko" then return end
 		if game.GetMap() == "bhop_orionsbelt_lj" then return end
 		if game.GetMap() == "kz_bhop_sakura" then return end
 		if game.GetMap() == "bhop_jegg_fix" then return end
