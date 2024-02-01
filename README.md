@@ -36,6 +36,7 @@ Added:
 - WR Replay Names Outside of server (justa | Niflheimrx)
 - WR Replay Crouch Bug fix (justa | fibzy)
 - Improved zone detection (justa | fibzy)
+- Awp added (fibzy)
 - SurfFix detection (Niflheimrx)
 - Base gamemode edits (fibzy)
 - Round Error Fixes (Niflheimrx | fibzy)
