@@ -696,6 +696,10 @@ function Command:Init()
 		Core:Send( ply, "Client", { "Tutorial", Lang.ChannelLink } )
 	end )
 
+	self:Register( { "discord", "ds", "chatwithus" }, function( ply )
+		Core:Send( ply, "Client", { "Tutorial", Lang.DiscordLink } )
+	end )
+
 	self:Register( { "forum", "forums", "community" }, function( ply )
 		Core:Send( ply, "Client", { "Tutorial", Lang.ForumLink } )
 	end )

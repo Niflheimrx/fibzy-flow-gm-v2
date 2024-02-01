@@ -231,6 +231,7 @@ Lang.Commands = {
 
 Lang.TutorialLink = "http://www.youtube.com/watch?v=Q3j9ftTk4C8"
 Lang.WebsiteLink = "http://www.google.com/" -- Change this
+Lang.DiscordLink = "https://discord.gg/UFvQxqwkve" -- Change this
 Lang.ChannelLink = "http://www.youtube.com/user/GMSpeedruns/videos" -- Preferably keep this in here, or change it to your YouTube channel
 Lang.ForumLink = "http://www.google.com/" -- Change this
 Lang.DonateLink = "http://www.google.com/" -- Change this
