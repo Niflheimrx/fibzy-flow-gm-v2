@@ -1,8 +1,6 @@
--- Inspired by 4chan, obviously. Feel free to change it.
-
 local varFilter = {
-	["This is an example to show the format of this shit"] = "nigga",
-	["heres another example showing that you need a comma after all the shit"] = "nigga",
+	["This is an example to show the format of this"] = "filter",
+	["heres another example"] = "filter 2",
 }
 
 local _sub, _find, _low, _up, _gs = string.sub, string.find, string.lower, string.upper, string.gsub
