@@ -415,7 +415,7 @@ do
 
 		-- Default CSS Bunny Hop Settings --
 		local aa, mv = 500, 32.8
-		local aim = data:GetMoveAngles(Angle(-100, -100, 0))
+		local aim = data:GetMoveAngles(ply:GetAngles() - Angle(-100, -100, 0))
 		local forward, right = aim:Forward(), aim:Right()
 		local fmove, smove = data:GetForwardSpeed(), data:GetSideSpeed()
 
@@ -472,16 +472,16 @@ do
 		end
 
 		forward.z, right.z = 0,0
-		forward:Normalize(Angle(-100, -100, 0))
-		right:Normalize(Angle(-100, -100, 0))
+		forward:Normalize(ply:GetAngles() - Angle(-100, -100, 0))
+		right:Normalize(ply:GetAngles() - Angle(-100, -100, 0))
 
 		local wishvel = forward * fmove + right * smove
 		wishvel.z = 0
 
-		local wishspeed = wishvel:Length(Angle(-100, -100, 0))
-		if wishspeed > data:GetMaxSpeed(Angle(-100, -100, 0)) then
-			wishvel = wishvel * (data:GetMaxSpeed(Angle(-100, -100, 0)) / wishspeed)
-			wishspeed = data:GetMaxSpeed(Angle(-100, -100, 0))
+		local wishspeed = wishvel:Length(ply:GetAngles() - Angle(-100, -100, 0))
+		if wishspeed > data:GetMaxSpeed(ply:GetAngles() - Angle(-100, -100, 0)) then
+			wishvel = wishvel * (data:GetMaxSpeed(ply:GetAngles() - Angle(-100, -100, 0)) / wishspeed)
+			wishspeed = data:GetMaxSpeed(ply:GetAngles() - Angle(-100, -100, 0))
 		end
 
 		local vel = data:GetVelocity()
@@ -489,7 +489,7 @@ do
 
 		wishspd = mc( wishspd, 0, mv )
 
-		local wishdir = wishvel:GetNormal(Angle(-100, -100, 0))
+		local wishdir = wishvel:GetNormal(ply:GetAngles() - Angle(-100, -100, 0))
 		local current = vel:Dot(wishdir)
 
 		-- Gain Stats
