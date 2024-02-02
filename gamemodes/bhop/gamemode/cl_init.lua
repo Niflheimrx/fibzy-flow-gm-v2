@@ -160,7 +160,7 @@ function ReloadingSpamer()
 	if GetConVar("kawaii_css_reloading"):GetInt() == 1 then
 	 	if input.IsMouseDown(MOUSE_RIGHT) then
 	 			RunConsoleCommand("+attack2")
-	 			timer.Create("css_reloading", 0, 0.001, function()
+	 			timer.Create("css_reloading", 0, 0.00000001, function()
 	 		 	RunConsoleCommand("-attack2")
 	 		 	end)
 	 	end
