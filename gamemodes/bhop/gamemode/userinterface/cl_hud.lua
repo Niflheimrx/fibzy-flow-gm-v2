@@ -202,9 +202,16 @@ HUD.Themes = {
 			wrn = "(" .. WorldRecords[pl:GetNWInt("Style", 1)][1] .. ")"
 		end
 
+		local pbtext
+		if (data.pb) == 0 then 
+			pbtext = "No Time"
+		else 
+			pbtext = cCTime(data.pb or 0)
+		end
+
 		-- Top 
 		draw.SimpleText("WR: " .. wr .. " " .. wrn, "HUDTimerBig", 10, 6, text)
-		draw.SimpleText(pb .. personal, "HUDTimerBig", 10, 34, text)	
+		draw.SimpleText(pb .. pbtext, "HUDTimerBig", 10, 34, text)	
 
 		-- Spec 
 		if (LocalPlayer():Team() == TEAM_SPECTATOR) then 
@@ -251,7 +258,7 @@ HUD.Themes = {
 
 			-- Strings
 			local time = "Time: "
-			local pb = "PB: "
+			local pb = "Best: "
 			local style = pl:GetNWInt("Style", 1)
 			local stylename = Core:StyleName(style or 1) .. (pl:IsBot() and " Replay" or "")
 	
@@ -305,8 +312,15 @@ HUD.Themes = {
 				wrn = "(" .. WorldRecords[pl:GetNWInt("Style", 1)][1] .. ")"
 			end
 
+			local pbtext
+			if (data.pb) == 0 then 
+				pbtext = "No Time"
+			else 
+				pbtext = cCTime(data.pb or 0)
+			end
+
 			draw.SimpleText("WR: " .. wr .. " " .. wrn, "HUDcsstop", 19, 10, color_white, text, TEXT_ALIGN_LEFT)
-			draw.SimpleText(pb .. personal, "HUDcsstop", 19, 50, color_white, text, TEXT_ALIGN_LEFT)	
+			draw.SimpleText(pb .. pbtext, "HUDcsstop", 19, 50, color_white, text, TEXT_ALIGN_LEFT)	
 
 			if (activity == 1) then
 				local TimeText = "Time: " .. currentf
@@ -450,10 +464,17 @@ HUD.Themes = {
 			wrn = "(" .. WorldRecords[pl:GetNWInt("Style", 1)][1] .. ")"
 		end
 
+		local pbtext
+		if (data.pb) == 0 then 
+			pbtext = "No time recorded"
+		else 
+			pbtext = ConvertTime(data.pb or 0)
+		end
+
 		-- Top 
 		draw.SimpleText("Map: " .. game.GetMap(), "HUDTimer2", 10, 8, tc, TEXT_ALIGN_LEFT)
 		draw.SimpleText("World Record: " .. wr .. " " .. wrn, "HUDTimer2", 9, 28, tc)
-		draw.SimpleText("Personal Best: " .. personalf, "HUDTimer2", 10, 48, tc)	
+		draw.SimpleText("Personal Best: " .. pbtext, "HUDTimer2", 10, 48, tc)	
 
 		-- In spec
 		if LocalPlayer():Team() == TEAM_SPECTATOR then
@@ -463,7 +484,6 @@ HUD.Themes = {
 				local szStyle = Core:StyleName( nStyle )
 
 				if ob:IsBot() then
-					--draw.SimpleText("Progress "  .. 4.5 * math.Round(time) * 100 / 100  .. "%", "HUDTimer", ScrW() / 2, yPos - 45, text, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 					draw.SimpleText("Status: Playing (1x)", "HUDTimer", ScrW() / 2, yPos + 48, text, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 				end
 
@@ -646,10 +666,17 @@ HUD.Themes = {
 			wrn = "(" .. WorldRecords[pl:GetNWInt("Style", 1)][1] .. ")"
 		end
 
+		local pbtext
+		if (data.pb) == 0 then 
+			pbtext = "No time recorded"
+		else 
+			pbtext = ConvertTime(data.pb or 0)
+		end
+
 		-- Top 
 		draw.SimpleText("Map: " .. game.GetMap(), "HUDTimer", 10, 8, tc, TEXT_ALIGN_LEFT)
 		draw.SimpleText("World Record: " .. wr .. " " .. wrn, "HUDTimer", 9, 28, tc)
-		draw.SimpleText("Personal Best: " .. personalf, "HUDTimer", 10, 48, tc)	
+		draw.SimpleText("Personal Best: " .. pbtext, "HUDTimer", 10, 48, tc)	
 
 		local current = LocalPlayer():GetVelocity():Length2D()
 		if not (LocalPlayer():Team() == TEAM_SPECTATOR) then 
