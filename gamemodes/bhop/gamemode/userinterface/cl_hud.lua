@@ -26,6 +26,19 @@ local function ConvertTime( ns )
 		return fo( "%.2d:%.2d.%.3d", fl( ns / 60 % 60 ), fl( ns % 60 ), fl( ns * 1000 % 1000 ) )
 	end
 end
+
+local function cCTime(ns)
+	ns = math.Round(ns, 4)
+
+	if ns > 3600 then
+		return fo( "%d:%.2d%.2d.%.3d", fl( ns / 3600 ), fl( ns / 60 % 60 ), fl( ns % 60 ), fl( ns * 1000 % 1000 ) )
+	elseif ns > 60 then 
+		return fo( "%.1d:%.2d.%.3d", fl( ns / 60 % 60 ), fl( ns % 60 ), fl( ns * 1000 % 1000 ) )
+	else
+		return fo( "%.1d.%.3d", fl( ns % 60 ), fl( ns * 1000 % 1000 ) )
+	end
+end
+
 local function cTime(ns)
 	ns = math.Round(ns, 4)
 
@@ -40,7 +53,7 @@ end
 
 -- Neat :)
 HUD = {}
-HUD.Ids = {"Counter Strike: Source", "Simple", "Momentum", "Flow Network"}
+HUD.Ids = {"Counter Strike: Source", "Counter Strike: Source Shavit", "Simple", "Momentum", "Flow Network"}
 
 -- Themes
 local sync = "0"
@@ -52,52 +65,72 @@ local last = 0
 local coll
 local lastUp = CurTime()
 
-hook.Add("HUDPaint", "Speedometer", function() 
-		local MONHUD = MONHUD.Enabled:GetBool()
-		if !MONHUD then return end
-        local current = LocalPlayer():GetVelocity():Length2D()
-    	if not (LocalPlayer():Team() == TEAM_SPECTATOR) then 
-	    if (current == 0) then
-		 	   	current = 0
-	       	 else
-	    		if (current <= 33) and not LocalPlayer():IsOnGround() then
-		  	  	current = 30
-		  	  end 
-	   	 end
-			local width = 200
-			local height = 100
-			local xPos = (ScrW() / 2) - (width / 2)
-			local yPos = ScrH() - height - 60 - (LocalPlayer():Team() == TEAM_SPECTATOR and 50 or 0)
-			if (CurTime() < (lastUp + 0.060)) then
-				draw.SimpleText(string.Split(current, ".")[1], "HUDTimerKindaUltraBig", ScrW() / 2, yPos - 110, color, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-			return end
-		
-		local maxVel = 1000000
+local StrafeAxis = 0 -- Saves the last eye angle yaw for checking mouse movement
+local StrafeButtons = nil -- Saves the buttons from SetupMove for displaying
+local StrafeCounter = 0 -- Holds the amount of strafes
+local StrafeLast = nil -- Your last strafe key for counting strafes
+local StrafeDirection = nil -- The direction of your strafes used for displaying
+local StrafeStill = 0 -- Counter to reset mouse movement
 
-		if (current > 0) then
-			if MONHUD then
-				if (current >= maxVel) then
-					color = Color(255, 174, 0)
-				elseif (current > last + 1) then
-					color = Color(0, 255, 255)
-				elseif (current < last - 1) then
-					color = Color(255, 0, 0)
-				elseif (current == last) then
-					color = color_white
+local fb, ik, lp, ts = bit.band, input.IsKeyDown, LocalPlayer, _C.Team.Spectator -- This function is used frequently so to reduce lag...
+local function norm( i ) if i > 180 then i = i - 360 elseif i < -180 then i = i + 360 end return i end -- Custom function to normalize eye angles
+
+local StrafeData -- Your Sync value is stored here
+local KeyADown, KeyDDown -- For displaying on the HUD
+local MouseLeft, MouseRight --- For displaying on the HUD
+local LastUpdate = CurTime()
+
+local ViewGUI = CreateClientConVar( "kawaii_keys", "1", true, false ) -- GUI visibility
+surface.CreateFont( "HUDFont2", { size = 20, weight = 800, font = "Tahoma" } )
+
+function ResetStrafes() StrafeCounter = 0 end -- Resets your stafes (global)
+function SetSyncData( data ) StrafeData = data end -- Sets your sync data (global)
+
+-- Monitors the buttons and strafe angles
+local function MonitorInput( ply, data )
+	local ang = data:GetAngles().y
+
+	if not ply:IsFlagSet(FL_ONGROUND + FL_INWATER) and ply:GetMoveType() == MOVETYPE_WALK then 
+		local difference = norm( ang - StrafeAxis )
+		local l, r = bit.band( data:GetOldButtons(), IN_MOVELEFT ) > 0, bit.band( data:GetOldButtons(), IN_MOVERIGHT ) > 0
+
+		if difference != 0 then 
+			if l or r then 
+				if LastUpdate + 0.02 > CurTime() then return end 
+				LastUpdate = CurTime() + 0.02
+				if difference > 0 then
+					if (l and not r) and StrafeDirection != IN_MOVELEFT and data:GetSideSpeed() < 0 then 
+						StrafeDirection = IN_MOVELEFT 
+						StrafeCounter = StrafeCounter + 1
+					end
+				elseif difference < 0 then
+					if (r and not l) and StrafeDirection != IN_MOVERIGHT and data:GetSideSpeed() > 0 then 
+						StrafeDirection = IN_MOVERIGHT 
+						StrafeCounter = StrafeCounter + 1
+					end
 				end
-			else
-				color = color_white
 			end
-	
-			lastUp = CurTime()
-		else
-			color = Color(255, 255, 255, 255)
 		end
-
-        last = current
-        draw.SimpleText(string.Split(current, ".")[1], "HUDTimerKindaUltraBig", ScrW() / 2, yPos - 110, color, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	end
-end)
+
+	StrafeAxis = ang 
+end
+hook.Add( "SetupMove", "MonitorInput", MonitorInput )
+
+local RECORDS = {}
+
+local function GetCurrentPlacement(nCurrent, s)
+
+	local timetbl = RECORDS[s] or {}
+	local c = 1
+
+	for k, v in pairs(timetbl) do 
+		if nCurrent > v then 
+			c = k
+		end
+	end
+	return c
+end
 
 HUD.Themes = {
 	function(pl, data) -- CS:S
@@ -189,6 +222,124 @@ HUD.Themes = {
 
 			draw.SimpleText(name, "HUDTimer", ScrW() / 2, ScrH() - 40, text, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)		
 		end	
+	end,
+
+	function(pl, data) -- CS:S SoF
+		local ScrWidth, ScrHeight = ScrW, ScrH
+		local w, h = ScrWidth(), ScrHeight()
+			--draw.SimpleText( "Spectators: " .. "port", "HUDcsstimeleft", w - 190, h - 342, color_white, TEXT_ALIGN_RIGHT, TEXT_ALIGN_RIGHT  )
+
+			--if (IsShowTime) then
+			--	draw.SimpleText( "Time left: " .. "port" .. " minutes", "HUDcsstimeleft", w - 82, h - 362, color_white, TEXT_ALIGN_RIGHT, TEXT_ALIGN_RIGHT )
+			--end
+	
+			if (data.strafe) then 
+				sync = data.sync or sync
+				return
+			end
+
+			-- Current Vel
+			local velocity = math.floor(pl:GetVelocity():Length2D())
+	
+			if (velocity == 0) then
+				velocity = 0
+			else
+				if (velocity <= 33) and not LocalPlayer():IsOnGround() then
+					velocity = 30
+				end 
+			end
+
+			-- Strings
+			local time = "Time: "
+			local pb = "PB: "
+			local style = pl:GetNWInt("Style", 1)
+			local stylename = Core:StyleName(style or 1) .. (pl:IsBot() and " Replay" or "")
+	
+			-- Personal best
+			local personal = cCTime(data.pb or 0)
+	
+			-- Current Time
+			local current = data.current < 0 and 0 or data.current
+			local currentf = cTime(current)
+
+			-- Jumps
+			jumps = pl.player_jumps or 0
+
+			local base = Color(0, 0, 0, 70)
+			
+			local activity = current > 0 and 1 or 2
+			activity = (pl:GetNWInt("inPractice", false) or (pl.TnF or pl.TbF)) and 3 or activity
+			activity = (activity == 1 and (pl:IsBot() and 4 or 1) or activity)
+
+			local box_y_css = -4
+			local box_y_css2 = -8
+			local text_y_css = 5
+			local text_y_css2 = -22
+			local text_y_css4 = 2
+
+			local width = {162, 164, 125, 165}
+			local width2 = {162, 164, 38, 165}
+
+			width = width[activity]
+			width2 = width2[activity]
+
+			local height = {136, 95, 56, 90}
+			height = height[activity]
+
+			local activity_y = {175, 175, 175, 175}
+			activity_y = activity_y[activity]
+
+			local xPos = (ScrW()/2) - (width/2)
+			local xPos2= (ScrW()/2) - (width2/2)
+			local yPos = ScrH() - height - activity_y
+			local CSRound2 = 8
+
+			local wrtext = "WR: "
+
+			local wr, wrn
+			if (not WorldRecords) or (not WorldRecords[style]) or (#WorldRecords[style] == 0) then 
+				wr = "No Record"
+				wrn = ""
+			else 
+				wr = cCTime(WorldRecords[pl:GetNWInt("Style", 1)][2])
+				wrn = "(" .. WorldRecords[pl:GetNWInt("Style", 1)][1] .. ")"
+			end
+
+			draw.SimpleText("WR: " .. wr .. " " .. wrn, "HUDcsstop", 19, 10, color_white, text, TEXT_ALIGN_LEFT)
+			draw.SimpleText(pb .. personal, "HUDcsstop", 19, 50, color_white, text, TEXT_ALIGN_LEFT)	
+
+			if (activity == 1) then
+				local TimeText = "Time: " .. currentf
+				local Vel = "Speed: " .. velocity
+				local Scaling = TimeText
+				local placement = GetCurrentPlacement(nCurrent, s)
+
+				draw.SimpleText(stylename, "HUDcss4", ScrW() / 2.002, text_y_css + yPos + 19, text, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)		
+				draw.SimpleText(Scaling .. " (#" .. placement .. ")", "HUDcssBottomTimer", ScrW() / 2, text_y_css + yPos + 39, text, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+				draw.SimpleText("Jumps: " .. jumps, "HUDcssBottom", ScrW() / 2, text_y_css + yPos + 59, text, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+				draw.SimpleText("Sync: " .. (sync) .. "%", "HUDcssBottom", ScrW() / 2.002, text_y_css + yPos + 79, text, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER) -- Change to Strafes
+				draw.SimpleText(Vel, "HUDcssBottom", ScrW() / 2.002, text_y_css + yPos + 99, text, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+
+				local Scaling = surface.GetTextSize(Scaling)
+
+				draw.RoundedBox(CSRound2, ScrW() / 2 - Scaling / 2 - 35 - 15 + 7, yPos + box_y_css, Scaling + 98 - 11, height, base)
+			elseif (activity == 2) then
+				draw.SimpleText("In Start Zone", "HUDcss", ScrW() / 2.002, text_y_css2 + yPos + 44, text, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+				draw.SimpleText(velocity, "HUDcss", ScrW() / 2.007, text_y_css2 + yPos + 84, text, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+				draw.RoundedBox(CSRound2, xPos, yPos + box_y_css2, width, height, base)
+			elseif (activity == 3) then
+				local Vel2 = velocity
+
+				draw.SimpleText(Vel2, "HUDcss", ScrW() / 2, text_y_css4 + yPos + 22, text, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+				local Vel2 = surface.GetTextSize(Vel2)
+
+				draw.RoundedBox(CSRound2, xPos2 - (Vel2/2), yPos + box_y_css, width2 + Vel2, height, base)
+			elseif (activity == 4) then
+				draw.SimpleText(stylename, "HUDcss", ScrW() / 2, text_y_css2 + yPos + 20 + 22, text, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+				draw.SimpleText("Time: " .. currentf, "HUDcss", ScrW() / 2, text_y_css2 + yPos + 40 + 22, text, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+				draw.SimpleText("Speed: " .. velocity, "HUDcss", ScrW() / 2, text_y_css2 + yPos + 60 + 22, text, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+				draw.RoundedBox(CSRound2, xPos, yPos + box_y_css, width, height, base)
+			end
 	end,
 
 	-- Simple
@@ -500,6 +651,49 @@ HUD.Themes = {
 		draw.SimpleText("World Record: " .. wr .. " " .. wrn, "HUDTimer", 9, 28, tc)
 		draw.SimpleText("Personal Best: " .. personalf, "HUDTimer", 10, 48, tc)	
 
+		local current = LocalPlayer():GetVelocity():Length2D()
+		if not (LocalPlayer():Team() == TEAM_SPECTATOR) then 
+		if (current == 0) then
+					current = 0
+				else
+				if (current <= 33) and not LocalPlayer():IsOnGround() then
+					current = 30
+				end 
+			end
+			local width = 200
+			local height = 100
+			local xPos = (ScrW() / 2) - (width / 2)
+			local yPos = ScrH() - height - 60 - (LocalPlayer():Team() == TEAM_SPECTATOR and 50 or 0)
+			if (CurTime() < (lastUp + 0.060)) then
+				draw.SimpleText(string.Split(current, ".")[1], "HUDTimerKindaUltraBig", ScrW() / 2, yPos - 110, color, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+			return end
+		
+		local maxVel = 1000000
+
+		if (current > 0) then
+			if MONHUD then
+				if (current >= maxVel) then
+					color = Color(255, 174, 0)
+				elseif (current > last + 1) then
+					color = Color(0, 255, 255)
+				elseif (current < last - 1) then
+					color = Color(255, 0, 0)
+				elseif (current == last) then
+					color = color_white
+				end
+			else
+				color = color_white
+			end
+	
+			lastUp = CurTime()
+		else
+			color = Color(255, 255, 255, 255)
+		end
+
+		last = current
+		draw.SimpleText(string.Split(current, ".")[1], "HUDTimerKindaUltraBig", ScrW() / 2, yPos - 110, color, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+	end
+	
 		-- In spec
 		if LocalPlayer():Team() == TEAM_SPECTATOR then
 			local ob = pl
@@ -839,12 +1033,12 @@ local function SSJ_HUD()
 	kawaiihud = GetConVarNumber("kawaii_hud")
 
 	if kawaiihud == 1 then return end
-
-	if kawaiihud == 3 then return end
+	if kawaiihud == 2 then return end
+	if kawaiihud == 5 then return end
 	if kawaiihud == 4 then return end
 	if LocalPlayer():IsOnGround() then return end
 
-	if kawaiihud == 2 and jump <= 0 then 
+	if kawaiihud == 3 and jump <= 0 then 
 		draw.SimpleText("", "HUDTimer2", ScrW() / 2, yPos + 123, color77, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	else
 		draw.SimpleText(math.Round(speed, 0) .. " (" .. sync .. "%, +" .. math.Round(speed / 10) .. ")", "HUDTimer2", ScrW() / 2, yPos + 123, color77, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)

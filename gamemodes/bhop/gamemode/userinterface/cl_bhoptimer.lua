@@ -22,9 +22,10 @@ local themeWarningText = {
 
 local themeOptions = {
 	[1] = "CS:S",
-	[2] = "Simple",
-	[3] = "Momentum Mod",
-	[4] = "Flow"
+	[2] = "CS:S Shavit",
+	[3] = "Simple",
+	[4] = "Momentum Mod",
+	[5] = "Flow"
 }
 
 local enumeratorOptions = {
