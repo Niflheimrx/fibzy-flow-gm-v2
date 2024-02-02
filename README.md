@@ -19,7 +19,6 @@ Added:
 - Crouch Boost fixes / CB Stop Time fix [This is broken on pG Gamemode] (fibzy)
 - Get Base Gains (fibzy)
 - RNGFix - Downhill (Now has no prediction errors) (claz | Niflheimrx)
-- Rawinput2 not fully tested - (fibzy)
 - Custom Chat Box (fibzy)
 - Paint (Niflheimrx)
 - Flow zone texture fix (fibzy)
@@ -100,12 +99,12 @@ TO DO (UI):
 - Finish new Progress Replay code
 - Add FJT and Pre-Speed to Jhud
 - Finish Main Menu Hud
-- Add my version of CS:S Hud?
 - Add justa's old version of Momentum Hud Jhud?
 - Add Roblox Hud
 - Add george's Gamemode Hud
 
 TO DO: (Other)
+- Fix Rawinput2
 - Finish PebbleBuster
 
 Private Commands:
