@@ -1034,6 +1034,7 @@ local function SSJ_HUD()
 
 	gain = math.Round(gain, 2) .. "%"
 
+	-- justas Jump Hud Display
 	if jump <= 1 then 
 	else 
 		draw.SimpleText(math.Round(speed, 0) - jump + 3, "JHUDMainBIG2", ScrW() / 2, (ScrH() / 2) - 140, color355, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
@@ -1059,6 +1060,7 @@ local function SSJ_HUD()
 
 	kawaiihud = GetConVarNumber("kawaii_hud")
 
+	-- Simple JHud
 	if kawaiihud == 1 then return end
 	if kawaiihud == 2 then return end
 	if kawaiihud == 5 then return end
@@ -1067,11 +1069,10 @@ local function SSJ_HUD()
 	if kawaiihud == 3 and jump <= 0 then 
 		draw.SimpleText("", "HUDTimer2", ScrW() / 2, yPos + 123, color77, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	else
-		draw.SimpleText(math.Round(speed, 0) .. " (" .. sync .. "%, +" .. math.Round(speed / 10) .. ")", "HUDTimer2", ScrW() / 2, yPos + 123, color77, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+		draw.SimpleText(math.Round(speed, 0) .. " (" .. sync .. "%, +" .. math.Round(speed / 10 + 13) .. ")", "HUDTimer2", ScrW() / 2, yPos + 123, color77, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	end
 
 end
-
 
 function HUD:Draw(style, client, data) 
 	self.Themes[selected_hud:GetInt()](client, data)
