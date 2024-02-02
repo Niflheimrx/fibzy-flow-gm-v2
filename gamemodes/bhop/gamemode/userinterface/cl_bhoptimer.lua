@@ -319,6 +319,7 @@ function SurfTimer.Open()
 		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 13 ), text = "Enable Strafe Trainer", convar = "kawaii_strafetrainer", tip = "Enables the strafetrainer display" } )
 		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 14 ), text = "Suppress Viewpunch", convar = "kawaii_suppress_viewpunch", tip = "Enables the Suppress Viewpunch" } )
 		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 15 ), text = "Suppress Viewpunch Weapon", convar = "kawaii_suppress_viewpunch_wep", tip = "Enables the Weapon Suppress Viewpunch" } )
+		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 16 ), text = "CS:S Weapon Reload Loop", convar = "kawaii_css_reloading", tip = "Enables the CS:S Weapon Loop Reload" } )
 
 		local tmSize = panParent:GetWide() - Interface:GetTextWidth( { "Change Theme" }, Interface:GetFont() )
 		local emSize = panParent:GetWide() - Interface:GetTextWidth( { "Set Decimal Count" }, Interface:GetFont() )
