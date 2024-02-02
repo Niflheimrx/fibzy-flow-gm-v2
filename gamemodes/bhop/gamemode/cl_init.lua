@@ -156,17 +156,20 @@ end
 
 CreateClientConVar("kawaii_css_reloading", 1, true, false)
 
-function ReloadingSpamer()
+function BHOPCSSReloader()
 	if GetConVar("kawaii_css_reloading"):GetInt() == 1 then
 	 	if input.IsMouseDown(MOUSE_RIGHT) then
+	 		if LocalPlayer():IsOnGround() then
 	 			RunConsoleCommand("+attack2")
-	 			timer.Create("css_reloading", 0, 0.00000001, function()
+	 			timer.Create("Bhop", 0, 0.0001, function()
 	 		 	RunConsoleCommand("-attack2")
+	 		 	
 	 		 	end)
+	 		end
 	 	end
 	end
 end
-hook.Add("Think", "ReloadingSpamer", ReloadingSpamer )
+hook.Add("Think", "BHOPCSSReloader", BHOPCSSReloader )
 
 hook.Add("CalcViewModelView", "FixPos", function(wep, vm, oldPos, oldAng, pos, ang)
 	pos = pos - ang:Forward() * 5
