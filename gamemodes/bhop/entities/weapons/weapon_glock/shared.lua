@@ -172,8 +172,6 @@ end
 
 -- Called when right mouse is clicked - Toggles the firing type (Same as CS:S)
 function SWEP:SecondaryAttack()
-	if CLIENT or self.NextSecondaryAttack > CurTime() then return end
-	
 	if self:GetDTInt(0) == 1 then
 		self:SetDTInt( 0, 0 )
 		self.Owner:PrintMessage( HUD_PRINTCENTER, "Switched to semi-automatic" )
@@ -181,6 +179,4 @@ function SWEP:SecondaryAttack()
 		self:SetDTInt( 0, 1 )
 		self.Owner:PrintMessage( HUD_PRINTCENTER, "Switched to burst-fire mode" )
 	end
-	
-	self.NextSecondaryAttack = CurTime() + 0.3
 end

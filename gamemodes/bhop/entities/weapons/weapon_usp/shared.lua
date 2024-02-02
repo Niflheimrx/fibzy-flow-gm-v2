@@ -131,8 +131,6 @@ self.ReloadingTimer = CurTime()
 self.Recoil = 0
 self.Idle = 0
 self.IdleTimer = CurTime()
-self.Owner:SetWalkSpeed( 200 )
-self.Owner:SetRunSpeed( 400 )
 return true
 end
 
@@ -250,7 +248,7 @@ end
 end
 
 function SWEP:Think()
-if self.SilencerTimer <= CurTime() then
+if self.SilencerTimer < CurTime() then
 if self.Silencer == 1 then
 self.Silencer = 2
 end
@@ -271,7 +269,6 @@ if self.ShotTimer > CurTime() then
 self.Primary.SpreadRecoveryTimer = CurTime() + self.Primary.SpreadRecoveryTime
 end
 if self.Owner:IsOnGround() then
-if self.Owner:GetVelocity():Length() <= 100 then
 if self.Primary.SpreadRecoveryTimer <= CurTime() then
 if self.Silencer == 0 then
 self.Primary.Spread = self.Primary.SpreadMin
@@ -279,25 +276,20 @@ end
 if self.Silencer == 2 then
 self.Primary.Spread = self.Primary.SpreadMinAlt
 end
-end
 if self.Primary.Spread > self.Primary.SpreadMin then
 self.Primary.Spread = ( ( self.Primary.SpreadRecoveryTimer - CurTime() ) / self.Primary.SpreadRecoveryTime ) * self.Primary.Spread
 end
 end
-if self.Owner:GetVelocity():Length() <= 100 then
 if self.Silencer == 0 and self.Primary.Spread > self.Primary.SpreadMax then
 self.Primary.Spread = self.Primary.SpreadMax
 end
 if self.Silencer == 2 and self.Primary.Spread > self.Primary.SpreadMaxAlt then
 self.Primary.Spread = self.Primary.SpreadMaxAlt
 end
-end
-if self.Owner:GetVelocity():Length() > 100 then
 if self.Silencer == 0 then
 self.Primary.Spread = self.Primary.SpreadMove
 if self.Primary.Spread > self.Primary.SpreadMin then
 self.Primary.Spread = ( ( self.Primary.SpreadRecoveryTimer - CurTime() ) / self.Primary.SpreadRecoveryTime ) * self.Primary.SpreadMove
-end
 end
 if self.Silencer == 2 then
 self.Primary.Spread = self.Primary.SpreadMoveAlt
