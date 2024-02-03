@@ -6,6 +6,7 @@ Checkpoints = {}
 
 -- SetUp 
 function Checkpoints:SetUp(pl)
+
 	if (not pl.checkpoints) then 
 		pl.checkpoints = {}
 		pl.checkpoint_current = 0
@@ -84,6 +85,16 @@ end
 -- Save
 function Checkpoints:Save(pl)
 	-- Set up if not already
+	if pl.Style == 2 then return end
+	if pl.Style == 3 then return end
+	if pl.Style == 4 then return end
+	if pl.Style == 5 then return end
+	if pl.Style == 6 then return end
+	if pl.Style == 7 then return end
+	if pl.Style == 8 then return end
+	if pl.Style == 9 then return end
+	if pl.Style == 10 then return end
+
 	self:SetUp(pl)
 
 	-- Save
