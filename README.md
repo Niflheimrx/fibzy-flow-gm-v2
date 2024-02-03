@@ -18,7 +18,7 @@ Added:
 - Simple Hud (justa)
 - Crouch Boost fixes / CB Stop Time fix [This is broken on pG Gamemode] (fibzy)
 - Get Base Gains (fibzy)
-- RNGFix - Downhill (Now has no prediction errors) (claz | Niflheimrx)
+- RNGFix - Downhill (Now has no prediction errors) EdgeFix now works with new CB (claz | Niflheimrx | fibzy)
 - Custom Chat Box (fibzy)
 - Paint (Niflheimrx)
 - Flow zone texture fix (fibzy)
