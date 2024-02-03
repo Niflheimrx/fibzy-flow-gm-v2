@@ -49,6 +49,10 @@ local sideTimerOptions = {
 	[3] = "110"
 }
 
+local UnloadBFix = {
+	[1] = "Yes"
+}
+
 local showKeysOptions = {
 	[1] = "Center",
 	[2] = "Bottom Right"
@@ -248,6 +252,10 @@ function SurfTimer.Open()
 			Link:Print( "Timer", "Your FoV has been set to " .. sideTimerValue .. "." )
 		end
 
+		function SurfTimer.UnloadBoosterFx( int )
+			RunConsoleCommand( "say", "/gravityboosterfix " )
+		end
+
 		function SurfTimer.ChangeShowKeysPosition( int )
 			local showKeysValue = showKeysOptions[int]
 			if !showKeysValue then return end
@@ -338,6 +346,7 @@ function SurfTimer.Open()
 		SMPanels.MultiButton( { parent = panParent, text = "Rainbow Skybox Speed", tip = "Changes the speed of the Rainbow Skybox", select = chatColorPaletteOptions, func = SurfTimer.ChangeChatColorPalette, x = ctSize - bezel, y = bezel + ( boxSize * 5 ), norep = true } )
 		SMPanels.MultiButton( { parent = panParent, text = "Set Record Sound Theme", tip = "Changes the record soundtrack for your runs", select = recordSoundOptions, func = SurfTimer.ChangeRecordSound, x = srSize - bezel, y = bezel + ( boxSize * 6 ), norep = true } )
 		SMPanels.MultiButton( { parent = panParent, text = "Set HUD Opacity", tip = "Changes how transparent your HUD will appear", select = opacityOptions, func = SurfTimer.ChangeHUDOpacity, x = hoSize - bezel, y = bezel + ( boxSize * 7 ), norep = true } )
+		SMPanels.MultiButton( { parent = panParent, text = "Unload Boosterfix", tip = "Disables Constant BoosterFix", select = UnloadBFix, func = SurfTimer.UnloadBoosterFx, x = hoSize - bezel, y = bezel + ( boxSize * 9 ), norep = true } )
 
 		SMPanels.Button( { parent = panParent, text = "Open DevTools", tip = "Opens the DevTools experimental menu", func = OpenDevTools, scale = true, x = dtSize - bezel, y = bezel + (boxSize * 8) } )
 	end
