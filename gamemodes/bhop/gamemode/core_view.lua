@@ -37,4 +37,4 @@ local function InstallView( ply )
 		ply:SetViewOffsetDucked( ViewDuck )
 	end
 end
-hook.Add( "Move", "InstallView", InstallView )
+hook.Add( "SetupMove", "InstallView", InstallView )

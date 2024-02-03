@@ -62,70 +62,17 @@ local last = 0
 local coll
 local lastUp = CurTime()
 
-local StrafeAxis = 0 -- Saves the last eye angle yaw for checking mouse movement
-local StrafeButtons = nil -- Saves the buttons from SetupMove for displaying
-local StrafeCounter = 0 -- Holds the amount of strafes
-local StrafeLast = nil -- Your last strafe key for counting strafes
-local StrafeDirection = nil -- The direction of your strafes used for displaying
-local StrafeStill = 0 -- Counter to reset mouse movement
-
-local fb, ik, lp, ts = bit.band, input.IsKeyDown, LocalPlayer, _C.Team.Spectator -- This function is used frequently so to reduce lag...
-local function norm( i ) if i > 180 then i = i - 360 elseif i < -180 then i = i + 360 end return i end -- Custom function to normalize eye angles
-
-local StrafeData -- Your Sync value is stored here
-local KeyADown, KeyDDown -- For displaying on the HUD
-local MouseLeft, MouseRight --- For displaying on the HUD
-local LastUpdate = CurTime()
-
-local ViewGUI = CreateClientConVar( "kawaii_keys", "1", true, false ) -- GUI visibility
-surface.CreateFont( "HUDFont2", { size = 20, weight = 800, font = "Tahoma" } )
-
-function ResetStrafes() StrafeCounter = 0 end -- Resets your stafes (global)
-function SetSyncData( data ) StrafeData = data end -- Sets your sync data (global)
-
--- Monitors the buttons and strafe angles
-local function MonitorInput( ply, data )
-	local ang = data:GetAngles().y
-
-	if not ply:IsFlagSet(FL_ONGROUND + FL_INWATER) and ply:GetMoveType() == MOVETYPE_WALK then 
-		local difference = norm( ang - StrafeAxis )
-		local l, r = bit.band( data:GetOldButtons(), IN_MOVELEFT ) > 0, bit.band( data:GetOldButtons(), IN_MOVERIGHT ) > 0
-
-		if difference != 0 then 
-			if l or r then 
-				if LastUpdate + 0.02 > CurTime() then return end 
-				LastUpdate = CurTime() + 0.02
-				if difference > 0 then
-					if (l and not r) and StrafeDirection != IN_MOVELEFT and data:GetSideSpeed() < 0 then 
-						StrafeDirection = IN_MOVELEFT 
-						StrafeCounter = StrafeCounter + 1
-					end
-				elseif difference < 0 then
-					if (r and not l) and StrafeDirection != IN_MOVERIGHT and data:GetSideSpeed() > 0 then 
-						StrafeDirection = IN_MOVERIGHT 
-						StrafeCounter = StrafeCounter + 1
-					end
-				end
-			end
-		end
-	end
-
-	StrafeAxis = ang 
-end
-hook.Add( "SetupMove", "MonitorInput", MonitorInput )
-
 local RECORDS = {}
-
-local function GetCurrentPlacement(nCurrent, s)
-
+local function GetCurrentPlacement(current, s)
 	local timetbl = RECORDS[s] or {}
 	local c = 1
 
 	for k, v in pairs(timetbl) do 
-		if nCurrent > v then 
+		if current > v then 
 			c = k
 		end
 	end
+
 	return c
 end
 

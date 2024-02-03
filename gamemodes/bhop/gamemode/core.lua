@@ -391,14 +391,229 @@ local function StrafeInput( ply, data )
 end
 hook.Add( "SetupMove", "StrafeInput", StrafeInput )
 
--- Bunny Hop Movement --
--- The following below is movement from Flow v10.0 --
+local BHOP_TIME = 12
+local g_groundTicks = {}
+local g_storedVelocity = {}
+local g_longGround = {}
+local PJ = {}
+
+local function ChangeMove(ply, data)
+	if not IsValid( ply ) or ply:IsBot() then return end
+
+	if not g_groundTicks[ ply ] then
+		g_groundTicks[ ply ] = 0
+
+		return
+	end
+
+	local st = ply.Style
+
+	if not ply:IsOnGround() then
+		if g_groundTicks[ ply ] ~= 0 then
+			g_groundTicks[ ply ] = 0
+			g_storedVelocity[ ply ] = nil
+			g_longGround[ ply ] = false
+
+			ply:SetDuckSpeed( 0 )
+			ply:SetUnDuckSpeed( 0 )
+		end
+
+		if not ply.Freestyle and ply:GetMoveType() != 8 then
+			if st == _C.Style["SW"] or st == _C.Style["W-Only"] or st == _C.Style["S-Only"] then
+				data:SetSideSpeed( 0 )
+
+				if st == _C.Style["W-Only"] and data:GetForwardSpeed() < 0 then
+					data:SetForwardSpeed( 0 )
+				elseif st == _C.Style["S-Only"] and data:GetForwardSpeed() > 0 then
+					data:SetForwardSpeed( 0 )
+				end
+			elseif st == _C.Style["A-Only"] then
+				data:SetForwardSpeed( 0 )
+
+				if data:GetSideSpeed() > 0 then
+					data:SetSideSpeed( 0 )
+				end
+			elseif st == _C.Style["D-Only"] then
+				data:SetForwardSpeed( 0 )
+
+				if data:GetSideSpeed() < 0 then
+					data:SetSideSpeed( 0 )
+				end
+			elseif st == _C.Style["HSW"] then
+				if ib and ba( data:GetButtons(), 16 ) > 0 then
+					local bd = data:GetButtons()
+					if ba( bd, 512 ) > 0 or ba( bd, 1024 ) > 0 then
+						data:SetForwardSpeed( 0 )
+						data:SetSideSpeed( 0 )
+					end
+				end
+			if (st == _C.Style["HSW"] and bit.band(data:GetButtons(), 16) > 0) then
+				local bd = data:GetButtons()
+				if (bit.band(bd, 512) > 0) or (bit.band(bd, 1024) > 0) then
+					data:SetForwardSpeed(0)
+					data:SetSideSpeed(0)
+				end
+			end
+				if data:GetForwardSpeed() == 0 or data:GetSideSpeed() == 0 then
+					data:SetForwardSpeed( 0 )
+					data:SetSideSpeed( 0 )
+				end
+			elseif st == _C.Style["SHSW"] then
+				if ( data:GetForwardSpeed() >= 0 and data:GetSideSpeed() >= 0 ) then
+					data:SetSideSpeed( 0 )
+					data:SetForwardSpeed( 0 )
+				end
+
+
+				if ( data:GetForwardSpeed() <= 0 and data:GetSideSpeed() <= 0 ) then
+					data:SetSideSpeed( 0 )
+					data:SetForwardSpeed( 0 )
+				end
+			end
+		end
+
+		if ic and ply.Gravity != nil then
+			if ply.Gravity or ply.Freestyle then
+				ply:SetGravity( 0 )
+			else
+				ply:SetGravity( plg )
+			end
+		end
+
+		return
+	end
+
+	if g_groundTicks[ ply ] > 12 then
+		if g_longGround[ ply ] then return end
+
+		if st == _C.Style["Easy Scroll"] then
+			ply:SetJumpPower( _C.Player.JumpPower )
+		end
+
+		--if _C.Player.HullStand != _C.Player.HullMax and not util.TraceLine( { filter = ply, mask = MASK_PLAYERSOLID, start = ply:EyePos(), endpos = ply:EyePos() + Vector( 0, 0, 24 ) } ).Hit then
+		--	ply:SetHull( _C.Player.HullMin, _C.Player.HullMax )
+		--end
+
+		ply:SetDuckSpeed( 0.4 )
+		ply:SetUnDuckSpeed( 0.2 )
+
+		g_longGround[ ply ] = true
+
+		return
+	end
+
+	g_groundTicks[ ply ] = g_groundTicks[ ply ] + 1
+
+	-- player will land this tick
+	if g_groundTicks[ ply ] == 1 then
+		g_storedVelocity[ ply ] = data:GetVelocity()
+
+		if st == _C.Style["Easy Scroll"] then
+			ply:SetJumpPower( _C.Player.ScrollPower )
+		end
+
+		if PJ[ ply ] then
+			PJ[ ply ] = PJ[ ply ] + 1
+		end
+	elseif g_groundTicks[ ply ] > 1 and data:KeyDown( 2 ) and st != _C.Style["Legit"] and st != _C.Style["Easy Scroll"] then
+		if ic and g_groundTicks[ ply ] < 4 then return end
+
+		-- CrouchBug fix?
+		local vel = g_storedVelocity[ ply ] or data:GetVelocity()
+		vel.z = ply:GetJumpPower()
+		data:SetVelocity( vel )
+	end
+end
+hook.Add( "SetupMove", "ChangeMove", ChangeMove )
+
+
 do
 
 	local mc, ft = math.Clamp, FrameTime
 	function GM:Move(ply, data)
 		-- Does the player exist in this tick? --
-		if !IsValid(ply) then return end
+		if not IsValid( ply ) then return end
+		if lp and ply != lp() then return end
+	
+		-- Custom Noclip speed
+		if (ply:GetMoveType() == MOVETYPE_NOCLIP) then 
+			local walk = ply:GetNWInt("noclipwalk", 500)
+			local shift = ply:GetNWInt("noclipshift", 2000)
+			local ducks = ply:GetNWInt("noclipduck", 200)
+	
+			local duck = ply:KeyDown( IN_DUCK )
+			local speed = ply:KeyDown( IN_SPEED )
+	
+			local vel = data:GetVelocity()
+	
+			if (duck) then 
+				vel = vel * ducks
+			elseif (speed) then 
+				vel = vel * shift
+			else
+				vel = vel * walk
+			end
+	
+			--ply:SetVelocity(vel)
+	
+			--return true
+		end
+		
+		local st, og = ply.Style, ply:IsOnGround()
+		if og and not gf[ ply ] then
+			gf[ ply ] = 0
+		elseif og and gf[ ply ] then
+			gf[ ply ] = gf[ ply ] + 1
+			if gf[ ply ] > 12 then
+				ply:SetDuckSpeed( 0.4 )
+				ply:SetUnDuckSpeed( 0.2 )
+			end
+		elseif not og then
+			gf[ ply ] = 0
+			ply:SetDuckSpeed( 0 )
+			ply:SetUnDuckSpeed( 0 )
+		end
+		
+		if og and st == 6 then
+			local v = data:GetVelocity()
+			local vl = v:Length2D()
+			local c = ct()
+	
+			if ply.AirStam then
+				data:SetVelocity( v - (0.04 * v) )
+				
+				if ply.AirStam == 4 then
+					ply.Gtime = c
+				end
+				
+				ply.AirStam = ply.AirStam - 1
+				if ply.AirStam < 0 then
+					ply.AirStam = nil
+				end
+			end
+			
+			if ply.Gtime then
+				if ply.Gtime == c then
+					ply.Gset = 0
+				elseif ply.Gset then
+					if ply.Gset < 4 then
+						ply.Gset = ply.Gset + 1
+						return
+					end
+					
+					local dt = c - ply.Gtime
+					if dt < 1 then
+						local p = (1 - dt) / 16
+						data:SetVelocity( v - (p * v) )
+					else
+						ply.Gtime = nil
+						ply.Gset = nil
+					end
+				end
+			end
+		end
+		
+		if og or not ply:Alive() then return end	
 
 		-- Reduce clientside computes by checking if the player is alive and only checking the localplayer --
 		if !ply:Alive() then return end
@@ -645,53 +860,6 @@ local function PlayerGround( ply, bWater )
 end
 hook.Add( "OnPlayerHitGround", "HitGround", PlayerGround )
 
-local function StripMovements( ply, data )
-	if lp and ply != lp() then return end
-	
-	local st = ply.Style
-	if not ply.Freestyle and st and st > 1 and st < 7 and ply:GetMoveType() != MOVETYPE_NOCLIP then
-		if ply:OnGround() then
-			if st == 6 then
-				local vel = data:GetVelocity()
-				local ts = ls[ ply ] or 700
-				if vel:Length2D() > ts then
-					local diff = vel:Length2D() - ts
-					vel:Sub( Vector( vel.x > 0 and diff or -diff, vel.y > 0 and diff or -diff, 0 ) )
-				end
-				
-				data:SetVelocity( vel )
-				return false
-			end
-			
-			return
-		end
-		
-		if st == 2 or st == 4 then
-			data:SetSideSpeed( 0 )
-				
-			if st == 4 and data:GetForwardSpeed() < 0 then
-				data:SetForwardSpeed( 0 )
-			end
-		elseif st == 5 then
-			data:SetForwardSpeed( 0 )
-				
-			if data:GetSideSpeed() > 0 then
-				data:SetSideSpeed( 0 )
-			end
-		elseif (st == 3  and bit.band(data:GetButtons(), 16) > 0) then
-			local bd = data:GetButtons()
-			if (bit.band(bd, 512) > 0) or (bit.band(bd, 1024) > 0) then
-				data:SetForwardSpeed(0)
-				data:SetSideSpeed(0)
-			end
-		end
-		if (data:GetForwardSpeed() == 0) or (data:GetSideSpeed() == 0) then
-			data:SetForwardSpeed(0)
-			data:SetSideSpeed(0)
-		end
-	end
-end
-hook.Add( "SetupMove", "StripIllegal", StripMovements )
 
 -- Core
 
@@ -787,53 +955,6 @@ function Core.Util:NoEmpty( tab )
 	
 	return tab
 end
-
-local ticksOnGround, inAir, storedVelocity = {}, {}, {}, {}
--- Crouchbug fix --
-
-local TIME_TO_UNDUCK = 0.2
-local TIME_TO_DUCK   = 0.4
-
-local function ProcessDuckMove(ply, data)
-	if !IsValid(ply) then return end
-	if ply:IsBot() then return end
-
-	-- Check if we landed this tick --
-	if ply:OnGround(ply) then
-		-- We probably didn't set them up so lets do that --
-		if !ticksOnGround[ply] then
-			ticksOnGround[ply] = 0
-		return end
-
-		-- Check if the player has been in the ground for 12 ticks, if so then don't proceed with any fixes --
-		if (ticksOnGround[ply] > 12 and 15) or !data:KeyDown(IN_JUMP) then
-			ticksOnGround[ply] = 0
-
-			ply:SetDuckSpeed(TIME_TO_DUCK)
-			ply:SetUnDuckSpeed(TIME_TO_UNDUCK)
-		return end
-
-		-- Increment tick counter by 1 --
-		ticksOnGround[ply] = ticksOnGround[ply] + 1
-
-		-- The first tick should be when we first hit the ground as soon as we are uncrouching, therefore we are still in the air, so let's store that info --
-		if (ticksOnGround[ply] == 1) then
-			inAir[ply] = nil
-		-- From the 2nd tick onwards until the 12th tick, we have a grace period where we can uncrouch and not lose speed --
-		elseif (ticksOnGround[ply] > 1) and data:KeyDown(IN_JUMP) then
-		end
-
-	-- We probably did some fixes already so proceed with clearing the default arrays --
-	elseif !inAir[ply] then
-		ticksOnGround[ply] = 0
-		inAir[ply] = true
-		storedVelocity[ply] = nil
-
-		ply:SetDuckSpeed(0)
-		ply:SetUnDuckSpeed(0)
-	end
-end
-hook.Add("SetupMove", "sm_duckbug_fix", ProcessDuckMove)
 
 do
 	local result = {}
