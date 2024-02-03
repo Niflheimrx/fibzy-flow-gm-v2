@@ -11,8 +11,8 @@ function PANEL:Init()
 	-- These are Lua side commands
 	-- Defined above using AccessorFunc
 	--
-	self:SetDrawBorder( true )
-	self:SetPaintBackground( true )
+	self:SetDrawBorder( false )
+	self:SetPaintBackground( false )
 
 	self:SetTall( 22 )
 	self:SetMouseInputEnabled( true )
@@ -73,9 +73,6 @@ function PANEL:SetMaterial( mat )
 end
 
 function PANEL:Paint( w, h )
-
-	derma.SkinHook( "Paint", "Button", self, w, h )
-
 	--
 	-- Draw the button text
 	--
