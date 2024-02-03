@@ -137,4 +137,4 @@ local function DetectPebble(objPlayer, mvData)
 	objPlayer.lastMoveAngles = mvData:GetMoveAngles()
 
 end
-hook.Add("Move", "DetectPebble", DetectPebble)
+hook.Add("SetupMove", "DetectPebble", DetectPebble)

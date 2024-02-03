@@ -17,7 +17,7 @@ surface.CreateFont( "HUDTimerKindaUltraBig", { size = 28, weight = 4000, font = 
 
 -- Converting a time
 local fl, fo  = math.floor, string.format
-local function ConvertTime( ns )
+local function ConvertTime(ns)
 	ns = math.Round(ns, 4)
 
 	if ns > 3600 then
@@ -57,9 +57,6 @@ HUD.Ids = {"Counter Strike: Source", "Counter Strike: Source Shavit", "Simple", 
 
 -- Themes
 local sync = "0"
-
-MONHUD = {}
-MONHUD.Enabled = CreateClientConVar( "kawaii_momentum_speed_hud", "1", true, false, "Momentum speed hud display" )
 
 local last = 0
 local coll
@@ -693,7 +690,6 @@ HUD.Themes = {
 		local maxVel = 1000000
 
 		if (current > 0) then
-			if MONHUD then
 				if (current >= maxVel) then
 					color = Color(255, 174, 0)
 				elseif (current > last + 1) then
@@ -702,7 +698,6 @@ HUD.Themes = {
 					color = Color(255, 0, 0)
 				elseif (current == last) then
 					color = color_white
-				end
 			else
 				color = color_white
 			end

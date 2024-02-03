@@ -171,6 +171,13 @@ function BHOPCSSReloader()
 end
 hook.Add("Think", "BHOPCSSReloader", BHOPCSSReloader )
 
+function WRDisplay()
+	if input.IsKeyDown(KEY_F4) then
+	 	RunConsoleCommand("say", "!wr")
+	end
+end
+hook.Add("Think", "WRDisplay", WRDisplay )
+
 hook.Add("CalcViewModelView", "FixPos", function(wep, vm, oldPos, oldAng, pos, ang)
 	pos = pos - ang:Forward() * 5
 
