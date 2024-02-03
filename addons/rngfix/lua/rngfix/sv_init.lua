@@ -544,8 +544,10 @@ local function AirAccelerate2( ply, data )
 	
 		vel = vel + (wishdir * accelspeed)
 
-		--vel.z = vel.z - (ply:GetGravity() * 800 * FrameTime() * 0.5)
-		
+		if not game.GetMap() == "bhop_kasvihuone" then
+			vel.z = vel.z - (ply:GetGravity() * 600 * FrameTime() * 0.5)
+		end
+
 		data:SetVelocity( vel )
 		end
 	end
