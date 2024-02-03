@@ -45,7 +45,7 @@ function SetSpawn:Save(pl)
 
 	local current = self:GetCurrent(pl)
 
-	Core:Send(pl, "Print", {"Server", "Spawn point set."})
+	Core:Send(pl, "Print", {"Timer", "Spawn point set."})
 
 	-- Set
 	if (pl.SetSpawn[current < 0]) then 
