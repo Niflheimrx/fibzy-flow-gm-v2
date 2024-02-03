@@ -634,7 +634,7 @@ HUD.Themes = {
 				draw.SimpleText(string.Split(current, ".")[1], "HUDTimerKindaUltraBig", ScrW() / 2, yPos - 110, color, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 			return end
 		
-		local maxVel = 1000000
+		local maxVel = 80000000000000000000000000000000000000
 
 		if (current > 0) then
 				if (current >= maxVel) then
