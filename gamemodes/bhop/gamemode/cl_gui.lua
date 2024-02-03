@@ -28,16 +28,6 @@ surface.CreateFont( "HUDTimer", { size = 17, weight = 800, font = "Trebuchet24" 
 surface.CreateFont( "HUDMessage", { size = 30, weight = 800, font = "Verdana" } )
 surface.CreateFont( "HUDCounter", { size = 144, weight = 800, font = "Coolvetica" } )
 
-surface.CreateFont( "HUDcsstop", { size = 40, weight = 1000, antialias = true, font = "FiBuchetMS" } )
-surface.CreateFont( "HUDcss", { size = 21, weight = 800, antialias = true, bold = true, font = "Verdana" } )
-surface.CreateFont( "HUDcssBottomTimer", { size = 21.9, weight = 800, antialias = true, bold = true, font = "Verdana" } )
-surface.CreateFont( "HUDcssBottom", { size = 21.5, weight = 800, antialias = true, bold = true, font = "Verdana" } )
-surface.CreateFont( "HUDcss4", { size = 21, weight = 800, antialias = true, bold = true, font = "Verdana" } )
-surface.CreateFont( "HUDcss2", { size = 21, weight = 700, bold = true, antialias = true, font = "Verdana" } )
-
-surface.CreateFont( "HUDcsstimeleft", { size = 21, weight = 700, bold = true, antialias = true, font = "Verdana" } )
-surface.CreateFont( "HUDcsssync", { size = 21, weight = 700, bold = true, antialias = true, font = "Verdana" } )
-
 Window = {}
 Window.Unclosable = { "Vote" }
 Window.NoThink = { "Admin", "VIP" }

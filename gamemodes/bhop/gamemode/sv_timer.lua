@@ -8,6 +8,7 @@ Timer.BonusMultiplier = 1
 Timer.Options = 0
 
 resource.AddFile( "resource/fonts/FiBuchetMS-Bold.ttf" )
+resource.AddFile( "resource/fonts/trebucbd.ttf" )
 
 local function ValidTimer( ply, bBonus )
 	if ply:IsBot() then return false end

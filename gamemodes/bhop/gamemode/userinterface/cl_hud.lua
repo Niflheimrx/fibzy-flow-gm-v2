@@ -15,6 +15,13 @@ surface.CreateFont( "HUDTimerBig", { size = 28, weight = 400, font = "Trebuchet2
 surface.CreateFont( "HUDTimerMedThick", { size = 22, weight = 40000, font = "Trebuchet24" } )
 surface.CreateFont( "HUDTimerKindaUltraBig", { size = 28, weight = 4000, font = "Trebuchet24" } )
 
+surface.CreateFont( "HUDcsstop2", { size = 40, weight = 1000, antialias = true, font = "FiBuchetMS-Bold" } )
+surface.CreateFont( "HUDcss", { size = 21, weight = 800, antialias = true, bold = true, font = "Verdana" } )
+surface.CreateFont( "HUDcssBottomTimer", { size = 21.9, weight = 800, antialias = true, bold = true, font = "Verdana" } )
+surface.CreateFont( "HUDcssBottom", { size = 21.5, weight = 800, antialias = true, bold = true, font = "Verdana" } )
+surface.CreateFont( "HUDcss4", { size = 21, weight = 800, antialias = true, bold = true, font = "Verdana" } )
+surface.CreateFont( "HUDcss2", { size = 21, weight = 700, bold = true, antialias = true, font = "Verdana" } )
+
 -- Converting a time
 local fl, fo  = math.floor, string.format
 local function ConvertTime(ns)
@@ -258,8 +265,8 @@ HUD.Themes = {
 				pbtext = cCTime(data.pb or 0)
 			end
 
-			draw.SimpleText("WR: " .. wr .. " " .. wrn, "HUDcsstop", 19, 10, color_white, text, TEXT_ALIGN_LEFT)
-			draw.SimpleText(pb .. pbtext, "HUDcsstop", 19, 50, color_white, text, TEXT_ALIGN_LEFT)	
+			draw.SimpleText("WR: " .. wr .. " " .. wrn, "HUDcsstop2", 19, 10, color_white, text, TEXT_ALIGN_LEFT)
+			draw.SimpleText(pb .. pbtext, "HUDcsstop2", 19, 50, color_white, text, TEXT_ALIGN_LEFT)	
 
 			if (activity == 1) then
 				local TimeText = "Time: " .. currentf
