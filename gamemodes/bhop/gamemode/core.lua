@@ -151,12 +151,6 @@ function GM:EntityEmitSound() return true end
 physenv.SetAirDensity( 0 )
 
 -- Custom client run commands for different maps
-timer.Create( "rawinput2", 4, 1, function()
-for k,v in pairs(player.GetAll()) do
-		v:ConCommand( "m_rawinput 2" )
-		end
-end)
-
 timer.Create( "ratefix", 2, 1, function()
 for k,v in pairs(player.GetAll()) do
 		v:ConCommand( "rate 1000000000" )
@@ -413,7 +407,7 @@ do
 		-- This hook shouldn't run if we are on the ground --
 		if ply:OnGround() then return end
 
-		-- Default CSS Bunny Hop Settings --
+		-- Default GMod Bunny Hop Settings --
 		local aa, mv = 500, 32.8
 		local aim = data:GetMoveAngles(ply:GetAngles() - Angle(-100, -100, 0))
 		local forward, right = aim:Forward(), aim:Right()

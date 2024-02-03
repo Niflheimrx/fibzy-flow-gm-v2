@@ -172,6 +172,8 @@ local function CreateScoreboard()
 			draw.SimpleText(isBot and "WR Replay" or pRank[1], "hud.subtitle", 12, 20, isBot and Color(255, 255, 255) or pRank[2], TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
 
 			-- Player name
+			local ColorSpec = pl:GetNWInt( "Spectating", 0 ) == 1 and Color( 180, 180, 180 ) or Color( 255, 255, 255 )
+
 			local name = isBot and pl:GetNWString("BotName", "Loading...") or pl:Nick()
 			if isBot and (name ~= "Loading..." and name ~= "No replay available") then
 				local position = pl:GetNWInt("WRPos", 0)
@@ -190,7 +192,7 @@ local function CreateScoreboard()
 			if (pl:SteamID() == "STEAM_0:1:48688711") then
 				draw.SimpleText(name, "hud.subtitle", distance * 1.5, 20, Color( 0, 220 * abs(sin(CurTime())), 255 ), TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
 			else
-				draw.SimpleText(name, "hud.subtitle", distance * 1.5, 20, pl:GetObserverMode() ~= OBS_MODE_NONE and Color(150, 150, 150, 255) or text_colour, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
+				draw.SimpleText(name, "hud.subtitle", distance * 1.5, 20, pl:GetObserverMode() ~= OBS_MODE_NONE and Color(150, 150, 150, 255) or ColorSpec, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
 			end
 
 			-- Player style

@@ -394,7 +394,7 @@ local setting_gunsounds = CreateClientConVar("kawaii_gunsounds", "1", true, fals
 local setting_hints = CreateClientConVar("kawaii_hints", "180", true, false)
 
 rawinput = {}
-rawinput.Enabled = CreateClientConVar( "kawaii_rawinput", "2", true, false, "Return sensitivity to default source engine and rawinput fix." )
+rawinput.Enabled = CreateClientConVar( "kawaii_mousesmoothing", "1", true, false, "Return sensitivity to smoother input." )
 
 function GM:AdjustMouseSensitivity( fDefault )
     local rawinput = rawinput.Enabled:GetBool()
