@@ -48,7 +48,7 @@ local g_cvUseOldSlopefixLogic = CreateConVar("rngfix_useoldslopefixlogic", "0", 
 	"Old Slopefix had some logic errors that could cause double boosts.", 0.0, 1.0)
 local g_cvStairs = CreateConVar("rngfix_stairs", "1", CV_FLAGS, "Enable stair slide fix (surf only)", 0.0, 1.0)
 local g_cvTelehop = CreateConVar("rngfix_telehop", "1", CV_FLAGS, "Enable telehop fix.", 0.0, 1.0)
-local g_cvTriggerjump = CreateConVar("rngfix_triggerjump", "0", CV_FLAGS, "Enable trigger jump fix.", 0.0, 1.0)
+local g_cvTriggerjump = CreateConVar("rngfix_triggerjump", "1", CV_FLAGS, "Enable trigger jump fix.", 0.0, 1.0)
 
 -- Core physics ConVars
 local g_cvMaxVelocity = 80000000000000000000000000000000000000

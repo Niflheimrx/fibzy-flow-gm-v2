@@ -43,7 +43,7 @@ local g_cvUphill = CreateConVar("rngfix_uphill", "1", FCVAR_NOTIFY, "Enable uphi
 local g_cvEdge = CreateConVar("rngfix_edge", "1", FCVAR_NOTIFY, "Enable edgebug fix.", 0.0, 1.0)
 local g_cvDebug = CreateConVar("rngfix_debug", "0", FCVAR_NONE, "1 = Enable debug messages. 2 = Enable debug messages and lasers.", 0.0, 2.0)
 local g_cvUseOldSlopefixLogic = CreateConVar("rngfix_useoldslopefixlogic", "0", FCVAR_NOTIFY, "Old Slopefix had some logic errors that could cause double boosts. Enable this on a per-map basis to retain old behavior. (NOT RECOMMENDED)", 0.0, 1.0)
-local g_cvTriggerjump = CreateConVar("rngfix_triggerjump", "0", CV_FLAGS, "Enable trigger jump fix.", 0.0, 1.0)
+local g_cvTriggerjump = CreateConVar("rngfix_triggerjump", "1", CV_FLAGS, "Enable trigger jump fix.", 0.0, 1.0)
 
 -- Core physics ConVars
 local g_cvMaxVelocity = 80000000000000000000000000000000000000
