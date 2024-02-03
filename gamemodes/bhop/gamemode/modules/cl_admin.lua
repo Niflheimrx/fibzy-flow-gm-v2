@@ -243,7 +243,6 @@ hook.Add( "PostDrawOpaqueRenderables", "PreviewArea", DrawAreaEditor )
 
 local function AddDrawHud()
 	if RawCache and RawCache[ 1 ] then
-		if not ViewGUI:GetBool() then return end
 
 		local w, h, n = ScrW(), 20, 10
 		for _,i in pairs( RawCache ) do

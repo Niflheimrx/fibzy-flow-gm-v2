@@ -224,11 +224,8 @@ local function TransferHandle( szAction, varArgs )
 		end
 	elseif szAction == "Help" then
 		local wantsRules = varArgs[1]
-		if wantsRules then
 			Help:OpenRules()
-		else
 			Help:Open()
-		end
 	elseif szAction == "Timer" then
 		local szType = tostring( varArgs[ 1 ] )
 		

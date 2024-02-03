@@ -2,32 +2,32 @@
   Author: Niflheimrx
   Description: Help page for new players, and the rules page for existing players.
   We also test for css textures here... because I am lazy!
+  Edit by FiBzY
 --]]
 
 Help = {}
-Help.Size = { [0] = { 500, 500 }, [1] = { 800, 580 } }
+Help.Size = { [0] = { 700, 500 }, [1] = { 800, 580 } }
 
 local helpDescription = {
-  [0] = "Welcome to our SurfTimer server!",
-  [2] = "In this gamemode you will be riding ramps to reach the end of the map.",
+  [0] = "Welcome to our Bunny Hop server!",
+  [2] = "In this gamemode you will be strafing and jumping to reach the end of the map.",
   [3] = "It is your objective to reach the end as fast as possible and compete for the",
   [4] = "best time possible.",
-  [6] = "If you are new to surf, it is recommended to watch the tutorial!",
+  [6] = "If you are new to Bunny Hop, it is recommended to watch the tutorial!",
   [7] = "To watch the tutorial, click the button below that says 'Watch Tutorial'",
-  [8] = "To view settings, commands, and more information, press F1 or do !surftimer",
+  [8] = "To view settings, commands, and more information, press F1 or do !menu",
   [9] = "Be sure to read the rules using !rules",
   [11] = "Enjoy and have fun!"
 }
 
 local rulesDescription = {
   [1] = {
-    [0] = "==[ These are the rules for the SurfTimer ]==",
-    [2] = "• Prehopping is not allowed under any circumstances",
-    [3] = "• Crouch boosting is allowed as long as it is not considered 'RNG'",
-    [4] = "• Using exploits within the SurfTimer gamemode is not allowed and can result",
-    [5] = "in getting your SurfTimer profile reset",
-    [6] = "• Bypassing autohop is not allowed",
-    [7] = "• Using map exploits can vary per map, it's best to ask an admin first"
+    [0] = "==[ These are the rules for the Timer ]==",
+    [2] = "• Cheating is not allowed under any circumstances",
+    [3] = "• Using exploits within the Timer gamemode is not allowed and can result",
+    [4] = "in getting your Timer profile reset",
+    [5] = "• Bypassing autohop is not allowed",
+    [6] = "• Using map exploits can vary per map, it's best to ask an admin first"
   },
   [2] = {
     [0] = "==[ These are the rules for the Server ]==",

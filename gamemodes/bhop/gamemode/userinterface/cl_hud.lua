@@ -6,7 +6,7 @@ local draw = draw
 local Color = Color
 
 -- ConVar to select which HUD we want to use
-local selected_hud = CreateClientConVar("kawaii_hud", 3, true, false)
+local selected_hud = CreateClientConVar("kawaii_hud", 4, true, false)
 
 -- Font
 surface.CreateFont( "HUDTimer", { size = 17, weight = 800, font = "Trebuchet24" } )

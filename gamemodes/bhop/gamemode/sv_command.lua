@@ -50,6 +50,10 @@ function GM:ShowHelp( ply )
 	Core:Send( ply, "MainMenu" )
 end
 
+function GM:ShowSpare2( ply )
+	Core:Send( ply, "GUI_Open", { "WR", { 2, Timer:GetRecordList( nStyle, nPage ), nStyle, nPage, Timer:GetRecordCount( nStyle ) } } )
+end
+
 Command = {}
 Command.Functions = {}
 Command.TimeLimit = 0.8
@@ -57,10 +61,13 @@ Command.Limiter = {}
 
 local HelpData, HelpLength
 
-
 function Command:Init()
 	self:Register( { "menu", "mainmenu", "settings", "options" }, function( ply, args )
 		Core:Send( ply, "MainMenu" )
+	end )
+
+	self:Register( { "help", "howto" }, function( ply, args )
+		Core:Send( ply, "Help" )
 	end )
 
 	self:Register({"theme", "themeeditor", "themes"}, function(pl)
@@ -557,7 +564,7 @@ function Command:Init()
 	end )
 
 	-- Info commands
-	self:Register( { "help", "commands", "command" }, function( ply, args )
+	self:Register( { "commands", "command" }, function( ply, args )
 		Command:GetHelp()
 
 		if #args > 0 then
