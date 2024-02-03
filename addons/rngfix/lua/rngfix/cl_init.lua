@@ -5,7 +5,7 @@ local g_ply = nil -- LocalPlayer() value
 -- Fixed: justa
 local function TogglePrediction(_, _, val)
 	if tonumber(val) == 1 then
-		hook.Add("SetupMove", "RNGFIX", RNGFix.ProcessMovementPre)
+		hook.Add("Move", "RNGFIX", RNGFix.ProcessMovementPre)
 		hook.Add(RNGFix.POST_THINK_HOOK, "RNGFIX", RNGFix.ProcessMovementPost)
 		hook.Add("OnPlayerHitGround", "RNGFIX", RNGFix.OnPlayerHitGround)
 		hook.Add("InitPostEntity", "RNGFIX", function()
@@ -16,7 +16,7 @@ local function TogglePrediction(_, _, val)
 		if RNGFix.Refresh then g_ply = LocalPlayer() end
 		if g_ply then RNGFix.InitPlayerArrayValues(g_ply) end
 	else
-		hook.Remove("SetupMove", "RNGFIX")
+		hook.Remove("Move", "RNGFIX")
 		hook.Remove(RNGFix.POST_THINK_HOOK, "RNGFIX")
 		hook.Remove("OnPlayerHitGround", "RNGFIX")
 		hook.Remove("InitPostEntity", "RNGFIX")

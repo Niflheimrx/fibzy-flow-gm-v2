@@ -40,7 +40,7 @@ local UPHILL_NEUTRAL = 1  -- Force a jump (respecting NON_JUMP_VELOCITY) (fix RN
 -- Plugin settings
 local g_cvDownhill = CreateConVar("rngfix_downhill", "1", FCVAR_NOTIFY, "Enable downhill incline fix.", 0.0, 1.0)
 local g_cvUphill = CreateConVar("rngfix_uphill", "1", FCVAR_NOTIFY, "Enable uphill incline fix. Set to -1 to normalize effects not in the player's favor (not recommended).", -1.0, 1.0)
-local g_cvEdge = CreateConVar("rngfix_edge", "1", FCVAR_NOTIFY, "Enable edgebug fix.", 0.0, 1.0)
+local g_cvEdge = CreateConVar("rngfix_edge", "0", FCVAR_NOTIFY, "Enable edgebug fix.", 0.0, 1.0)
 local g_cvDebug = CreateConVar("rngfix_debug", "0", FCVAR_NONE, "1 = Enable debug messages. 2 = Enable debug messages and lasers.", 0.0, 2.0)
 local g_cvUseOldSlopefixLogic = CreateConVar("rngfix_useoldslopefixlogic", "0", FCVAR_NOTIFY, "Old Slopefix had some logic errors that could cause double boosts. Enable this on a per-map basis to retain old behavior. (NOT RECOMMENDED)", 0.0, 1.0)
 local g_cvTriggerjump = CreateConVar("rngfix_triggerjump", "0", CV_FLAGS, "Enable trigger jump fix.", 0.0, 1.0)
@@ -63,7 +63,7 @@ local GetSpeedCap = function(ply) return 30.00 end
 
 -- [ Flow bhop compat ] --
 
-/*RNGFix = {}
+RNGFix = {}
 
 RNGFix.vCurrent = {}
 RNGFix.vLast = {}
@@ -197,7 +197,7 @@ local function StartCommand( ply )
 		end
 	end
 end
-hook.Add("StartCommand", "StartCommand", StartCommand)*/
+hook.Add("StartCommand", "StartCommand", StartCommand)
 
 hook.Add("Initialize", "RNGFIX_FlowCompat", function()
  	local _C = _G._C
@@ -218,7 +218,7 @@ hook.Add("Initialize", "RNGFIX_FlowCompat", function()
 	GetSpeedCap = function(ply)
 		-- Legit or Easy Scroll
 		if ply.Style == s1 or ply.Style == s2 then return 30.0 end
-		return (wishspd - math.abs(current)) / 7.4 -- Other styles
+		return 32.8 -- Other styles
 	end
 
 	if Core and Core.Config then
