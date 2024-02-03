@@ -63,7 +63,7 @@ local GetSpeedCap = function(ply) return 30.00 end
 
 -- [ Flow bhop compat ] --
 
-RNGFix = {}
+/*RNGFix = {}
 
 RNGFix.vCurrent = {}
 RNGFix.vLast = {}
@@ -197,7 +197,7 @@ local function StartCommand( ply )
 		end
 	end
 end
-hook.Add("StartCommand", "StartCommand", StartCommand)
+hook.Add("StartCommand", "StartCommand", StartCommand)*/
 
 hook.Add("Initialize", "RNGFIX_FlowCompat", function()
  	local _C = _G._C
