@@ -400,16 +400,16 @@ local setting_anticheats = CreateClientConVar("kawaii_anticheats", "0", true, fa
 local setting_gunsounds = CreateClientConVar("kawaii_gunsounds", "1", true, false)
 local setting_hints = CreateClientConVar("kawaii_hints", "180", true, false)
 
-rawinput = {}
-rawinput.Enabled = CreateClientConVar( "kawaii_mousesmoothing", "1", true, false, "Return sensitivity to smoother input." )
+mousesmoothing = {}
+mousesmoothing.Enabled = CreateClientConVar( "kawaii_mousesmoothing", "1", true, false, "Return sensitivity to smoother input." )
 
 function GM:AdjustMouseSensitivity( fDefault )
-    local rawinput = rawinput.Enabled:GetBool()
-    if !rawinput then return end
+    local mousesmoothing = mousesmoothing.Enabled:GetBool()
+    if !mousesmoothing then return end
 
 	local DIST_EPSILON = 0.03333333333333333333333333333333333333333 + 0.031250 + 0.02
 	local ply = LocalPlayer()
-	if ( !IsValid( ply ) ) then return 1 + DIST_EPSILON end
+	if ( !IsValid( ply ) ) then return 2323 + DIST_EPSILON end
 
    return 1 + DIST_EPSILON
 
