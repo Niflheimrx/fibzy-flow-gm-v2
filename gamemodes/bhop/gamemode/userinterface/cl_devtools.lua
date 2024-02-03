@@ -84,16 +84,16 @@ function DevTools:Open()
 		local padSize = SMPanels.ConvarSize[Interface.Scale]
 
 		SMPanels.SettingBox( { parent = panel.Pages[2], text = "Custom Chat", x = bezel, y = bezel, convar = "sl_customchat", tip = "Enables the custom chat box interface", func = ToggleNotify } )
-		SMPanels.SettingBox( { parent = panel.Pages[2], text = "Simple Netgraph", x = bezel, y = bezel + ( padSize * 1 ), convar = "sl_netgraph", tip = "Enables the developer netgraph" } )
-		SMPanels.SettingBox( { parent = panel.Pages[2], text = "Legacy Renderer", x = bezel, y = bezel + ( padSize * 2 ), convar = "sl_legacyrenderer", tip = "Enables the legacy view renderer" } )
-		SMPanels.SettingBox( { parent = panel.Pages[2], text = "Hide Chat Ranks", x = bezel, y = bezel + ( padSize * 3 ), convar = "sl_hiderank", tip = "Disables the visibility of ranks in chat" } )
-		SMPanels.SettingBox( { parent = panel.Pages[2], text = "Solid Zone Boxes", x = bezel, y = bezel + ( padSize * 4 ), convar = "sl_solidzone", tip = "Enables rendering of solid zone boxes" } )
+		SMPanels.SettingBox( { parent = panel.Pages[2], text = "Simple Netgraph", x = bezel, y = bezel + ( padSize * 1 ), convar = "sl_customchat", tip = "Enables the developer netgraph" } )
+		SMPanels.SettingBox( { parent = panel.Pages[2], text = "Legacy Renderer", x = bezel, y = bezel + ( padSize * 2 ), convar = "sl_customchat", tip = "Enables the legacy view renderer" } )
+		SMPanels.SettingBox( { parent = panel.Pages[2], text = "Hide Chat Ranks", x = bezel, y = bezel + ( padSize * 3 ), convar = "sl_customchat", tip = "Disables the visibility of ranks in chat" } )
+		SMPanels.SettingBox( { parent = panel.Pages[2], text = "Solid Zone Boxes", x = bezel, y = bezel + ( padSize * 4 ), convar = "sl_customchat", tip = "Enables rendering of solid zone boxes" } )
 		SMPanels.SettingBox( { parent = panel.Pages[2], text = "Custom SMPanel Schemes", x = bezel, y = bezel + ( padSize * 5 ), convar = "sl_customsurftimer", tip = "Enables Custom Colors on all SMPanel-based UIs" } )
 		SMPanels.SettingBox( { parent = panel.Pages[2], text = "Smooth Noclipping", x = bezel, y = bezel + ( padSize * 6 ), convar = "sl_smoothnoclip", tip = "Enables the new smoothing noclip movement" } )
 		SMPanels.SettingBox( { parent = panel.Pages[2], text = "Ultrawide Scaling", x = bezel, y = bezel + ( padSize * 7 ), convar = "sl_ultracenter", tip = "Allows the HUD to be centered on an ultrawide display", func = ToggleNotify } )
-		SMPanels.SettingBox( { parent = panel.Pages[2], text = "Legacy Center Speed", x = bezel, y = bezel + ( padSize * 8 ), convar = "sl_old_centervelocity", tip = "Uses the legacy center speed module" } )
-		SMPanels.SettingBox( { parent = panel.Pages[2], text = "Show True Playernames", x = bezel, y = bezel + ( padSize * 9 ), convar = "sl_displaytruename", tip = "Displays true playernames on interfaces that support this" } )
-		SMPanels.SettingBox( { parent = panel.Pages[2], text = "Display Command Hints", x = bezel, y = bezel + ( padSize * 10 ), convar = "sl_command_suggest", tip = "Displays command listings and descriptions when typing out chat commands" } )
+		SMPanels.SettingBox( { parent = panel.Pages[2], text = "Legacy Center Speed", x = bezel, y = bezel + ( padSize * 8 ), convar = "sl_customchat", tip = "Uses the legacy center speed module" } )
+		SMPanels.SettingBox( { parent = panel.Pages[2], text = "Show True Playernames", x = bezel, y = bezel + ( padSize * 9 ), convar = "sl_customchat", tip = "Displays true playernames on interfaces that support this" } )
+		SMPanels.SettingBox( { parent = panel.Pages[2], text = "Display Command Hints", x = bezel, y = bezel + ( padSize * 10 ), convar = "sl_customchat", tip = "Displays command listings and descriptions when typing out chat commands" } )
 
 		local snSize = panel.Pages[2]:GetWide() - Interface:GetTextWidth( { "Set Netgraph Position" }, Interface:GetFont() )
 		simpleNetGraphButton = SMPanels.MultiButton( { parent = panel.Pages[2], text = "Set Netgraph Position", select = simpleNetGraphOptions, func = DevTools.ChangeNetgraphPosition, x = snSize - bezel, y = bezel } )
@@ -112,6 +112,9 @@ function DevTools:Open()
 			RunConsoleCommand( "say", "/fullbright" )
 		end
 
+		local padSize = SMPanels.ConvarSize[Interface.Scale]
+
 		SMPanels.Button( { parent = panel.Pages[3], text = "Toggle Fullbright Visibility", func = ToggleFullbright, scale = true, x = bezel, y = bezel } )
+		SMPanels.Button( { parent = panel.Pages[3], text = "Toggle Show Triggers Menu", func = ToggleTeleport, scale = true, x = bezel + ( padSize * 9 ), y = bezel } )
 	end
 end
