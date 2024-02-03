@@ -231,14 +231,9 @@ HUD.Themes = {
 		end	
 	end,
 
-	function(pl, data) -- CS:S SoF
+	function(pl, data) -- CS:S Shavit
 		local ScrWidth, ScrHeight = ScrW, ScrH
 		local w, h = ScrWidth(), ScrHeight()
-			--draw.SimpleText( "Spectators: " .. "port", "HUDcsstimeleft", w - 190, h - 342, color_white, TEXT_ALIGN_RIGHT, TEXT_ALIGN_RIGHT  )
-
-			--if (IsShowTime) then
-			--	draw.SimpleText( "Time left: " .. "port" .. " minutes", "HUDcsstimeleft", w - 82, h - 362, color_white, TEXT_ALIGN_RIGHT, TEXT_ALIGN_RIGHT )
-			--end
 	
 			if (data.strafe) then 
 				sync = data.sync or sync
@@ -251,7 +246,7 @@ HUD.Themes = {
 			if (velocity == 0) then
 				velocity = 0
 			else
-				if (velocity <= 33) and not LocalPlayer():IsOnGround() then
+				if (velocity <= 33) then
 					velocity = 30
 				end 
 			end
@@ -393,7 +388,7 @@ HUD.Themes = {
 		if (velocity == 0) then
 			velocity = 0
 		else
-			if (velocity <= 33) and not LocalPlayer():IsOnGround() then
+			if (velocity <= 33) then
 				velocity = 30
 			end 
 		end
@@ -499,7 +494,7 @@ HUD.Themes = {
 	  		 	 if (velocity == 0) then
 		 			   	velocity = 0
 	       			 else
-	    				if (velocity <= 33) and not LocalPlayer():IsOnGround() then
+	    				if (velocity <= 33) then
 		  	 		 	velocity = 30
 		  			  end 
 	   			 end
@@ -683,7 +678,7 @@ HUD.Themes = {
 		if (current == 0) then
 					current = 0
 				else
-				if (current <= 33) and not LocalPlayer():IsOnGround() then
+				if (current <= 33) then
 					current = 30
 				end 
 			end
@@ -744,7 +739,7 @@ HUD.Themes = {
 	  		 	 if (velocity == 0) then
 		 			   	velocity = 0
 	       			 else
-	    				if (velocity <= 33) and not LocalPlayer():IsOnGround() then
+	    				if (velocity <= 33) then
 		  	 		 	velocity = 30
 		  			  end 
 	   			 end
