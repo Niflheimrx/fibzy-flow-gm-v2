@@ -1,4 +1,3 @@
--- Fixes the vast majority of pebble instances.
 if (CLIENT) then 
 	CreateClientConVar("kawaii_debug_pebbles", 0, false, false, "Debug pebble analysis to console", 0, 1)
 
