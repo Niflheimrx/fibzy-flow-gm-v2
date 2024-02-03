@@ -1338,29 +1338,6 @@ end
 				if TracePlayerBBoxForGround(ply, tickEnd, tickEndBelow, mins, maxs) then return end
 			end
 
-			local fraction_left = 1.0 - tr.Fraction
-            local tickEnd
-
-            if nrm.z == 1.0 then
-                -- If the ground is level, all that changes is Z velocity becomes zero.
-                tickEnd = Vector(
-                    collisionPoint.x + velocity_tick.x * fraction_left,
-                    collisionPoint.y + velocity_tick.y * fraction_left,
-                    collisionPoint.z
-                )
-            else
-                local velocity2 = ClipVelocity(velocity, nrm)
-                
-                if (velocity2.z > NON_JUMP_VELOCITY) then
-                    -- This would be an "edge bug" (slide without landing at the end of the tick)
-                    -- 100% of the time due to the Z velocity restriction.
-                    return
-                else
-                    velocity2:Mul(g_flFrameTime[ply] * fraction_left)
-                    tickEnd = collisionPoint + velocity2
-                end
-            end
-
 			RNGFix:DebugMsg(ply, "DO FIX: Edge Bug")
 			PreventCollision(ply, mv, origin, collisionPoint, velocity_tick)
 		end
