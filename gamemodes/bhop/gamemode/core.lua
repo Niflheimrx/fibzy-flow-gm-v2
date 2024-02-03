@@ -551,7 +551,7 @@ local function MoveNoclip(ply, mv)
 	local deltaTime = FrameTime()
 
 	local noclipSpeed, noclipAccelerate = GetConVar "sv_noclipspeed", GetConVar "sv_noclipaccelerate"
-	local speedValue, accelValue = noclipSpeed:GetInt() + 66.9, noclipAccelerate:GetInt()
+	local speedValue, accelValue = noclipSpeed:GetInt() + 67.58, noclipAccelerate:GetInt()
 
 	local ang = mv:GetMoveAngles()
 	local acceleration = (ang:Forward() * mv:GetForwardSpeed()) + (ang:Right() * mv:GetSideSpeed()) + (ang:Up() * mv:GetUpSpeed())
