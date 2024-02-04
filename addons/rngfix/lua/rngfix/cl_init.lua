@@ -8,7 +8,7 @@ function FiBzYIsTheBest()
 	 	if input.IsKeyDown(KEY_LCONTROL) then
 	 			RunConsoleCommand("rngfix_prediction", "0")
 		elseif not input.IsKeyDown(KEY_LCONTROL) then
-			timer.Simple(3, function()
+			timer.Simple(.5, function()
 			RunConsoleCommand("rngfix_prediction", "1")
 			end)
 		end
