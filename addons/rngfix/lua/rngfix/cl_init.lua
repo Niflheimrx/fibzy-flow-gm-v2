@@ -6,9 +6,11 @@ local delay = -3
 
 function FiBzYIsTheBest()
 	 	if input.IsKeyDown(KEY_LCONTROL) then
+			timer.Simple(0.001, function()
 	 			RunConsoleCommand("rngfix_prediction", "0")
+			end)
 		elseif not input.IsKeyDown(KEY_LCONTROL) then
-			timer.Simple(.5, function()
+			timer.Simple(7, function()
 			RunConsoleCommand("rngfix_prediction", "1")
 			end)
 		end
