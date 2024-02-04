@@ -833,7 +833,7 @@ local function ProcessDuckMove(ply, data)
 		ply:SetUnDuckSpeed(0)
 	end
 end
-hook.Add("SetupMove", "sm_duckbug_fix", ProcessDuckMove)
+hook.Add("Move", "sm_duckbug_fix", ProcessDuckMove)
 
 do
 	local result = {}
