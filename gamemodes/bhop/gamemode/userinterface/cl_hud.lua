@@ -976,6 +976,9 @@ local function SSJ_HUD()
 		fade = 0 
 	end
 
+	if gain == 0 then return end
+	if speed == 0 then return end
+
 	gain = math.Round(gain, 2) .. "%"
 
 	-- justas Jump Hud Display
@@ -1004,6 +1007,9 @@ local function SSJ_HUD()
 	
 	local JHUDOLD = JHUDOLD.Enabled:GetBool()
 	if JHUDOLD then
+		if gain == 0 then return end
+		if speed == 0 then return end
+
 		draw.SimpleText(math.Round(speed, 0), "JHUDMain", ScrW() / 2, (ScrH() / 2) + 291, color35, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 
 		if jump <= 1 then 
@@ -1028,6 +1034,8 @@ local function SSJ_HUD()
 	if kawaiihud == 4 then return end
 
 	if kawaiihud == 3 and jump <= 0 then 
+		if gain == 0 then return end
+		if speed == 0 then return end
 		draw.SimpleText("", "HUDTimer2", ScrW() / 2, yPos + 123, color77, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	else
 		draw.SimpleText(math.Round(speed, 0) .. " (" .. sync .. "%, +" .. math.Round(speed / 10 + 13) .. ")", "HUDTimer2", ScrW() / 2, yPos + 123, color77, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
