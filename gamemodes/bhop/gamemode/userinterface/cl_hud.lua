@@ -980,12 +980,12 @@ local function SSJ_HUD()
 
 	-- justas Jump Hud Display
 	if jump == 2 then 
-		draw.SimpleText( math.Round(speed, 0) - math.Round(speed / 10 + 13) - 53, "JHUDMainBIG2", ScrW() / 2, (ScrH() / 2) - 140, color355, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+		draw.SimpleText(math.Round(speed, 0) - math.Round(speed / 10 + 13) - 53, "JHUDMainBIG2", ScrW() / 2, (ScrH() / 2) - 140, color355, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	end
 
 	if jump <= 2 then 
 	else 
-		draw.SimpleText( math.Round(speed, 0) - math.Round(speed / 10 + 13), "JHUDMainBIG2", ScrW() / 2, (ScrH() / 2) - 140, color355, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+		draw.SimpleText(math.Round(speed, 0) - math.Round(speed / 10 + 13), "JHUDMainBIG2", ScrW() / 2, (ScrH() / 2) - 140, color355, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	end
 
 	if jump <= 1 then 
@@ -997,6 +997,19 @@ local function SSJ_HUD()
 	if jump <= 1 then 
 	else 
 		draw.SimpleText(gain, "JHUDMainBIG2", ScrW() / 2, (ScrH() / 2) - 60, color355, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+	end
+
+	JHUDOLD = {}
+	JHUDOLD.Enabled = CreateClientConVar( "kawaii_jhudold", "0", true, false, "JHud Old Pos" )
+	
+	local JHUDOLD = JHUDOLD.Enabled:GetBool()
+	if JHUDOLD then
+		draw.SimpleText(math.Round(speed, 0), "JHUDMain", ScrW() / 2, (ScrH() / 2) + 291, color35, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+
+		if jump <= 1 then 
+		else 
+			draw.SimpleText("(with " .. gain .. " gain)", "JHUDMain", ScrW() / 2, (ScrH() / 2) + 312, color, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+		end
 	end
 
 	local width = 200
