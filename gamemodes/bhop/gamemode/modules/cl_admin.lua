@@ -211,7 +211,7 @@ end
 net.Receive( Link.Protocol2, ReceiveGrab )
 
 local DrawLaser = Material( "sprites/jscfixtimer" )
-local DrawColor = Color( 255, 255, 255 )
+local DrawColor = Color( 50, 0, 255, 255 )
 local DrawWidth = 1
 
 local function DrawAreaEditor()
