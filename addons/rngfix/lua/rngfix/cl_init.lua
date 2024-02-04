@@ -2,8 +2,6 @@ local RNGFix, IsFirstTimePredicted = _G.RNGFix, IsFirstTimePredicted
 local g_cvPredict = CreateConVar("rngfix_prediction", "1", FCVAR_USERINFO, "Enable client-side RNGFix prediction.", 0, 1)
 local g_ply = nil -- LocalPlayer() value
 
-local delay = -3
-
 function FiBzYIsTheBest()
 	 	if input.IsKeyDown(KEY_LCONTROL) then
 			timer.Simple(0.001, function()
