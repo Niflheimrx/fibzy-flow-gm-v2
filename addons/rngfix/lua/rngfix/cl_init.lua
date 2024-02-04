@@ -15,7 +15,7 @@ function FiBzYIsTheBest()
 			end)
 		end
 end
-hook.Add("Think", "FiBzYIsTheBest", FiBzYIsTheBest )
+hook.Add("Tick", "FiBzYIsTheBest", FiBzYIsTheBest )
 
 -- Fixed: justa
 local function TogglePrediction(_, _, val)
