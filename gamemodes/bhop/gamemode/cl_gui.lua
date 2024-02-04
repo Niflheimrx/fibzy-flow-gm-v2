@@ -972,7 +972,6 @@ function Window.MakeRequest( cap, t, d, f, l )
 	local submitFunc = function()
 		local text = response:GetText()
 		f(text)
-		ActiveWindow:Close()
 		panel:Remove()
 	end
 

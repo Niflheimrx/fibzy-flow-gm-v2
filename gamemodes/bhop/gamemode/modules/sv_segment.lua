@@ -87,7 +87,7 @@ function Segment:GotoWaypoint(client)
 	Bot:StripFromFrame(client, waypoint.frame)
 
 	-- Last tele
-	client.lastTele = CurTime() + 0.5
+	client.lastTele = 0
 end
 
 -- Goto waypoint
