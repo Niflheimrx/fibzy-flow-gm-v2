@@ -1010,11 +1010,12 @@ local function SSJ_HUD()
 		if gain == 0 then return end
 		if speed == 0 then return end
 
-		draw.SimpleText(math.Round(speed, 0), "JHUDMain", ScrW() / 2, (ScrH() / 2) + 291, color35, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-
+		if kawaiihud == 4 then
+			draw.SimpleText(math.Round(speed, 0), "JHUDMain", ScrW() / 2, (ScrH() / 2) + 291, color35, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 		if jump <= 1 then 
-		else 
-			draw.SimpleText("(with " .. gain .. " gain)", "JHUDMain", ScrW() / 2, (ScrH() / 2) + 312, color, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+			else 
+				draw.SimpleText("(with " .. gain .. " gain)", "JHUDMain", ScrW() / 2, (ScrH() / 2) + 312, color, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+			end
 		end
 	end
 
