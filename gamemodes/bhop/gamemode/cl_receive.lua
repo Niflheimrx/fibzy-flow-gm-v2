@@ -187,6 +187,7 @@ function Link:Print( szPrefix, varText )
 	if type( varText ) != "table" then varText = { varText } end
 	
 	chat.AddText( _C.Prefixes[ szPrefix ], szPrefix, GUIColor.White, " | ", unpack( varText ) )
+	surface.PlaySound("common/talk.wav")
 end
 
 function Link:Send( szAction, varArgs )
