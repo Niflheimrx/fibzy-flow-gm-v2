@@ -976,13 +976,12 @@ local function SSJ_HUD()
 		fade = 0 
 	end
 
-	if gain == 0 then return end
-	if speed == 0 then return end
-
 	gain = math.Round(gain, 2) .. "%"
 
 	-- justas Jump Hud Display
 	if jump == 2 then 
+		if gain == 0 then return end
+		if speed == 0 then return end
 		draw.SimpleText(math.Round(speed, 0) - math.Round(speed / 10 + 13) - 53, "JHUDMainBIG2", ScrW() / 2, (ScrH() / 2) - 140, color355, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	end
 
@@ -998,7 +997,9 @@ local function SSJ_HUD()
 	end
 
 	if jump <= 1 then 
-	else 
+	else
+		if gain == 0 then return end
+		if speed == 0 then return end
 		draw.SimpleText(gain, "JHUDMainBIG2", ScrW() / 2, (ScrH() / 2) - 60, color355, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	end
 
