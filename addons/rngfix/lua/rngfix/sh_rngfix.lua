@@ -1021,5 +1021,5 @@ RNGFix.DeletePlayerArrayValues = DeletePlayerArrayValues
 RNGFix.OnPlayerHitGround = OnPlayerHitGround
 RNGFix.OnPlayerTeleported = OnPlayerTeleported
 RNGFix.TeleportEntity = TeleportEntity
-RNGFix.ProcessMovementPre = OnPlayerHitGround
+RNGFix.ProcessMovementPre = ProcessMovementPre
 RNGFix.ProcessMovementPost = ProcessMovementPost
