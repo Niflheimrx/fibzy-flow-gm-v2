@@ -886,7 +886,7 @@ local function ChangeMove(ply, data)
 		if PlayerJumps[ ply ] then
 			PlayerJumps[ ply ] = PlayerJumps[ ply ] + 1
 		end
-	elseif g_groundTicks[ ply ] > 12 and data:KeyDown( 2 ) and st != _C.Style["Legit"] and st != _C.Style["Easy Scroll"] then
+	elseif g_groundTicks[ ply ] > 1 and data:KeyDown( 2 ) and st != _C.Style["Legit"] and st != _C.Style["Easy Scroll"] then
 
 		-- CrouchBug fix?
 		local vel = g_storedVelocity[ ply ] or data:GetVelocity()
