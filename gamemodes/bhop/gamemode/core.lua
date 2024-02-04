@@ -894,7 +894,7 @@ local function ChangeMove(ply, data)
 		data:SetVelocity( vel )
 	end
 end
-hook.Add( "FinishMove", "ChangeMove", ChangeMove )
+hook.Add( "Move", "ChangeMove", ChangeMove )
 
 
 do
