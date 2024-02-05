@@ -42,7 +42,7 @@ gamemodes\bhop\entities\entities\TeleporterEnt.lua
 gamemodes\bhop\entities\entities\HullSizeZone.lua
 gamemodes\bhop\gamemode\modules\cl_admin.lua
 gamemodes\bhop\gamemode\modules\cl_strafe.lua
-gamemodes\bhop\gamemode\sh_config.lua
+gamemodes\bhop\gamemode\sv_config.lua
 gamemodes\bhop\gamemode\cl_gui.lua
 gamemodes\bhop\gamemode\cl_init.lua
 gamemodes\bhop\gamemode\cl_receive.lua

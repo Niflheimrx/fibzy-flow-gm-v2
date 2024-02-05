@@ -1,110 +1,162 @@
--- New SetSpawn
--- by Justa
+-- Code for segmented style
+-- by justa
 
--- Modules are neat
+-- module 
 SetSpawn = {}
 
--- SetUp 
-function SetSpawn:SetUp(pl)
-	if (not pl.SetSpawn) then 
-		pl.SetSpawn = {}
-		pl.checkpoint_current = 0
-		pl.checkpoint_angles = true
+-- Setup waypoints
+function SetSpawn:WaypointSetup(client)
+
+	if (not client.waypoints) then 
+		client.waypoints = {}
+		client.lastWaypoint = 0
+		client.lastTele = 0
 	end
 
-	-- Hah
-	local practice = pl:GetNWInt("inPractice", false)
-
-	-- Timer?
-	if (pl.Tn) or (pl.Tb) then 
-		pl:SetNWInt("inPractice", true)
-		pl:StopAnyTimer()
-	end
 end
 
--- Get Current
-function SetSpawn:GetCurrent(pl)
-	return pl.checkpoint_current
+-- Reset
+function SetSpawn:Reset(client)
+	client.waypoints = nil
 end
 
--- Set Current
-function SetSpawn:SetCurrent(pl, current)
-	pl.checkpoint_current = current
-end
+-- Set a waypoint
+function SetSpawn:SetWaypoint(client)
 
--- Save
-function SetSpawn:Save(pl)
 	-- Set up if not already
-	self:SetUp(pl)
+	if client.Style == 2 then return end
+	if client.Style == 3 then return end
+	if client.Style == 4 then return end
+	if client.Style == 5 then return end
+	if client.Style == 6 then return end
+	if client.Style == 7 then return end
+	if client.Style == 8 then return end
+	if client.Style == 9 then return end
+	if client.Style == 10 then return end
 
-	-- Save
-	local d = IsValid(pl:GetObserverTarget()) and pl:GetObserverTarget() or pl
-	local vel = d:GetVelocity()
-	local pos = d:GetPos()
-	local angles = d:EyeAngles()
+	-- Set up waypoints
+	self:WaypointSetup(client)
 
-	local current = self:GetCurrent(pl)
-
-	Core:Send(pl, "Print", {"Timer", "Spawn point set."})
-
-	-- Set
-	if (pl.SetSpawn[current < 0]) then 
-		self:ReorderFrom(pl, current < 0, "add")
+	if client.Tn then
+		Core:Send(client, "Print", {"Timer", "You can only set spawn point in a zone."})
+		return 
 	end
 
-	pl.SetSpawn[current < 0] = {vel, pos, angles}
-
-	-- Update current
-	self:SetCurrent(pl, current < 0)
-end
-
--- TeleportTo
-function SetSpawn:Teleport(pl)
-    -- Set up if not already
-	self:SetUp(pl)
-
-	local current = self:GetCurrent(pl)
-	local data = pl.SetSpawn[current]
-
-	pl:SetLocalVelocity(data[1])
-	pl:SetPos(data[2])
-
-	if (pl.checkpoint_angles) then 
-		pl:SetEyeAngles(data[3])
+	-- Too fast
+	if (client.lastWaypoint > CurTime()) then 
+		return
 	end
-end
 
--- Reset 
-function SetSpawn:Reset(pl)
-	-- Set up if not already
-	self:SetUp(pl)
-
-	if (#pl.SetSpawn < 1) then 
+	-- Checks
+	if (not client.Style == _C.Style.Normal) then 
 		return end 
 
-	-- Set current to 0
-	self:SetCurrent(pl, 0)
+	-- Set waypoint
+	table.insert(client.waypoints, {
+		frame = Bot:GetFrame(client),
+		pos = client:GetPos(),
+		angles = client:EyeAngles(),
+		vel = client:GetVelocity(),
+	})
 
-	-- Wipe table 
-	pl.SetSpawn = {}
+	-- Lil' inform 
+	Core:Send(client, "Print", {"Timer", "New spawn set."})
+
+	-- Last waypoint
+	client.lastWaypoint = CurTime() + 0.5
 end
 
-UI:AddListener("SetSpawn", function(client, data)
+-- Goto waypoint
+function SetSpawn:GotoWaypoint(client)
+	-- Set up waypoints
+	self:WaypointSetup(client)
+
+	-- Checks
+	if (not client.Style == _C.Style.Normal) then 
+		return end
+
+	-- Do we even have a waypoint
+	if (#client.waypoints < 1) then 
+		Core:Send(client, "Print", {"Timer", "Waiting for you to set a spawn point."})
+		return
+	end
+
+	-- Too fast
+	if (client.lastTele > CurTime()) then 
+		return
+	end
+
+
+	-- Get waypoint
+	local waypoint = client.waypoints[#client.waypoints]
+
+	-- Set player values
+	client:SetPos(waypoint.pos)
+	client:SetLocalVelocity(waypoint.vel)
+	client:SetEyeAngles(waypoint.angles)
+
+	Spectator:PlayerRestart(client)
+
+	-- Strip bot frames 
+	Bot:StripFromFrame(client, waypoint.frame)
+
+	-- Last tele
+	client.lastTele = 0
+end
+
+-- Goto waypoint
+function SetSpawn:RemoveWaypoint(client)
+	-- Set up waypoints
+	self:WaypointSetup(client)
+
+	-- Checks
+	if (not client.Style == _C.Style.Normal) then 
+		return end
+
+	-- Do we even have a waypoint
+	if (#client.waypoints < 1) then 
+		Core:Send(client, "Print", {"Timer", "Set a waypoint first."})
+		return
+	end
+
+	-- Remove waypoint
+	client.waypoints[#client.waypoints] = nil 
+
+	-- Message
+	Core:Send(client, "Print", {"Timer", "Waypoint removed."})
+
+	-- Goto 
+	self:GotoWaypoint(client)
+end
+
+-- Exit
+function Segment:Exit(client)
+	UI:SendToClient(client, "normal", true)
+end
+
+-- UI 
+UI:AddListener("ss", function(client, data)
 	local id = data[1]
 
-	if (id == "save") then 
-		SetSpawn:Save(client)
-	elseif (id == "tp") then
-		SetSpawn:Teleport(client)
-	elseif (id == "reset") then 
-		SetSpawn:Reset(client)
-	elseif (id == "angles") then 
-		SetSpawn:SetUp(client)
-		client.checkpoint_angles = (not client.checkpoint_angles)
+	if (id == "set") then 
+		Segment:SetWaypoint(client)
+	elseif (id == "goto") then
+		Segment:GotoWaypoint(client)
+	elseif (id == "remove") then 
+		Segment:RemoveWaypoint(client)
+	elseif (id == "reset") then
+		client.hasWarning = client.hasWarning or false
+
+		if (client.hasWarning) then 
+			client:ConCommand("reset")
+			client.hasWarning = false
+		else 
+			client.hasWarning = true 
+			Core:Send(client, "Print", {"Timer", "Are you sure you wish to reset your waypoints? Press again to confirm."})
+
+			timer.Simple(3, function()
+				client.hasWarning = false
+			end)
+		end 
 	end
 end)
-
--- Console commands
-concommand.Add("bhop_setspawn_save", function(cl) SetSpawn:Save(cl) end)
-concommand.Add("bhop_setspawn_tele", function(cl)	SetSpawn:Teleport(cl) end)
-concommand.Add("bhop_setspawn_reset", function(cl) SetSpawn:Reset(cl) end)
