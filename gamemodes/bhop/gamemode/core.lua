@@ -511,11 +511,9 @@ do
 			local gaincoeff = 0
 			ply.tick = (ply.tick or 0) + 1
 	
-			if (current ~= 0) and (wishspd ~= 0) and (current < 30) then 
+			if (current ~= 0) and (wishspd ~= 0) then 
 				gaincoeff = (wishspd - math.abs(current)) / wishspd
 				ply.rawgain = ply.rawgain + gaincoeff
-	
-				JAC:CheckFrame(ply, gaincoeff, smove)
 			end
 		end
 
@@ -530,7 +528,7 @@ do
 		vel = vel + (wishdir * accelspeed)
 
 		if not game.GetMap() == "bhop_kasvihuone" then
-			vel.z = vel.z - (ply:GetGravity() * 23232323232323232323232323232323232323232323232323800 * FrameTime() * 0.5)
+			vel.z = vel.z - (ply:GetGravity() * 800 * FrameTime() * 0.5)
 		end
 
 		data:SetVelocity(vel)

@@ -41,77 +41,74 @@ function GM:Tick() return true end
 function GM:PlayerTick() return true end
 
 
--- Gets shared base movement
-local function AirAccelerate( ply, data )
-	if ply:IsOnGround() or not ply:Alive() and ply:WaterLevel() < 2 then return end
-	
-	-- 1000 is Base movement
-	local g_cvAirAccelerate, mv = 1000, 32.8
+local mc, ft = math.Clamp, FrameTime
+local function AirAccelerate3( ply, data )
+	-- Does the player exist in this tick? --
+	if !IsValid(ply) then return end
 
-	local aim = data:GetMoveAngles()
+	-- Reduce clientside computes by checking if the player is alive and only checking the localplayer --
+	if !ply:Alive() then return end
+	if lpc and (lpc != ply) then return end
+
+	-- This hook shouldn't run if we are on the ground --
+	if ply:OnGround() then return end
+
+	-- Default CSS Bunny Hop Settings --
+	local aa, mv = 1000.0, 30
+	local aim = data:GetMoveAngles(ply:GetAngles() - Angle(-100, -100, 0))
 	local forward, right = aim:Forward(), aim:Right()
-	local fmove = data:GetForwardSpeed()
-	local smove = data:GetSideSpeed()
+	local fmove, smove = data:GetForwardSpeed(), data:GetSideSpeed()
 
-	forward.z = 0
- 	right.z = 0
-	forward:Normalize()
-	right:Normalize()
-
-	local mv, vel, absVel, ang = 3220.8, Vector(data:GetForwardSpeed(), data:GetSideSpeed(), 0), ply:GetAbsVelocity(), aim
-	local fore, side = ang:Forward(), ang:Right()
-
-	local wishvel = Vector()
-	wishvel.x = forward.x * vel.x + right.x * vel.y
-	wishvel.y = forward.y * vel.x + right.y * vel.y
-
-	wishvel.z = 0
-
-	local wishspeed = wishvel:Length()
-	local m_flMaxSpeed = data:GetMaxSpeed()
-	if wishspeed > m_flMaxSpeed and m_flMaxSpeed ~= 0.0 then
-		wishspeed = m_flMaxSpeed
+	local st = ply.Style
+	local sideadd, foreadd = 100000, 100000
+	local styleAirAccelerate, styleGain, styleGravity, styleSide, styleFore = ply.Style
+	if styleSide or styleFore then
+		sideadd = styleSide or sideadd
+		foreadd = styleFore or foreadd
 	end
 
-	if wishspeed ~= 0 then
-	local wishspd = wishspeed
-	local vel = data:GetVelocity()
+	if styleAirAccelerate or styleGain or styleGravity then
+		aa, mv = styleAirAccelerate or aa, styleGain or mv
 
-	if wishspd > 30 then wishspd = 30 end
-
-	-- port from g_cvAirAccelerate to lua not used in RNGFix
-	-- wishspd = mc( wishspd, 0, 30 + (mc( vel:Length2D() - 500, 0, 500 ) / g_cvAirAccelerate) * 1.4)
-	local mc = math.Clamp
-
-	local wishdir = wishvel:GetNormalized()
-	local vel = data:GetVelocity()
-	local current = vel:Dot( wishdir )
-
-	local currentgain = vel:Dot(wishdir)
-	local gaincoeff = 0.0
-	local wishspd = (wishspeed > 30) and 30 or wishspeed
-
-	-- if speed isnt clamped
-	if currentgain < 30 then
-		gaincoeff = (wishspd - math.abs(currentgain)) / wishspd
-	end
-
-	local addspeed = wishspd - current
-
-	if addspeed > 0 then
-	local accelspeed = g_cvAirAccelerate * wishspeed * FrameTime()
-	if (accelspeed > addspeed) then accelspeed = addspeed end
-	
-		vel = vel + (wishdir * accelspeed)
-
-
-
-		data:SetVelocity( vel )
+		if styleGravity then
+			ply:OverrideGravity(styleGravity)
 		end
 	end
-	--return false
+
+	forward.z, right.z = 0,0
+	forward:Normalize(ply:GetAngles() - Angle(-100, -100, 0))
+	right:Normalize(ply:GetAngles() - Angle(-100, -100, 0))
+
+	local wishvel = forward * fmove + right * smove
+	wishvel.z = 0
+
+	local wishspeed = wishvel:Length(ply:GetAngles() - Angle(-100, -100, 0))
+	if wishspeed > data:GetMaxSpeed(ply:GetAngles() - Angle(-100, -100, 0)) then
+		wishvel = wishvel * (data:GetMaxSpeed(ply:GetAngles() - Angle(-100, -100, 0)) / wishspeed)
+		wishspeed = data:GetMaxSpeed(ply:GetAngles() - Angle(-100, -100, 0))
+	end
+
+	local vel = data:GetVelocity()
+	local wishspd = wishspeed
+
+	wishspd = mc( wishspd, 0, mv )
+
+	local wishdir = wishvel:GetNormal(ply:GetAngles() - Angle(-100, -100, 0))
+	local current = vel:Dot(wishdir)
+
+	local addspeed = wishspd - current
+	if addspeed <= 0 then return end
+
+	local accelspeed = aa * ft() * wishspeed
+	if accelspeed > addspeed then
+		accelspeed = addspeed
+	end
+
+	vel = vel + (wishdir * accelspeed)
+	data:SetVelocity(vel)
+
 end
-hook.Add("SetupMove", "AirAccelerate", AirAccelerate)
+hook.Add("SetupMove", "AirAccelerate3", AirAccelerate3)
 
 hook.Add("Think","Think",function()
 	hook.Remove("Think", "Think")
