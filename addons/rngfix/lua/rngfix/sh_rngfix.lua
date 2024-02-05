@@ -317,19 +317,6 @@ local function AirAccelerate( ply, data )
 		gaincoeff = (wishspd - math.abs(currentgain)) / wishspd
 	end
 
-	-- Gain Stats
-	if SERVER and (not ply:IsBot()) then 
-		local gaincoeff = 0
-		ply.tick = (ply.tick or 0) + 1
-
-		if (current ~= 0) and (wishspd ~= 0) and (current < 30) then 
-			gaincoeff = (wishspd - math.abs(current)) / wishspd
-			ply.rawgain = ply.rawgain + gaincoeff
-
-			--JAC:CheckFrame(ply, gaincoeff, smove)
-		end
-	end
-
 	local addspeed = wishspd - current
 
 	if addspeed > 0 then
