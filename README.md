@@ -40,6 +40,7 @@ Added:
 - Base gamemode edits (fibzy)
 - Round Error Fixes (Niflheimrx | fibzy)
 - Improved Score Board based off justa's (fibzy)
+- Improved JHUD Gain data (fibzy)
 - Improved Stepsize hulls (fibzy)
 - Auto Strafe Style (fibzy)
 - Jhud updates based off justa's (justa | fibzy)
