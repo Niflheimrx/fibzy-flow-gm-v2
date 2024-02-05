@@ -1,5 +1,5 @@
--- Code for segmented style
--- by justa
+-- Code for set spawn style
+-- by justa and fibzy
 
 -- module 
 SetSpawn = {}
@@ -15,11 +15,6 @@ function SetSpawn:WaypointSetup(client)
 
 end
 
--- Reset
-function SetSpawn:Reset(client)
-	client.waypoints = nil
-end
-
 -- Set a waypoint
 function SetSpawn:SetWaypoint(client)
 
@@ -30,7 +25,6 @@ function SetSpawn:SetWaypoint(client)
 	if client.Style == 5 then return end
 	if client.Style == 6 then return end
 	if client.Style == 7 then return end
-	if client.Style == 8 then return end
 	if client.Style == 9 then return end
 	if client.Style == 10 then return end
 
@@ -46,10 +40,6 @@ function SetSpawn:SetWaypoint(client)
 	if (client.lastWaypoint > CurTime()) then 
 		return
 	end
-
-	-- Checks
-	if (not client.Style == _C.Style.Normal) then 
-		return end 
 
 	-- Set waypoint
 	table.insert(client.waypoints, {
@@ -71,10 +61,6 @@ function SetSpawn:GotoWaypoint(client)
 	-- Set up waypoints
 	self:WaypointSetup(client)
 
-	-- Checks
-	if (not client.Style == _C.Style.Normal) then 
-		return end
-
 	-- Do we even have a waypoint
 	if (#client.waypoints < 1) then 
 		Core:Send(client, "Print", {"Timer", "Waiting for you to set a spawn point."})
@@ -85,7 +71,6 @@ function SetSpawn:GotoWaypoint(client)
 	if (client.lastTele > CurTime()) then 
 		return
 	end
-
 
 	-- Get waypoint
 	local waypoint = client.waypoints[#client.waypoints]
@@ -103,60 +88,3 @@ function SetSpawn:GotoWaypoint(client)
 	-- Last tele
 	client.lastTele = 0
 end
-
--- Goto waypoint
-function SetSpawn:RemoveWaypoint(client)
-	-- Set up waypoints
-	self:WaypointSetup(client)
-
-	-- Checks
-	if (not client.Style == _C.Style.Normal) then 
-		return end
-
-	-- Do we even have a waypoint
-	if (#client.waypoints < 1) then 
-		Core:Send(client, "Print", {"Timer", "Set a waypoint first."})
-		return
-	end
-
-	-- Remove waypoint
-	client.waypoints[#client.waypoints] = nil 
-
-	-- Message
-	Core:Send(client, "Print", {"Timer", "Waypoint removed."})
-
-	-- Goto 
-	self:GotoWaypoint(client)
-end
-
--- Exit
-function Segment:Exit(client)
-	UI:SendToClient(client, "normal", true)
-end
-
--- UI 
-UI:AddListener("ss", function(client, data)
-	local id = data[1]
-
-	if (id == "set") then 
-		Segment:SetWaypoint(client)
-	elseif (id == "goto") then
-		Segment:GotoWaypoint(client)
-	elseif (id == "remove") then 
-		Segment:RemoveWaypoint(client)
-	elseif (id == "reset") then
-		client.hasWarning = client.hasWarning or false
-
-		if (client.hasWarning) then 
-			client:ConCommand("reset")
-			client.hasWarning = false
-		else 
-			client.hasWarning = true 
-			Core:Send(client, "Print", {"Timer", "Are you sure you wish to reset your waypoints? Press again to confirm."})
-
-			timer.Simple(3, function()
-				client.hasWarning = false
-			end)
-		end 
-	end
-end)
