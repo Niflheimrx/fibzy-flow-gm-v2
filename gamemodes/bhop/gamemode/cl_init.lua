@@ -229,16 +229,32 @@ local function DispatchChatJoinMSG(um)
 	local mode = um:ReadString()
 	local STEAMID = um:ReadString()
 
-	if mode == "1" then
-		if GetConVarNumber( "sl_connection" ) == 1 then
-			surface.PlaySound("common/talk.wav")
-		end
+	local location = "No Location found"
+	local US = "The United States"
+	local USB = "The Maybe United States"
+	local UK = "The United Kingdom"
 	
+	if (LocalPlayer():Ping() > 0) then
+		if (LocalPlayer():Ping() >= 100) then
+			location = UK
+	   	  else
+	    	if (LocalPlayer():Ping() >= 60) then
+				location = USB
+			else 
+				location = US
+			end 
+		end
+	end
+
+	if mode == "1" then
+	if GetConVarNumber( "sm_connection" ) == 1 then
+		surface.PlaySound("common/talk.wav")
+	end
 	elseif mode == "2" then
-		chat.AddText(Color(255, 109, 10), "Server ", Color(255, 255 , 255), "| " .. ply, Color(255, 255 , 255), " (", Color(255, 109, 10), STEAMID, Color(255, 255 , 255), ")", Color(255, 255 , 255), " has connected.")
+		chat.AddText(Color(255, 109, 10), "Server | ", Color(255, 255 , 255), ply, Color(255, 255 , 255), " (", Color(255, 109, 10), STEAMID, Color(255, 255 , 255), ")", Color(255, 255 , 255), " has connected from ", Color(255, 109, 10), location .. ".")
 	elseif mode == "3" then
-		if GetConVarNumber( "sl_connection" ) == 1 then
-		chat.AddText(Color(255, 109, 10), "Server ", Color(255, 255 , 255), "| " .. ply, Color(255, 255 , 255), " (", Color(255, 109, 10), STEAMID, Color(255, 255 , 255), ")", Color(255, 255 , 255), " has disconnected.")
+		if GetConVarNumber( "sm_connection" ) == 1 then
+		chat.AddText(Color(255, 109, 10), "Server | ", Color(255, 255 , 255), ply, Color(255, 255 , 255), " (", Color(255, 109, 10), STEAMID, Color(255, 255 , 255), ")", Color(255, 255 , 255), " has disconnected from ", Color(255, 109, 10), location .. ".")
 
 		surface.PlaySound("common/talk.wav")
 		end
