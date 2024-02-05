@@ -76,10 +76,6 @@ function Core:AwaitLoad( bRetry )
 			Core.Try = Core.Try + 1
 			Core:LoadZones()
 			
-			if #Zones.Cache == 0 then
-				print( "Couldn't load data. Retrying (Try " .. Core.Try .. ")" )
-			end
-			
 			timer.Simple( 5, function() Core:AwaitLoad( true ) end )
 		else
 			Core:Lock( "Server failed to load zone data from the database (No zones set in time!)" )
@@ -154,7 +150,9 @@ end
 
 
 function Core:AddResources()
-	resource.AddFile( "materials/" .. _C.MaterialID .. "/timer.png" )
+	resource.AddFile( "resource/fonts/FiBuchetMS-Bold.ttf" )
+	resource.AddFile( "resource/fonts/trebucbd.ttf" )
+	resource.AddFile( "materials/sprites/jscfixtimer.vmt" )
 	
 	for i = 1, 10 do
 		resource.AddFile( "materials/" .. _C.MaterialID .. "/icon_rank" .. i .. ".png" )
