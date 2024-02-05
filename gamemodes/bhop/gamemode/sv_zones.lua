@@ -11,6 +11,7 @@ Zones.Type = {
 	["LegitSpeed"] = 100,
 	["SoildAC"] = 120,
 	["Helper"] = 130,
+	["Gravity Zone"] = 122,
 }
 
 Zones.Options = {

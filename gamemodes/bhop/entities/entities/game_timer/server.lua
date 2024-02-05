@@ -12,6 +12,7 @@ local Zone = {
 	BAC = 7,
 	LS = 100,
 	SOILDAC = 120,
+	SURFGRAVTY = 122,
 }
 
 function ENT:Initialize()
@@ -59,6 +60,8 @@ function ENT:StartTouch(ent)
 		ent:BonusReset()
 	elseif (zone == Zone.NAC) then
 		ent:ResetTimer()
+	elseif (zone == Zone.SURFGRAVTY) then
+		ent:SetGravity(0.6)
 	elseif (zone == Zone.LS) then
 		ent:SetLegitSpeed(self.speed)
 	elseif (zone == Zone.SOILDAC) then
@@ -112,7 +115,7 @@ function ENT:EndTouch(ent)
 	-- See if the entity is valid, and is a player.	
 	if (not IsValid(ent)) or (not ent:IsPlayer()) or (ent:Team() == TEAM_SPECTATOR) then
 		return end;
-
+	ent:SetGravity(1)
 	-- Zone
 	local zone = self:GetZoneType()
 

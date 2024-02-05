@@ -19,6 +19,7 @@ include "modules/sv_ssj.lua"
 include "modules/sv_trailing.lua"
 include "modules/sv_jac.lua"
 include "modules/sv_boosterfix.lua"
+include "modules/sv_rampfix.lua"
 
 include "modules/sv_checkpoint.lua"
 include "modules/sv_setspawn.lua"
