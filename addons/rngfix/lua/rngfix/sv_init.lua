@@ -63,6 +63,141 @@ local GetSpeedCap = function(ply) return 30.00 end
 
 -- [ Flow bhop compat ] --
 
+RNGFix = {}
+
+RNGFix.vCurrent = {}
+RNGFix.vLast = {}
+RNGFix.vLast2 = {}
+
+RNGFix.bOnGround = {}
+RNGFix.bIsInAir = {}
+RNGFix.bLastOnGround = {}
+
+RNGFix.bLastTick = {}
+RNGFix.bOnGroundUpwards = {}
+
+local function playerOnGround( player )
+    local vPos = player:GetPos()
+    local vMins = player:OBBMins()
+    local vMaxs = player:OBBMaxs()
+
+	local onGroundTrace = util.TraceHull{
+		start = vPos,
+		endpos = Vector(vPos.x, vPos.y, vPos.z + 100),
+		mins = vMins,
+		maxs = vMaxs,
+		mask = MASK_PLAYERSOLID_BRUSHONLY,
+		filter = player,
+	}
+
+	if onGroundTrace.Fraction ~= 1 then
+		return true
+	else
+		return false
+	end
+end
+
+local function TraceHull2( ply )
+    local vPos = ply:GetPos()
+    local vMins = ply:OBBMins()
+    local vMaxs = ply:OBBMaxs()
+    local vEndPos = vPos * 1
+	local mult = mult or 1
+    vEndPos.z = vEndPos.z
+
+    local tr = util.TraceHull{
+      start = vPos,
+      endpos = vEndPos,
+      mins = vMins,
+      maxs = vMaxs,
+      mask = MASK_PLAYERSOLID_BRUSHONLY,
+      filter = ply,
+    }
+
+	if tr.Fraction ~= 1 then
+		local vPlane, vLast = tr.HitNormal, Vector()
+		if vPlane.z >= 0.7 and vPlane.z < 1 then
+			return true
+		else
+			return false
+		end
+	end
+end
+
+local function TraceHull( ply )
+    local vPos = ply:GetPos()
+    local vMins = ply:OBBMins()
+    local vMaxs = ply:OBBMaxs()
+    local vEndPos = vPos * 1
+	local mult = mult or 1
+    vEndPos.z = vEndPos.z + 100
+
+    local tr = util.TraceHull{
+      start = vPos,
+      endpos = vEndPos,
+      mins = vMins,
+      maxs = vMaxs,
+      mask = MASK_PLAYERSOLID_BRUSHONLY,
+      filter = ply,
+    }
+
+	if tr.Fraction ~= 1 then
+		local vPlane, vLast = tr.HitNormal, Vector()
+		if vPlane.z >= 0.7 and vPlane.z < 1 then
+	    vLast = RNGFix.vLast[ply]
+        if not vLast then return end
+        vLast.z = vLast.z
+        vLast.z = 0
+		end
+	end
+end
+
+local function CalcPlayerMovement( ply, mult, vVel )
+	if bit.band(ply:GetFlags(), FL_BASEVELOCITY) ~= 0 then
+		local vBase = ply:GetBaseVelocity()
+		vVel:Add(vBase)
+	else
+		ply:SetLocalVelocity(vVel * mult)
+	end
+	if bit.band(ply:GetFlags(), FL_BASEVELOCITY) ~= 0 then
+		local vBase = ply:GetBaseVelocity()
+		vVel:Add(vBase)
+	end
+	    ply:SetLocalVelocity(vVel * mult)
+end
+
+local function StartCommand( ply )
+	RNGFix.bLastOnGround[ply] = RNGFix.bOnGround[ply] or false
+	RNGFix.bOnGround[ply] = ply:IsOnGround() and ply:Crouching()
+	RNGFix.bIsInAir[ply] = not RNGFix.bOnGround[ply] or false
+	RNGFix.bOnGroundUpwards[ply] = playerOnGround( ply )
+	RNGFix.vLast[ply] = RNGFix.vCurrent[ply] or Vector( 0, 0, 0 )
+	RNGFix.vCurrent[ply] = ply:GetVelocity()
+
+	if not RNGFix.bOnGround[ply] then
+		RNGFix.vLast[ply] = RNGFix.vCurrent[ply]
+		RNGFix.vLast2[ply] = RNGFix.vCurrent[ply]
+
+		RNGFix.bLastTick[ply] = true
+		return
+	end
+
+	if RNGFix.bOnGround[ply] and not RNGFix.bLastOnGround[ply] then
+		if TraceHull2( ply ) then
+			RNGFix.bLastTick[ply]=false
+			if TraceHull( ply ) then
+			RNGFix.bLastTick[ply]=false
+			end
+		end
+	else
+		if RNGFix.bLastTick[ply] then
+			RNGFix.bLastTick[ply]=false
+
+			CalcPlayerMovement( ply, 1, RNGFix.vLast2[ply] )
+		end
+	end
+end
+hook.Add("StartCommand", "StartCommand", StartCommand)
 
 hook.Add("Initialize", "RNGFIX_FlowCompat", function()
  	local _C = _G._C
@@ -359,62 +494,7 @@ local function CheckCrouch( ply,data )
 end
 hook.Add("SetupMove","CheckCrouch",CheckCrouch)
 
-local function AirAccelerate2( ply, data )
-	if ply:IsOnGround() or not ply:Alive() and ply:WaterLevel() < 2 then return end
 
-	local aim = data:GetMoveAngles(ply:GetAngles() - Angle(-100, -100, 0))
-	local forward, right = aim:Forward(), aim:Right()
-	local fmove = data:GetForwardSpeed(ply:GetAngles() - Angle(-100, -100, 0))
-	local smove = data:GetSideSpeed(ply:GetAngles() - Angle(-100, -100, 0))
-
-	forward.z = 0
- 	right.z = 0
-	forward:Normalize(ply:GetAngles() - Angle(-100, -100, 0))
-	right:Normalize(ply:GetAngles() - Angle(-100, -100, 0))
-
-	local mv, vel, absVel, ang = 30.0, Vector(data:GetForwardSpeed(), data:GetSideSpeed(), 0), ply:GetAbsVelocity(), aim
-	local fore, side = ang:Forward(), ang:Right()
-
-	local wishvel = Vector()
-	wishvel.x = forward.x * vel.x + right.x * vel.y
-	wishvel.y = forward.y * vel.x + right.y * vel.y
-
-	wishvel.z = 0
-
-	local wishspeed = wishvel:Length()
-	local m_flMaxSpeed = data:GetMaxSpeed()
-	if wishspeed > m_flMaxSpeed and m_flMaxSpeed ~= 0.0 then
-		wishspeed = m_flMaxSpeed
-	end
-
-	if wishspeed ~= 0 then
-	local wishspd = wishspeed
-	local vel = data:GetVelocity()
-
-	if wishspd > 30.0 then wishspd = 30.0 end
-
-	local wishdir = wishvel:GetNormalized()
-	local vel = data:GetVelocity()
-	local current = vel:Dot( wishdir )
-
-	local wishspd = (wishspeed > 30.0) and 30.0 or wishspeed
-
-	if (current ~= 0) and (wishspd ~= 0) and (current < 30.0) then return end
-
-	local addspeed = wishspd - current
-
-	if addspeed > 0 then
-	local accelspeed = g_cvAirAccelerate * wishspeed * FrameTime()
-	if (accelspeed > addspeed) then accelspeed = addspeed end
-	
-		vel = vel + (wishdir * accelspeed)
-
-
-		data:SetVelocity( vel )
-		end
-	end
-end
-hook.Add("SetupMove", "AirAccelerate2", AirAccelerate2)
 
 local function AirAccelerate(ply, velocity, mv)
 	-- This also includes the initial parts of AirMove()
