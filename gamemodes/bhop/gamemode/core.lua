@@ -154,85 +154,105 @@ physenv.SetAirDensity( 0 )
 timer.Create( "ratefix", 2, 1, function()
 for k,v in pairs(player.GetAll()) do
 		v:ConCommand( "rate 1000000000" )
-		end
+	end
 end)
 
 timer.Create( "interp", 2, 1, function()
 for k,v in pairs(player.GetAll()) do
 		v:ConCommand( "cl_interp 0.100000 " )
-		end
+	end
 end)
 
 timer.Create( "cmdrate", 2, 1, function()
 for k,v in pairs(player.GetAll()) do
 		v:ConCommand( "cl_cmdrate 80000000000000000000000000000000000000" )
-		end
+	end
 end)
 
 timer.Create( "painter", 2, 1, function()
 	for k,v in pairs(player.GetAll()) do
-			v:ConCommand( "r_decals 100" )
-			end
-	end)
+		v:ConCommand( "r_decals 100" )
+	end
+end)
 
 timer.Create( "nervy", 2, 1, function()
- if game.GetMap() == "bhop_nervosity2" then
-		LocalPlayer():ConCommand( "kawaii_map_brightness .8" )
+	for k,v in pairs(player.GetAll()) do
+ 	if game.GetMap() == "bhop_nervosity2" then
+			v:ConCommand( "kawaii_map_brightness .8" )
 		end
+	end
 end)
 
 timer.Create( "dicy", 2, 1, function()
+	for k,v in pairs(player.GetAll()) do
 	if game.GetMap() == "bhop_dice" then
-		   LocalPlayer():ConCommand( "kawaii_map_brightness 1.16" )
-		   end
+			v:ConCommand( "kawaii_map_brightness 1.16" )
+		end
+	end
 end)
 
 timer.Create( "mody", 2, 1, function()
+	for k,v in pairs(player.GetAll()) do
 	if game.GetMap() == "bhop_moderated" then
-		   LocalPlayer():ConCommand( "kawaii_map_brightness 1.3" )
-		   end
+			v:ConCommand( "kawaii_map_brightness 1.3" )
+		end
+	end
 end)
 
 timer.Create( "bloody", 2, 1, function()
- if game.GetMap() == "bhop_bloodflow" then
-		LocalPlayer():ConCommand( "kawaii_map_color 1.8" )
+	for k,v in pairs(player.GetAll()) do
+ 	if game.GetMap() == "bhop_bloodflow" then
+			v:ConCommand( "kawaii_map_color 1.8" )
 		end
+	end
 end)
 
 timer.Create( "calm", 2, 1, function()
- if game.GetMap() == "bhop_calming" then
-		LocalPlayer():ConCommand( "kawaii_map_color 1.3" )
+	for k,v in pairs(player.GetAll()) do
+ 	if game.GetMap() == "bhop_calming" then
+			v:ConCommand( "kawaii_map_color 1.3" )
 		end
+	end
 end)
 
-timer.Create( "overy", 2, 1, function()
- if game.GetMap() == "bhop_overline" then
-		LocalPlayer():ConCommand( "kawaii_map_color 2" )
+timer.Create( "overy", 3, 1, function()
+	for k,v in pairs(player.GetAll()) do
+ 	if game.GetMap() == "bhop_overline" then
+			v:ConCommand( "kawaii_map_color 2" )
 		end
+	end
 end)
 
 timer.Create( "forrq", 2, 1, function()
- if game.GetMap() == "bhop_0000" then
-		LocalPlayer():ConCommand( "kawaii_map_brightness 3" )
+	for k,v in pairs(player.GetAll()) do
+	 if game.GetMap() == "bhop_0000" then
+			v:ConCommand( "kawaii_map_brightness 3" )
 		end
+	end
 end)
 
-timer.Create( "forvehnex1", 2, 1, function()
+timer.Create( "forvehnex1", 3, 1, function()
+	for k,v in pairs(player.GetAll()) do
 	if game.GetMap() == "bhop_overline" then
-		   LocalPlayer():ConCommand( "mat_bloomscale 0" )
-		   end
+			v:ConCommand( "mat_bloomscale 0" )
+		end
+	end
 end)
 
 timer.Create( "forvehnex2", 2, 1, function()
+	for k,v in pairs(player.GetAll()) do
 	if game.GetMap() == "bhop_overline_sof" then
-		   LocalPlayer():ConCommand( "mat_bloomscale 0" )
-		   end
+			v:ConCommand( "mat_bloomscale 0" )
+		end
+	end
 end)
 
 timer.Create( "forvehnex", 2, 1, function()
+	for k,v in pairs(player.GetAll()) do
 	if game.GetMap() == "bhop_alt_univaje" then
-		   LocalPlayer():ConCommand( "mat_bloomscale 1" )
-		   end
+			v:ConCommand( "mat_bloomscale 1" )
+		 end
+	end
 end)
 
 if game.GetMap() == "bhop_aux_a9" then
