@@ -157,7 +157,7 @@ local function CreateScoreboard()
 				return
 			end
 
-			surface.SetDrawColor(isBot and SCORE_ACCENT or SCORE_ACCENT)
+			surface.SetDrawColor(isBot and SCORE_ACCENT or Color( 0, 0, 0, 0 ))
 			surface.DrawRect(0, 0, width, 37)
 			surface.SetDrawColor(color_black)
 
