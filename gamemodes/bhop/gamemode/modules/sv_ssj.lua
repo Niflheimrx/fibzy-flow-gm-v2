@@ -158,7 +158,7 @@ function SSJ:Display(pl)
     end
 
 	-- Build string table
-	local dStr = {"Jumps: ", _C["Prefixes"].Timer, tostring(#pl.SSJ["Jumps"]), color_white, " | ", "Speed: ", _C["Prefixes"].Timer, tostring(math.Round(currentVel - 0.5)), color_white}
+	local dStr = {"", _C["Prefixes"].Timer, "", color_white, "", "", _C["Prefixes"].Timer, "", color_white}
 
 	-- Values
 	local difference, height
@@ -207,6 +207,7 @@ function SSJ:Display(pl)
 	-- Start to show
 	for k, v in pairs(clients) do
 		local str = table.Copy(dStr)
+		local str2 = table.Copy(dStr2)
 		net.Start("kawaii.secret")
 			net.WriteInt(#pl.SSJ["Jumps"], 16)
 	 		net.WriteFloat(gain)
@@ -218,6 +219,35 @@ function SSJ:Display(pl)
 
 		-- Every jump disabled
 		if (not v.SSJ["Settings"][2]) and (#pl.SSJ["Jumps"] ~= 6) then continue end
+
+		if (#pl.SSJ["Jumps"] == 1) then
+			table.insert(str, "Prestrafe: ")
+			table.insert(str, _C["Prefixes"].Timer)
+			table.insert(str, tostring(math.Round(currentVel - 0.5)) )
+			table.insert(str, color_white)
+		end
+
+		if (#pl.SSJ["Jumps"] == 1) then
+			table.insert(str, " | FJT: ")
+			table.insert(str, _C["Prefixes"].Timer)
+			table.insert(str, "0" )
+			table.insert(str, color_white)
+		end
+
+		if (#pl.SSJ["Jumps"] > 1) then
+			table.insert(str, "Jumps: ")
+			table.insert(str, _C["Prefixes"].Timer)
+			table.insert(str, tostring(#pl.SSJ["Jumps"]) )
+			table.insert(str, color_white)
+		end
+
+
+		if (#pl.SSJ["Jumps"] > 1) then
+			table.insert(str, " | Speed: ")
+			table.insert(str, _C["Prefixes"].Timer)
+			table.insert(str, tostring(math.Round(currentVel - 0.5)) )
+			table.insert(str, color_white)
+		end
 
 		-- Height
 		if (#pl.SSJ["Jumps"] > 1) and (v.SSJ["Settings"][4]) then

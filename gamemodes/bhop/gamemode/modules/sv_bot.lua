@@ -430,7 +430,7 @@ function Bot:ChangeMultiBot( nStyle )
 			BotPlayer[ ply ] = nStyle
 			Bot:NotifyRestart( nStyle )
 
-			return "The bot is now displaying " .. BotInfo[ nStyle ].Name .. "'s " .. Core:StyleName( BotInfo[ nStyle ].Style ) .. " run!"
+			return "The Replay is now displaying " .. BotInfo[ nStyle ].Name .. "'s " .. Core:StyleName( BotInfo[ nStyle ].Style ) .. " run!"
 		else
 			return "Wait"
 		end
@@ -463,7 +463,7 @@ function Bot:SaveBot( ply )
 		end
 	end
 
-	Core:Send( ply, "Print", { "General", bSave and "Your bot will now be saved!" or "All your bots have already been saved or you have no bots." } )
+	Core:Send( ply, "Print", { "General", bSave and "Your Replay will now be saved!" or "All your Replays have already been saved or you have no Replays." } )
 end
 
 
@@ -484,7 +484,7 @@ function Bot:NotifyRestart( nStyle )
 		return false
 	end
 
-	local tab, Watchers = { "Timer", true, nil, "Waiting bot", nil, ct(), "Save" }, {}
+	local tab, Watchers = { "Timer", true, nil, "Waiting Replay", nil, ct(), "Save" }, {}
 	for _,p in pairs( player.GetHumans() ) do
 		if not p.Spectating then continue end
 		local ob = p:GetObserverTarget()
@@ -529,7 +529,7 @@ end
 function Bot:SetInfo( ply, nStyle, bSet )
 	local info = BotInfo[ nStyle ]
 	if not info then
-		ply:SetNWString( "BotName", "Bot (No Time)" )
+		ply:SetNWString( "BotName", "No Time" )
 		ply:SetNWInt( "Style", 0 )
 		return false
 	elseif info.Style then
@@ -566,7 +566,7 @@ function Bot:SetWRPosition( nStyle )
 
 	local info = BotInfo[ nStyle ]
 	if not info then
-		ply:SetNWString( "BotName", "Bot (No Time)" )
+		ply:SetNWString( "BotName", "No Time" )
 		ply:SetNWInt( "Style", 0 )
 		return false
 	end

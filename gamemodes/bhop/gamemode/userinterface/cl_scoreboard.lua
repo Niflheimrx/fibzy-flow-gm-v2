@@ -95,11 +95,23 @@ local function CreateScoreboard()
 			surface.SetDrawColor(Color( 25, 25, 25 ))
 			surface.DrawRect(0, 0, width, 35)
 
+			surface.SetDrawColor(Color( 25, 25, 25 ))
+			surface.DrawRect(0, 124, width, 10)
+
+			surface.SetDrawColor(Color( 25, 25, 25 ))
+			surface.DrawRect(0, 600, width, 35)
+
 			-- Title
 			draw.SimpleText(SCORE_TITLE, "hud.titlebig", width / 2, 7, text_colour, TEXT_ALIGN_CENTER, TEXT_ALIGN_TOP)
 
 			-- Map
 			draw.SimpleText(game.GetMap(), "hud.title", 14, 12, text_colour, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
+
+			-- Spectators
+			draw.SimpleText("Spectators: " .. LocalPlayer():GetNWInt( "Spectating", 0 ), "hud.title", 14, 610, text_colour, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
+
+			-- Time Left
+			draw.SimpleText("Timeleft: " .. Timer:Convert( CurTime() ), "hud.title", 975, 610, text_colour, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
 
 			-- Players online
 			local text = string.format(SCORE_PLAYERS, #player.GetHumans(), game.MaxPlayers()-2)
@@ -124,14 +136,6 @@ local function CreateScoreboard()
 
 			-- Cool fucking way to calculate distances bro
 			local distance = (width / 10)
-
-			-- Rank
-			draw.SimpleText("Rank", "hud.infotext", 12, 10, text_colour, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
-			draw.SimpleText("Player", "hud.infotext", distance * 1.5, 10, text_colour, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
-			draw.SimpleText("Style", "hud.infotext", distance * 4.5, 10, text_colour, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
-			draw.SimpleText("Status", "hud.infotext", distance * 5.7, 10, text_colour, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
-			draw.SimpleText("Personal Best", "hud.infotext", distance * 8.5, 10, text_colour, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
-			draw.SimpleText("Ping", "hud.infotext", width - 12, 10, text_colour, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
 		end
 
 	-- Calculate
@@ -154,7 +158,7 @@ local function CreateScoreboard()
 			end
 
 			surface.SetDrawColor(isBot and SCORE_ACCENT or Color( 0, 0, 0, 0 ))
-			surface.DrawRect(0, 0, width, height)
+			surface.DrawRect(0, 0, width, 37)
 			surface.SetDrawColor(color_black)
 
 			-- Cool fucking way to calculate distances bro
@@ -242,7 +246,7 @@ local function CreateScoreboard()
 				local place = pl:GetNWInt("SpecialRank", 0)
 
 				if (place == 0) then
-					draw.SimpleText(pb, "hud.subtitle", distance * 8.5, 20, text_colour, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
+					draw.SimpleText("No Time", "hud.subtitle", distance * 8.5, 20, text_colour, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
 				else
 
 					local w, h = surface.GetTextSize(place)
@@ -469,7 +473,7 @@ local function CreateScoreboard()
 	-- DScrollPanel
 	scoreboard.players = scoreboard.base:Add("DScrollPanel")
 		scoreboard.players:SetSize(width, height - 30)
-		scoreboard.players:SetPos(0, 20)
+		scoreboard.players:SetPos(0, 100)
 		scoreboard.players.list = {}
 		scoreboard.players.VBar:SetSize(0,0)
 
@@ -494,7 +498,7 @@ local function CreateScoreboard()
 
 			for k, v in pairs(players) do
 				local row = CreatePlayerRow(v)
-				row:SetPos(0, #scoreboard.players.list == 0 and 0 or #scoreboard.players.list * 39)
+				row:SetPos(0, #scoreboard.players.list == 0 and 0 or #scoreboard.players.list * 2)
 
 				table.insert(scoreboard.players.list, row)
 			end
@@ -509,7 +513,7 @@ local function CreateScoreboard()
 			scoreboard:Center()
 
 			if (scoreboard.bots) then
-				scoreboard.bots:SetPos(14, scoreboard:GetTall() - 125)
+				scoreboard.bots:SetPos(2, scoreboard:GetTall() - 12)
 			end
 		end
 
@@ -529,7 +533,7 @@ local function CreateScoreboard()
 	-- Bots at the bottom
 	scoreboard.bots = scoreboard:Add("DPanel")
 		scoreboard.bots:SetSize(width, 79)
-		scoreboard.bots:SetPos(14, scoreboard:GetTall() - 105)
+		scoreboard.bots:SetPos(14, scoreboard:GetTall() - 600)
 		scoreboard.bots.Paint = function(s,width,height)
 		end
 		scoreboard.bots.list = {}
