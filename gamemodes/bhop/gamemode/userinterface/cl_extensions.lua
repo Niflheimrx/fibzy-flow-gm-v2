@@ -608,6 +608,43 @@ function SMPanels.SettingBox( b )
 	return Button
 end
 
+function SMPanels.EndList( b )
+	local parent = b.parent
+	local text = b.text
+	local posx, posy = b.x, b.y
+	local width, height = Interface:GetTextWidth( { text } ), boxButton[Interface.Scale]
+	local convar = GetConVar( b.convar )
+	local tooltip = b.tip
+	local func = b.func
+
+	if !convar then
+		Surf:Notify( "Error", "Convar not defined/doesn't exist for checkbox creation" )
+	return end
+
+	if !text then
+		Surf:Notify( "Error", "Text not defined for checkbox creation" )
+	return end
+
+	if !(posx or posy) then
+		Surf:Notify( "Error", "Position not defined for checkbox creation" )
+	return end
+
+	local con_text = convar:GetName()
+	local con_value = convar:GetInt()
+
+	local Button = vgui.Create( "DButton", parent )
+	Button:SetSize( width, height )
+	Button:SetPos( posx, posy )
+	Button:SetText( "" )
+	Button.Paint = function( self, w, h )
+		draw.SimpleText( "", Interface:GetTinyFont(), height + Interface:GetBezel( "Medium" ), h / 2, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER )
+	end
+
+	SMPanels.Tooltip( { parent = Button, text = tooltip } )
+
+	return Button
+end
+
 -- Similar to SettingBox but doesn't take a convar, instead stores the value and waits for the caller to retrieve it --
 -- Sample: SMPanels.ToggleBox( { parent = nil, text = "", x = 0, y = 0 } )
 function SMPanels.ToggleBox( b )

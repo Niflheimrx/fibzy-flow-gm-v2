@@ -1,5 +1,5 @@
-surface.CreateFont( "m_hMediumFontTiny", { size = 13, font = "Default" } )
-surface.CreateFont( "m_hLargeFontTiny", { size = 21, font = "Default" } )
+surface.CreateFont( "m_hMediumFontTiny", { size = 13, font = "Arial" } )
+surface.CreateFont( "m_hLargeFontTiny", { size = 21, font = "Arial" } )
 
 surface.CreateFont( "m_hMediumFont", { size = 20, weight = 600, font = "Arial" } )
 surface.CreateFont( "m_hLargeFont", { size = 23, weight = 600, font = "Arial" } )

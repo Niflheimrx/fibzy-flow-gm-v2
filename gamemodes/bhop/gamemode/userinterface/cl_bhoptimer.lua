@@ -328,6 +328,7 @@ function SurfTimer.Open()
 		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 13 ), text = "Suppress Viewpunch", convar = "kawaii_suppress_viewpunch", tip = "Enables the Suppress Viewpunch" } )
 		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 14 ), text = "Suppress Viewpunch Weapon", convar = "kawaii_suppress_viewpunch_wep", tip = "Enables the Weapon Suppress Viewpunch" } )
 		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 15 ), text = "CS:S Weapon Reload Loop", convar = "kawaii_css_reloading", tip = "Enables the CS:S Weapon Loop Reload" } )
+		SMPanels.EndList( { parent = panParent, x = bezel, y = bezel + ( padSize * 16 ), text = "", convar = "kawaii_css_reloading", tip = "Enables the CS:S Weapon Loop Reload" } )
 
 		local tmSize = panParent:GetWide() - Interface:GetTextWidth( { "Change Theme" }, Interface:GetFont() )
 		local emSize = panParent:GetWide() - Interface:GetTextWidth( { "Set Decimal Count" }, Interface:GetFont() )
@@ -418,7 +419,7 @@ function SurfTimer.Open()
 		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 15 ), text = "Render Developer Focus", convar = "sl_forcefocus", tip = "DEVELOPER USE ONLY | Renders the toytown vision used on the sandbox engine" } )
 		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 16 ), text = "Render Developer Bokeh", convar = "pp_bokeh", tip = "DEVELOPER USE ONLY | Renders the bokeh effect used on the sandbox engine" } )
 		SMPanels.SettingBox( { parent = panParent, x = bezel, y = bezel + ( padSize * 17 ), text = "Render Motion Blur", convar = "kawaii_motion", tip = "DEVELOPER USE ONLY | Renders the Motion Blur effect" } )
-
+		SMPanels.EndList( { parent = panParent, x = bezel, y = bezel + ( padSize * 18 ), text = "", convar = "kawaii_css_reloading", tip = "Enables the CS:S Weapon Loop Reload" } )
 		
 		local mcSize = panParent:GetWide() - Interface:GetTextWidth( { "Toggle Multicore Rendering" }, Interface:GetFont() )
 		local ctSize = panParent:GetWide() - Interface:GetTextWidth( { "Set Chat Tick" }, Interface:GetFont() )
