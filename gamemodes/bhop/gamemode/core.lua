@@ -808,7 +808,7 @@ local function ProcessDuckMove(ply, data)
 		return end
 
 		-- Check if the player has been in the ground for 12 ticks, if so then don't proceed with any fixes --
-		if (ticksOnGround[ply] > 12 and 15) or !data:KeyDown(IN_JUMP) then
+		if (ticksOnGround[ply] > 12) or !data:KeyDown(IN_JUMP) then
 			ticksOnGround[ply] = 0
 
 			ply:SetDuckSpeed(TIME_TO_DUCK)
