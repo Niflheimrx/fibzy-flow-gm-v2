@@ -1222,6 +1222,15 @@ hook.Add( "OnPlayerChat", "TaggedChat", ChatTag )
 
 local function EntityCheckPost( ply )
 	hook.Remove( "PostDrawOpaqueRenderables", "PlayerMarkers" )
+	hook.Remove( "PostDrawOpaqueRenderables", "PlayerMarkers" )
+	hook.Remove( "PlayerTick", "PlayerTick" )
+	hook.Remove( "SetupMove", "SetupMove" )
+	hook.Remove( "StartMove", "StartMove" )
+	hook.Remove( "FinishMove", "FinishMove" )
+	hook.Remove( "CreateMove", "CreateMove" )
+	hook.Remove( "Tick", "Tick" )
+	hook.Remove( "Think", "Think" )
+
 	RunConsoleCommand( "sl_targetids", 0 )
 end
 hook.Add( "InitPostEntity", "StartEntityCheck", EntityCheckPost )
