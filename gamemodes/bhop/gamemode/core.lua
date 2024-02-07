@@ -978,7 +978,7 @@ RNGFix.Telehop = CreateConVar("rngfix_telefix", "1", FCVAR_NOTIFY, "Enable TeleF
 RNGFix.Debug = CreateConVar("rngfix_debug", "0", {128, 8192}, "Enable RNGFix debug messages", 0, 1):GetBool()
 
 LAND_HEIGHT = 2.0
-NON_JUMP_VELOCITY = 140.0
+NON_JUMP_VELOCITY = 140.0 + 32.8
 MIN_STANDABLE_ZNRM = 0.7
 DEFAULT_JUMP_IMPULSE = 301.99337741
 SERVER_GRAVITY = 800
