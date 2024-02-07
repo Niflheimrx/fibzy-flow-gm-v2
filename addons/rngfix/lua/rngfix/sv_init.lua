@@ -1111,6 +1111,8 @@ TeleFix = {
 		SetupData = "PlayerSpawn",
 		CheckOnGround = "SetupMove",
 		Move = "Move",
+		TelehopFix = "FinishMove",
+		TelehopFix2 = "FinishMove",
 		SurfFix = "FinishMove",
 		PredictVelocityClip = "Move",
 		CheckNoClip = "PlayerNoClip",
@@ -1328,7 +1330,7 @@ TeleFix:Initialize()
 
 -- PostThink works a little better than a ProcessMovement post hook because we need to wait for ProcessImpacts (trigger activation)
 -- PlayerPostThink or FinishMove or Move ?
-hook.Add("PlayerPostThink", "RNGFIX", function (ply, mv)
+hook.Add("FinishMove", "RNGFIX", function (ply, mv)
  	if not ply:Alive() then return end
 	if ply:GetMoveType() ~= MOVETYPE_WALK then return end
 	if CheckWater(ply) then return end
