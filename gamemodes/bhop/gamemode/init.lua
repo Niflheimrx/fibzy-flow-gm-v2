@@ -149,7 +149,7 @@ end
 hook.Add( "PlayerConnect", "PlyConnectMSG", PlyConnectMSG )
 
 local function PlyLoadedMSG( ply )
-	timer.Simple(1, function()
+	timer.Simple(1.5, function()
 		if ply:IsValid() and !ply:IsBot() then
 			umsg.Start("DispatchChatJoin")
 				umsg.String(ply:GetName())

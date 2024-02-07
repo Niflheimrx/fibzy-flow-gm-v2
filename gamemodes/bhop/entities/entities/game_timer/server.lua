@@ -129,6 +129,7 @@ function ENT:EndTouch(ent)
 		ent:StopFreestyle()
 	elseif (zone == Zone.MStart) and (not ent.Tn) then 
 		ent:StartTimer()
+		ent:SetStepSize(18)
 	elseif (zone == Zone.BStart) and (not ent.Tb) then
 		ent:BonusStart()
 	elseif (zone == Zone.STEPSIZE) then 
