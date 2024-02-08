@@ -529,7 +529,7 @@ end
 function Bot:SetInfo( ply, nStyle, bSet )
 	local info = BotInfo[ nStyle ]
 	if not info then
-		ply:SetNWString( "BotName", "No Time" )
+		ply:SetNWString( "BotName", "No Replay recorded" )
 		ply:SetNWInt( "Style", 0 )
 		return false
 	elseif info.Style then
@@ -566,7 +566,7 @@ function Bot:SetWRPosition( nStyle )
 
 	local info = BotInfo[ nStyle ]
 	if not info then
-		ply:SetNWString( "BotName", "No Time" )
+		ply:SetNWString( "BotName", "No Replay recorded" )
 		ply:SetNWInt( "Style", 0 )
 		return false
 	end

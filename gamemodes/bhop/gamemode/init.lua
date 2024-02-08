@@ -24,6 +24,7 @@ include "modules/sv_rampfix.lua"
 include "modules/sv_checkpoint.lua"
 include "modules/sv_setspawn.lua"
 include "modules/sv_segment.lua"
+include "modules/sv_wrsfx.lua"
 
 gameevent.Listen "player_connect"
 Core:AddResources()

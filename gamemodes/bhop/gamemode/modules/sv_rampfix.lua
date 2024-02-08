@@ -8,8 +8,6 @@
 Rampfix = {}
 Rampfix.Enabled = true -- Unless this module causes problems in your server, this should always be set to true
 
-Surf:Notify( "Success", "Rampfix module initialized" )
-
 Rampfix.LastSpeed = {}
 Rampfix.Speed = {}
 
